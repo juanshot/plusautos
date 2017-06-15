@@ -7,6 +7,12 @@
     width: 100%;
     position: absolute;
     .card{
+        img{
+           height: 100px;
+           width:200px;
+           border-radius: 50px;
+           margin-bottom: 30px;
+        };
         padding: 15px;
         .btn-link{
             padding: 0;
