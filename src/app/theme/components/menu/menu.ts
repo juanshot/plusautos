@@ -1,13 +1,114 @@
 export const menuItems = [
   {
-    title: 'Dashboard',
+    title: 'Panel Latoneria',
     routerLink: 'dashboard',
     icon: 'fa-home',
     selected: false,
     expanded: false,
     order: 0
   }, 
+    {
+    title: 'Taller Latoneria',
+    routerLink: 'form-elements',
+    icon: ' fa-car',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Ingreso de Autos',
+        routerLink: 'form-elements/inputs',
+   
+      },
+      {
+        title: 'Listado de Autos',
+        routerLink: 'form-elements/layouts'
+      },
+      {
+        title: 'Busqueda Avanzada',
+        routerLink: 'form-elements/validations'
+      },
+      {
+        title: 'Reportes',
+        routerLink: 'form-elements/wizard'
+      }
+    ]
+  }, 
+   {
+    title: 'Inventario',
+    routerLink: 'form-elements',
+    icon: 'fa-pencil-square-o',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Listado de Items',
+        routerLink: 'form-elements/inputs'
+      },
+      {
+        title: 'Reportes',
+        routerLink: 'form-elements/wizard'
+      }
+    ]
+  }, 
+   {
+    title: 'Nomina',
+    routerLink: 'form-elements',
+    icon: 'fa fa-users',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Listado de Items',
+        routerLink: 'form-elements/inputs'
+      },
+      {
+        title: 'Reportes',
+        routerLink: 'form-elements/wizard'
+      }
+    ]
+  }, 
+
   {
+    title: 'Facturacion',
+    routerLink: 'form-elements',
+    icon: 'fa-money',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Listado de Items',
+        routerLink: 'form-elements/inputs'
+      },
+      {
+        title: 'Reportes',
+        routerLink: 'form-elements/wizard'
+      }
+    ]
+  }, 
+   {
+    title: 'Sistema',
+    routerLink: 'form-elements',
+    icon: 'fa-desktop',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Usuarios',
+        routerLink: 'form-elements/inputs'
+      }
+    ]
+  }, 
+
+];
+
+let exampleMenu = [
+
+    {
     title: 'Charts',
     routerLink: 'charts',
     icon: 'fa-bar-chart',
@@ -229,4 +330,5 @@ export const menuItems = [
     order: 800,
     target: '_blank'
   }
-];
+
+]
