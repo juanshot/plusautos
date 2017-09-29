@@ -11,8 +11,8 @@ export class AppConfig {
    constructor(){
         this.sassVariables = this.getSassVariables();
         this.config = {
-            name: 'Azimuth',
-            title: 'Admin template based on Angular 4 and Bootstrap 4',
+            name: 'Mas Autos',
+            title: 'Sistema de Latoneria',
             version: '1.1.0',
             colors:{
                 main: this.sassVariables['main-color'],

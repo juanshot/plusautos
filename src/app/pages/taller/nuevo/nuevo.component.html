@@ -1,0 +1,122 @@
+<div class="row">
+    
+    <div class="col-xl-12 col-lg-12 col-12 bottom-30">
+        <div widget class="card">
+            <div class="card-header">
+                <span>INGRESO DE TALLER</span>
+                <div class="widget-controls">              
+                 
+       
+                </div>        
+            </div>
+            <div class="card-block widget-body">
+
+                <form [formGroup]="ingresoTallerForm">
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-success dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-car"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a  class="dropdown-item" href="javascript:void(0);">Auto Creado</a>
+                                     <a  data-toggle="modal" data-target="#car-modal" class="dropdown-item">Crear Nuevo</a>
+                                </div>
+                            </div>
+                            <input *ngIf="!autoPicked" disabled placeholder="Matricula" type="text" class="form-control">
+                        </div>
+
+                        
+                    </div>
+                     <div class="form-group">
+                        <label for="input-11">Fecha y Hora de Entrada</label>
+                        <input type="datetime-local" class="form-control"  value="2011-08-19T13:45:00" id="input-11">                       
+                    </div>
+
+                     <div class="form-group">
+                    <label for="exampleSelect3">Responsable</label>
+                    <select class="form-control custom-select" id="exampleSelect3">
+                        <option selected>Empleados</option>
+                        <option value="1">Yulimar Goyoneche</option>
+                        <option value="2">Victor Torres</option>
+                        <option value="3">Carlos Perez</option>
+                    </select>
+                </div>
+                    <div class="form-group">
+                        <label for="textarea-1">Observaciones</label>
+                        <textarea class="form-control" id="textarea-1"></textarea>
+                    </div>
+                    
+                   
+                   
+                </form>
+              
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="car-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large-label" style="display: none;">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header state modal-success">                                    
+                                    <h4 class="modal-title" id="modal-large-label"> <i class="fa fa-car"></i>Nuevo Automovil</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                     <form>
+
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-success"
+                                                                 aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fa fa-car"></i>
+                                                        </button>
+                                                      
+                                                    </div>
+                                                    <input placeholder="Placa" type="text" class="form-control">
+                                                </div>
+
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textarea-1">Ano</label>
+                                                    <input placeholder="ingrese ano...." type="number" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textarea-1">Modelo</label>
+                                                    <input placeholder="ingrese modelo...." type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textarea-1">Marca</label>
+                                                    <input placeholder="ingrese marca...." type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textarea-1">Kilometraje</label>
+                                                    <input placeholder="modelo" type="number" class="form-control">
+                                            </div>
+                                            
+                                        
+                                        
+                                        </form>
+                                  
+                                  
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                 </div>
+     </div>
+
+
+
+
+
+
+

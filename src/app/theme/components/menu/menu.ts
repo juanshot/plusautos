@@ -15,22 +15,37 @@ export const menuItems = [
     expanded: false,
     order: 400,
     subMenu: [
+       {
+        title: 'Estimaciones',
+        routerLink: 'estimaciones/listado',
+   
+      },
       {
-        title: 'Ingreso de Autos',
-        routerLink: 'form-elements/inputs',
+        title: 'Autos',
+        routerLink: 'autos/listado',
+   
+      },
+      {
+        title: 'Clientes',
+        routerLink: 'clientes/listado',
+   
+      },
+      {
+        title: 'Nuevo Taller',
+        routerLink: 'taller/nuevo',
    
       },
       {
         title: 'Listado de Autos',
-        routerLink: 'form-elements/layouts'
+        routerLink: 'taller/listado'
       },
       {
         title: 'Busqueda Avanzada',
-        routerLink: 'form-elements/validations'
+        routerLink: ''
       },
       {
         title: 'Reportes',
-        routerLink: 'form-elements/wizard'
+        routerLink: ''
       }
     ]
   }, 
@@ -44,11 +59,11 @@ export const menuItems = [
     subMenu: [
       {
         title: 'Listado de Items',
-        routerLink: 'form-elements/inputs'
+        routerLink: ''
       },
       {
         title: 'Reportes',
-        routerLink: 'form-elements/wizard'
+        routerLink: ''
       }
     ]
   }, 
@@ -62,11 +77,11 @@ export const menuItems = [
     subMenu: [
       {
         title: 'Listado de Items',
-        routerLink: 'form-elements/inputs'
+        routerLink: ''
       },
       {
         title: 'Reportes',
-        routerLink: 'form-elements/wizard'
+        routerLink: ''
       }
     ]
   }, 
@@ -81,11 +96,11 @@ export const menuItems = [
     subMenu: [
       {
         title: 'Listado de Items',
-        routerLink: 'form-elements/inputs'
+        routerLink: ''
       },
       {
         title: 'Reportes',
-        routerLink: 'form-elements/wizard'
+        routerLink: ''
       }
     ]
   }, 
@@ -99,7 +114,11 @@ export const menuItems = [
     subMenu: [
       {
         title: 'Usuarios',
-        routerLink: 'form-elements/inputs'
+        routerLink: 'usuarios/listado'
+      },
+      {
+        title: 'Roles',
+        routerLink: 'roles/listado'
       }
     ]
   }, 

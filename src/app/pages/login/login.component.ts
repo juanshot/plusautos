@@ -1,25 +1,34 @@
+import { UserService } from './../../services/user.service';
+import { ToasterService } from 'angular2-toaster';
+import { EndPointService } from './../../services/endpoint.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {Http, Headers, URLSearchParams} from '@angular/http';
+
 
 @Component({
   selector: 'az-login',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers:[EndPointService,UserService],
+
 })
 export class LoginComponent {  
     public router: Router;
     public form:FormGroup;
     public email:AbstractControl;
+    public invalid:boolean = false;
     public password:AbstractControl;
+    private toasterService: ToasterService;
 
         myStyle: object = {};
         myParams: object = {};
         width: number = 100;
         height: number = 100;
 
-    constructor(router:Router, fb:FormBuilder) {
+    constructor(router:Router, fb:FormBuilder,public ep:EndPointService,public user:UserService) {
         this.router = router;
         this.form = fb.group({
             'email': ['', Validators.compose([Validators.required, emailValidator])],
@@ -157,9 +166,29 @@ export class LoginComponent {
     public onSubmit(values:Object):void {
         if (this.form.valid) {
             console.log(values);
-            this.router.navigate(['pages/dashboard']);
+            this.ep.loginRequest(values).then((response=>{
+                  if(response.status ==401){
+                    this.invalid = true;
+
+                  }else{
+                    console.log(response);
+                    this.user.setToken(response.token);
+                    this.ep.getUserData().then((result=>{
+                      console.log(result);
+                      this.user.setUser(result.user);
+                     this.router.navigate(['pages/dashboard']);
+                      
+                    }))
+                    
+                   
+                  }
+                  
+            }));
+            
+            //this.router.navigate(['pages/dashboard']);
         }
     }
+
 }
 
 export function emailValidator(control: FormControl): {[key: string]: any} {
@@ -168,3 +197,5 @@ export function emailValidator(control: FormControl): {[key: string]: any} {
         return {invalidEmail: true};
     }
 }
+
+

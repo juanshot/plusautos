@@ -1,3 +1,4 @@
+import { EndPointService } from './../services/endpoint.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DirectivesModule } from '../theme/directives/directives.module';
@@ -29,6 +30,7 @@ import { SearchComponent } from './search/search.component';
     BreadcrumbComponent,
     BackTopComponent,
     SearchComponent 
-  ]
+  ],
+  providers:[]
 })
 export class PagesModule { }

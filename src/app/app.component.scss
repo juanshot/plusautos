@@ -8,4 +8,11 @@
 @import "theme/styles/bootstrap-override";
 @import "theme/styles/libs-override";
 @import "theme/styles/base";
+.generic{
+    background-color:#640D05;
+    color: #ffffff;
+}
+.img-circle{
+    border-radius: 50%;
+}
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
 import { Location } from '@angular/common';
 import { AppState } from '../app.state';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'az-pages',
@@ -18,10 +19,12 @@ export class PagesComponent implements OnInit {
         this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
         });    
+     
     }
 
     ngOnInit() {
         this.getCurrentPageName();
+       
     }
 
     public getCurrentPageName():void{       

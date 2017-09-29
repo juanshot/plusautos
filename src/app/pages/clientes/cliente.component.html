@@ -1,0 +1,211 @@
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">cliente</span>
+                <div class="widget-controls"> 
+                    <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                    <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                    <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                    <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>                          
+                    <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                </div>        
+            </div>
+            <div class="card-block widget-body">
+
+
+                <div class="w-200 pull-right bottom-15">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input class="form-control" id="table-search-input" [(ngModel)]="searchText" type="text" placeholder="Buscar por nombre...">
+                    </div>
+                </div> 
+                <div class="w-200 pull-left bottom-15">
+                       <button data-toggle="modal" data-target="#nuevo-cliente" class="btn btn-outline generic btn-sm">
+                           <i class="fa fa-plus-circle btn-sm "> </i>
+                           Nuevo
+                       </button>
+                    </div> 
+                <div class="table-responsive datatable">
+                    <table class="table table-striped table-hover table-sm" [mfData]="data  | SearchPipe : searchText" #mf="mfDataTable" [mfRowsOnPage]="10">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>   
+                                <th><mfDefaultSorter by="apellido">Apellido</mfDefaultSorter></th>                           
+                                <th><mfDefaultSorter by="cedula">Cedula</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="telefono">Telefono</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="celular">Celular</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="direccion">Direccion</mfDefaultSorter></th>
+                           
+                                <th>Acciones</th>      
+                            </tr>
+                        </thead>
+                        <tbody>                           
+                            <tr *ngFor="let cliente of mf.data">
+                               
+                                <td><strong>{{cliente.nombre}}</strong></td>
+                                <td>
+                                   <strong>{{cliente.apellido}} </strong>
+                                </td>
+                                <td>
+                                    <strong>{{cliente.cedula}} </strong>
+                                 </td>
+                                 <td>
+                                    <strong>{{cliente.telefono}} </strong>
+                                 </td>
+                                 <td>
+                                        <strong>{{cliente.celular}} </strong>
+                                </td>
+
+                                <td>
+                                        <strong>{{cliente.direccion}} </strong>
+                                </td>
+                          
+                        
+
+                                <td><button class="btn btn-warning btn-sm">Ver historial de Taller</button><button class="btn btn-success btn-sm">Ver Autos</button></td>
+                                </tr>
+                                <tr *ngIf="(mf.data | SearchPipe : searchText).length === 0">
+                                <td colspan="100">
+                                    No hay Resultados
+                                </td>
+                            </tr>                          
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="12">
+                                    <mfBootstrapPaginator [rowsOnPageSet]="[10, 25, 50, 100]"></mfBootstrapPaginator>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="nuevo-cliente" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header generic ">
+                        <h4 class="modal-title" id="modal-label"><i class="fa fa-user-plus"></i> Nuevo cliente</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="clearfix">
+                                    <ul class="nav nav-tabs top pull-left w-100p">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#ta">Datos</a>
+                                        </li>
+                                      
+                                                           
+                                    </ul>
+                                </div>
+                                <div class="tab-content top">
+                                        <div class="tab-pane active" id="ta">
+                                                <form [formGroup]="clienteForm">
+                                                        <div class="row">
+                                                                <div class="col-md-6" >
+                                                                        <div [ngClass]="{'has-success':clienteForm.get('nombre').value != '' }">
+                                                                                <div class="form-group">
+                                                                                        <label for="">Nombre:</label>
+                                                                                        <input [ngClass]="{'form-control-success':clienteForm.get('nombre').value != '' }" formControlName="nombre" type="text" class="form-control">
+                                                                                </div>
+    
+                                                                        </div>
+                                                                        <div [ngClass]="{'has-success':clienteForm.get('apellido').value != '' }">
+                                                                                <div class="form-group">
+                                                                                        <label for="">Apellido:</label>
+                                                                                        <input [ngClass]="{'form-control-success':clienteForm.get('apellido').value != '' }" formControlName="apellido" type="text" class="form-control">
+                                            
+                                                                                </div>
+    
+                                                                        </div>
+                                                                       
+                                                                       
+                                                                        <div [ngClass]="{'has-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'),
+                                                                    
+                                                                                          'has-success': clienteForm.get('cedula').value != '' && !clienteForm.get('cedula').hasError('invalidCedula')              }">
+                                                                                <div class="form-group">
+                                                                                        <label for="">Cedula:</label>
+                                                                                        <input maxlength="10" formControlName="cedula" type="text" [ngClass]="{'form-control-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'),
+                                                                                    
+                                                                                                                                                                'form-control-success':clienteForm.get('cedula').value != '' && !clienteForm.get('cedula').hasError('invalidCedula')}" class="form-control">
+                                                                                </div>
+    
+                                                                        </div>
+                                                                    
+                                                                
+                                                                   
+                                                                    </div>
+                                                               
+                                                                <div class="col-md-6"  >
+                                                                       
+                                                                        <div [ngClass]="{'has-danger' : (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('required')) || (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('invalidEmail')), 
+                                                                        'has-success' : !clienteForm.get('email').hasError('required') && clienteForm.get('email').value !='' && !clienteForm.get('email').hasError('invalidEmail')}">
+                                                                                <label class="form-control-label">Email</label>
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                                                                    <input formControlName="email" class="form-control" [ngClass]="{'form-control-danger' : (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('required')) || (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('invalidEmail')), 
+                                                                                                                                                    'form-control-success' :  !clienteForm.get('email').hasError('required') && !clienteForm.get('email').hasError('invalidEmail')}" type="text">                      
+                                                                                </div>
+                                                                                <span class="help-block text-danger" *ngIf="clienteForm.get('email').value != '' && clienteForm.get('email').hasError('required')">Email es requerido</span>                              
+                                                                                <span class="help-block text-danger" *ngIf="clienteForm.get('email').value != '' && clienteForm.get('email').hasError('invalidEmail')">Email Invalido</span>
+                                                                            </div>
+
+                                                                            <div [ngClass]="{'has-success':clienteForm.get('telefono').value != '' }">
+                                                                                    <div class="form-group">
+                                                                                            <label for="">Telefono Casa:</label>
+                                                                                            <div class="input-group">
+                                                                                                <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>
+                                                                                                <input [ngClass]="{'form-control-success':clienteForm.get('telefono').value != '' }" formControlName="telefono" type="text" class="form-control">
+                                                                                            </div>
+                                                                                            
+                                                
+                                                                                    </div>
+        
+                                                                            </div>
+                                                                            <div [ngClass]="{'has-success':clienteForm.get('celular').value != '' }">
+                                                                                    <div class="form-group">
+                                                                                            <label for="">Telefono Movil:</label>
+                                                                                        <div class="input-group">
+                                                                                                <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                                                                                <input [ngClass]="{'form-control-success':clienteForm.get('celular').value != '' }" formControlName="celular" type="text" class="form-control">
+                                                                                        </div>
+                                                                                            
+                                                                                           
+                                                
+                                                                                    </div>
+        
+                                                                            </div>
+                                                                            <div [ngClass]="{'has-success':clienteForm.get('direccion').value != '' }">
+                                                                                    <div class="form-group">
+                                                                                            <label for="">Direccion:</label>
+                                                                                            <textarea  [ngClass]="{'form-control-success':clienteForm.get('direccion').value != '' }" formControlName="direccion"  class="form-control"> </textarea>
+                                                
+                                                                                    </div>
+        
+                                                                            </div>
+                                                                     
+                                                                     
+                                                                      
+                                                                    </div>
+                                                            </div>
+                                                       
+                                                         
+                                                      </form>
+                                         
+                                        </div>
+                               
+ 
+                                    </div>  
+             
+                  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" [disabled]="!clienteForm.valid" (click)="saveCliente()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
