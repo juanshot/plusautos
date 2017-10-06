@@ -26,6 +26,9 @@ export const routes: Routes = [
              { path: 'roles', loadChildren: 'app/pages/roles/roles.module#RolesModule', data: { breadcrumb: 'roles' } },
              { path: 'autos', loadChildren: 'app/pages/autos/autos.module#AutosModule', data: { breadcrumb: 'autos' } },
              { path: 'clientes', loadChildren: 'app/pages/clientes/cliente.module#ClientesModule', data: { breadcrumb: 'clientes' } },
+             { path: 'servicios', loadChildren: 'app/pages/servicios/servicios.module#ServiciosModule', data: { breadcrumb: 'servicios' } },
+             { path: 'productos', loadChildren: 'app/pages/productos/productos.module#ProductosModule', data: { breadcrumb: 'productos' } },
+             { path: 'inventario', loadChildren: 'app/pages/inventarioPanel/panel-inventario.module#PanelInventarioModule', data: { breadcrumb: 'Inventario' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } }
         ]

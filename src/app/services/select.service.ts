@@ -31,7 +31,60 @@ export class SelectService {
             format.map((result)=>{
                let obj = {
                    value: result.id,
-                   label: result.placa +' - '+result.modelo
+                   label: result.placa +' - '+result.marca+' '+result.modelo
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })
+   
+        
+    }
+
+    loadServicios(){  
+        let resultOptions = [];
+        return this.ep.getServicios().then((resp)=>{
+            let format = resp.servicios;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: result.nombre
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })     
+    }
+
+    loadProductos(){  
+        let resultOptions = [];
+        return this.ep.getProductos().then((resp)=>{
+            let format = resp.productos;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: result.nombre
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })     
+    }
+
+    loadUnidadMedida(){  
+        let resultOptions = [];
+        return this.ep.getUnidadMedida().then((resp)=>{
+            let format = resp.unidades;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: result.nombre
                }
                resultOptions.push(obj);
                

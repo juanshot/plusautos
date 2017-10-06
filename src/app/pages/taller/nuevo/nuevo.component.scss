@@ -1,0 +1,66 @@
+@import "../../../theme/styles/variables";
+
+.items{
+    margin-top: 20px;
+}
+line:hover{
+  stroke: $pinterest-color;
+}
+#top:hover{
+    stroke: $pinterest-color;
+}
+#cuerpo:hover{
+    fill:$pinterest-color;
+}
+#right-wheel-inf:hover{
+  fill:$pinterest-color;
+}
+#right-wheel-sup:hover{
+  fill:$pinterest-color;
+}
+
+#left-wheel-inf:hover{
+  fill:$pinterest-color;
+}
+#left-wheel-sup:hover{
+  fill:$pinterest-color;
+}
+#luz-delantera:hover{
+  fill:$pinterest-color;
+}
+#luz-trasera:hover{
+  fill:$pinterest-color;
+}
+#tyreL:hover{
+  fill:$pinterest-color;
+}
+#tyreR:hover{
+  fill:$pinterest-color;
+}
+#bumper:hover{
+  stroke:$pinterest-color;
+}
+#bonnetEnd:hover{
+  fill:$pinterest-color;
+}
+#bonnetStart:hover{
+  fill:$pinterest-color;
+}
+#frame:hover{
+  fill:$pinterest-color;
+  stroke: $pinterest-color;
+}
+#headlightL:hover{
+  fill:$pinterest-color;
+}
+#headlightR:hover{
+  fill:$pinterest-color;
+}
+#mirrorL:hover{
+  fill:$pinterest-color;
+}
+#mirrorR:hover{
+  fill:$pinterest-color;
+}
+
+

@@ -1,13 +1,13 @@
 <div class="row">
-    
-    <div class="col-xl-12 col-lg-12 col-12 bottom-30">
+
+    <div class="col-xl-12 col-lg-6 col-12 bottom-30">
         <div widget class="card">
             <div class="card-header">
-                <span>INGRESO DE TALLER</span>
-                <div class="widget-controls">              
-                 
-       
-                </div>        
+                <span>DATOS BASICOS</span>
+                <div class="widget-controls">
+
+
+                </div>
             </div>
             <div class="card-block widget-body">
 
@@ -16,107 +16,308 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-btn">
-                                <button type="button" class="btn btn-success dropdown-toggle"
+                                <button type="button" class="btn btn-main dropdown-toggle"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-car"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a  class="dropdown-item" href="javascript:void(0);">Auto Creado</a>
-                                     <a  data-toggle="modal" data-target="#car-modal" class="dropdown-item">Crear Nuevo</a>
+
+                                     <a  data-toggle="modal" data-target="#nuevo-auto" class="dropdown-item">Crear Nuevo</a>
                                 </div>
-                            </div>
-                            <input *ngIf="!autoPicked" disabled placeholder="Matricula" type="text" class="form-control">
+                                 </div>
+                                        <ng-select
+                                        formControlName="auto_id"
+                                        [(options)]="autos"
+                                        [placeholder]="auto"
+                                        [multiple]="false"
+                                    >
+                                    </ng-select>
                         </div>
 
-                        
+
                     </div>
-                     <div class="form-group">
-                        <label for="input-11">Fecha y Hora de Entrada</label>
-                        <input type="datetime-local" class="form-control"  value="2011-08-19T13:45:00" id="input-11">                       
+                    <div class="row">
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="input-11">Fecha y Hora de Entrada</label>
+                                        <input formControlName="fecha_ingreso" type="datetime-local" class="form-control"  value="2011-08-19T13:45:00" id="input-11">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="input-11">Fecha y Hora de Salida (Aproximada)</label>
+                                        <input formControlName="fecha_ingreso" type="datetime-local" class="form-control"  value="2011-08-19T13:45:00" id="input-11">
+                                    </div>
+                                </div>
+
                     </div>
+
+
 
                      <div class="form-group">
                     <label for="exampleSelect3">Responsable</label>
-                    <select class="form-control custom-select" id="exampleSelect3">
+                    <select formControlName="empleado_id" class="form-control custom-select" id="exampleSelect3">
                         <option selected>Empleados</option>
                         <option value="1">Yulimar Goyoneche</option>
                         <option value="2">Victor Torres</option>
                         <option value="3">Carlos Perez</option>
                     </select>
                 </div>
-                    <div class="form-group">
-                        <label for="textarea-1">Observaciones</label>
-                        <textarea class="form-control" id="textarea-1"></textarea>
-                    </div>
-                    
-                   
-                   
+                <div class="form-group">
+                    <label for="textarea-1">Observaciones</label>
+                    <textarea formControlName="observaciones" class="form-control" id="textarea-1"></textarea>
+                </div>
+
+
+
+
                 </form>
-              
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingOne">
+                            <h5 class="mb-0">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Servicios a Realizar
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="card-block">
+                                    <form [formGroup]="serviciosForm">
+                                           <div class="row">
+                                                <div class="form-group col-md-4 col-sm-6">
+
+                                                            <div class="input-group">
+                                                                    <div class="input-group-btn">
+                                                                        <button type="button" class="btn btn-main dropdown-toggle"
+                                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                <i class="fa fa-wrench"></i>
+                                                                        </button>
+                                                                        <div class="dropdown-menu">
+
+                                                                             <a  data-toggle="modal" data-target="#nuevo-auto" class="dropdown-item">Crear Nuevo</a>
+                                                                        </div>
+                                                                         </div>
+                                                                                <ng-select
+                                                                                formControlName="servicio_id"
+                                                                                [(options)]="servicios"
+                                                                                [placeholder]="auto"
+                                                                                [multiple]="false"
+                                                                            >
+                                                                            </ng-select>
+                                                                </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4 col-sm-6">
+                                                            <input type="number" formControlName="horas" class="form-control" placeholder="Horas Aproximadas">
+                                                        </div>
+
+                                                    <div class="form-group col-md-3 col-sm-6">
+                                                        <button (click)="addService()" [disabled]="!serviciosForm.valid" type="submit" class="btn btn-main">Agregar</button>
+                                                    </div>
+
+                                           </div>
+
+                                        </form>
+                                        <div class="items">
+                                                <ul class="list-group">
+
+                                                        <li *ngFor="let servicio of listadoServicios" class="list-group-item justify-content-between">
+                                                            <h4>{{servicio.nombre}}</h4>
+                                                            <span class="badge badge-main badge-pill big-text">{{servicio.horas}} Horas</span>
+                                                        </li>
+                                                        <li  class="list-group-item justify-content-between">
+                                                            &nbsp;
+                                                                <span class="badge badge-warning badge-pill big-text">Tiempo Estimado {{totalServicio}} Horas</span>
+                                                            </li>
+
+                                                    </ul>
+
+                                        </div>
+
+
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="card ">
+                        <div class="card-header" role="tab" id="headingSix">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    Productos a Utilizar
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+                            <div class="card-block">
+                                    <form [formGroup]="productosForm" class="row form-inline">
+                                            <div class="form-group col-md-4 col-sm-6">
+                                                    <ng-select formControlName="producto_id"
+                                                                 [(options)]="productos"
+                                                                 [placeholder]="productosLabel"
+                                                                 [multiple]="false"
+                                                        >
+                                                    </ng-select>
+                                                    </div>
+                                                    <div class="form-group col-md-4 col-sm-6">
+                                                            <input type="number" formControlName="cantidad" class="form-control" placeholder="Cantidad">
+                                                        </div>
+
+                                            <div class="form-group col-md-3 col-sm-6">
+                                                <button (click)="addProducto()" type="submit" class="btn btn-main">Agregar</button>
+                                            </div>
+                                        </form>
+                                        <div class="items">
+                                                <ul class="list-group">
+                                                <li *ngFor="let producto of listadoProductos" class="list-group-item justify-content-between">
+                                                    <h4>{{producto.nombre}}</h4>
+                                                    <span class="badge badge-main badge-pill big-text">{{producto.cantidad}}</span>
+                                                </li>
+                                                <li  class="list-group-item justify-content-between">
+                                                        &nbsp;
+                                                        <span class="badge badge-warning badge-pill big-text pull-right">Costo Aproximado : {{totalProducto}} $</span>
+                                                    </li>
+
+                                            </ul>
+
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-light">
+                            <div class="card-header" role="tab" id="headingSeven">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                        Detalles del Auto
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+                                <div class="card-block">
+                                            <div class="text-center">
+
+
+                                                <svg  width="365" height="185">
+                                                            <!-- Top -->
+                                                            <rect data-toggle="modal" data-target="#nuevo-detalle" id="top" x="70" y="10" width="220" height="130" fill="transparent" rx="40" stroke="#2E0502" stroke-width="10" />
+
+                                                            <!-- Body -->
+                                                            <rect data-toggle="modal" data-target="#nuevo-detalle"  id="cuerpo" x="10" y="70" width="340" height="80" fill="#2E0502" rx="10" />
+
+                                                            <g>
+                                                            <!-- Left line -->
+                                                            <line data-toggle="modal" data-target="#nuevo-detalle" data-toggle="modal" data-target="nuevo-detalle" x1="145" y1="10" x2="145" y2="80" stroke="#2E0502" stroke-width="10"/>
+
+                                                            <!-- Right line -->
+                                                            <line data-toggle="modal" data-target="#nuevo-detalle" data-toggle="modal" data-target="nuevo-detalle" x1="215" y1="10" x2="215" y2="80" stroke="#2E0502" stroke-width="10"/>
+                                                            </g>
+
+                                                            <g>
+                                                            <!-- Left bumper -->
+                                                            <rect data-toggle="modal" data-target="#nuevo-detalle" data-toggle="modal" data-target="nuevo-detalle" x="0" y="110" width="40" height="20" fill="#999" rx="10" />
+
+                                                            <!-- Right bumper -->
+                                                            <rect data-toggle="modal" data-target="#nuevo-detalle" data-toggle="modal" data-target="nuevo-detalle" x="325" y="110" width="40" height="20" fill="#999" rx="10" />
+                                                            </g>
+
+                                                            <!-- Left wheel -->
+                                                            <g>
+                                                            <circle id="right-wheel-sup" data-toggle="modal" data-target="#nuevo-detalle" r="40px" fill="#222" stroke="white" stroke-width="7" cx="90" cy="140"/>
+                                                            <circle id="right-wheel-inf" data-toggle="modal" data-target="#nuevo-detalle" r="15px" fill="#555" cx="90" cy="140"/>
+                                                            </g>
+
+                                                            <!-- Right wheel -->
+                                                            <g>
+                                                            <circle id="right-wheel-sup" data-toggle="modal" data-target="#nuevo-detalle" r="40px" fill="#222" stroke="white" stroke-width="7" cx="270" cy="140"/>
+                                                            <circle id="right-wheel-inf" data-toggle="modal" data-target="#nuevo-detalle" r="15px" fill="#555" cx="270" cy="140"/>
+                                                            </g>
+
+                                                            <g>
+                                                            <!-- Gold light -->
+                                                            <circle id="luz-delantera"  data-toggle="modal" data-target="#nuevo-detalle" r="15px" fill="gold" cx="340" cy="90"/>
+
+                                                            <!-- Orange light -->
+                                                            <circle id="luz-trasera" data-toggle="modal" data-target="#nuevo-detalle" r="10px" fill="orange" cx="15" cy="90"/>
+                                                            </g>
+                                                        </svg>
+
+                                                        <div class="items">
+                                                                <ul class="list-group">
+                                                                        <li class="list-group-item justify-content-between">
+                                                                            Puerta Izquierda
+                                                                            <span class="badge badge-main badge-pill">14</span>
+                                                                        </li>
+
+                                                                    </ul>
+
+                                                        </div>
+
+                                                        <svg version="1.1" width="800" height="600"
+                                                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600">
+
+                                                                <ellipse id="shadow" fill="#000"  cx="410.779" cy="411.598" rx="142.983" ry="7.438"/>
+
+                                                                    <g id="wholeCar">
+
+                                                                <ellipse  data-target="#nuevo-detalle" id="shadowFollow" fill="#000"  cx="410.779" cy="411.598" rx="142.983" ry="7.438" opacity="0"/>
+                                                                <g clip-path="url(#tyreMask)">
+                                                                <path  data-toggle="modal" data-target="#nuevo-detalle" id="tyreL" fill="#222" d="M345.763,410.936h-29.098c-2.2,0-4-1.8-4-4v-40.935c0-2.2,1.8-4,4-4h29.098c2.2,0,4,1.8,4,4	v40.935C349.763,409.136,347.963,410.936,345.763,410.936z"/>
+                                                                <path data-toggle="modal" data-target="#nuevo-detalle" id="tyreR" fill="#222" d="M502.303,410.936h-29.098c-2.2,0-4-1.8-4-4v-40.935c0-2.2,1.8-4,4-4h29.098c2.2,0,4,1.8,4,4	v40.935C506.303,409.136,504.503,410.936,502.303,410.936z"/>
+                                                                    </g>
+                                                                    <g id="chassis">
+                                                                <line data-toggle="modal" data-target="#nuevo-detalle" id="bumper" fill="none" stroke="#ccc" stroke-width="26" stroke-linecap="round" stroke-miterlimit="10" x1="290" y1="370" x2="528" y2="370"/>
+                                                                    <g clip-path="url(#bonnetMask)">
+                                                                <path data-toggle="modal" data-target="#nuevo-detalle" id="bonnetEnd" fill="#2E0502" d="M290,361.167v-47.833c0-17.05,13.95-31,31-31h177.833c17.05,0,31,13.95,31,31v47.833"/>
+                                                                <path data-toggle="modal" data-target="#nuevo-detalle" id="bonnetStart" fill="#ccc" d="M378,361.167v-47.833c0-17.05,13.95-31,31-31h1.833c17.05,0,31,13.95,31,31v47.833"/>
+                                                                    </g>
+                                                                <polygon data-toggle="modal" data-target="#nuevo-detalle" id="frame" fill="#1B4C3D" fill-opacity="0.2" stroke="#2E0502" stroke-width="16" stroke-miterlimit="10" points="496.429,282.333
+                                                                    323.467,282.333 340.467,202.194 483.429,202.194 "/>
+                                                                <circle data-toggle="modal" data-target="#nuevo-detalle" id="headlightL" fill="gold" cx="331.714" cy="326.858" r="17.5"/>
+                                                                <circle data-toggle="modal" data-target="#nuevo-detalle" id="headlightR" fill="gold" cx="487.754" cy="326.858" r="17.5"/>
+                                                                    <rect data-toggle="modal" data-target="#nuevo-detalle" id="mirrorR" x="514.21" y="262.76" width="28.59" height="20.16" rx="6" ry="6" fill="#2E0502"/>
+                                                                    <rect data-toggle="modal" data-target="#nuevo-detalle" id="mirrorL" x="276.94" y="262.76" width="28.59" height="20.16" rx="6" ry="6" fill="#2E0502"/>
+                                                                    </g>
+                                                                    </g>
+
+                                                                </svg>
+
+
+
+
+                                            </div>
+
+                                            <div class="items">
+                                                    <ul class="list-group">
+                                                            <li class="list-group-item justify-content-between">
+                                                                Puerta Izquierda
+                                                                <span class="badge badge-main badge-pill">14</span>
+                                                            </li>
+
+                                                        </ul>
+
+                                            </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
             </div>
+            <button [disabled]="!ingresoTallerForm.valid || listadoServicios.length == 0 || listadoProductos.length == 0  "  class="btn btn-main btn-block"><i class="fa fa-floppy-o"></i> GUARDAR</button>
         </div>
+
     </div>
+
 
 </div>
 
-<div class="modal fade" id="car-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large-label" style="display: none;">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header state modal-success">                                    
-                                    <h4 class="modal-title" id="modal-large-label"> <i class="fa fa-car"></i>Nuevo Automovil</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                </div>
-                                <div class="modal-body">
-                                     <form>
-
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn btn-success"
-                                                                 aria-haspopup="true" aria-expanded="false">
-                                                                <i class="fa fa-car"></i>
-                                                        </button>
-                                                      
-                                                    </div>
-                                                    <input placeholder="Placa" type="text" class="form-control">
-                                                </div>
-
-                                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="textarea-1">Ano</label>
-                                                    <input placeholder="ingrese ano...." type="number" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="textarea-1">Modelo</label>
-                                                    <input placeholder="ingrese modelo...." type="text" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="textarea-1">Marca</label>
-                                                    <input placeholder="ingrese marca...." type="text" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="textarea-1">Kilometraje</label>
-                                                    <input placeholder="modelo" type="number" class="form-control">
-                                            </div>
-                                            
-                                        
-                                        
-                                        </form>
-                                  
-                                  
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                 </div>
-     </div>
 
 
+<auto-form (saved)="updateSelect($event)"></auto-form>
 
-
-
-
-
+<detalle-form (saved)="addDetalle($event)"></detalle-form>

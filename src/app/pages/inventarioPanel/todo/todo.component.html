@@ -1,0 +1,17 @@
+<div class="task-todo-container">
+    <div class="row header">
+              
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="todo-list" slim-scroll [slimScrollOptions]="{height: 349}">
+                <li *ngFor="let item of sinStock" 
+                   >
+                    <span class="cut-with-dots">{{ item.nombre }} Cantidad Restante: {{item.cantidad}} {{item.unidad_medida.nombre}} </span>  
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

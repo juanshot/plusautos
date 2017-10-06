@@ -1,3 +1,4 @@
+import { PresupuestoSearchPipe } from './search/presupuesto-search.pipe';
 import { AutoSearchPipe } from './search/auto-search.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,14 +16,16 @@ import { SearchPipe } from './search/search.pipe';
         ProfilePicturePipe,
         MailSearchPipe,
         SearchPipe,
-        AutoSearchPipe
+        AutoSearchPipe,
+        PresupuestoSearchPipe
     ],
     exports: [
         AppPicturePipe,
         ProfilePicturePipe,
         MailSearchPipe,
         SearchPipe,
-        AutoSearchPipe
+        AutoSearchPipe,
+        PresupuestoSearchPipe
     ]
 })
 export class PipesModule { }

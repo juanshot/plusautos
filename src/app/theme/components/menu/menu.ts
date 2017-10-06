@@ -6,7 +6,7 @@ export const menuItems = [
     selected: false,
     expanded: false,
     order: 0
-  }, 
+  },
     {
     title: 'Taller Latoneria',
     routerLink: 'form-elements',
@@ -18,26 +18,27 @@ export const menuItems = [
        {
         title: 'Estimaciones',
         routerLink: 'estimaciones/listado',
-   
+
       },
       {
         title: 'Autos',
         routerLink: 'autos/listado',
-   
+
       },
       {
         title: 'Clientes',
         routerLink: 'clientes/listado',
-   
+
       },
       {
-        title: 'Nuevo Taller',
+        title: 'Servicios',
+        routerLink: 'servicios/listado',
+
+      },
+      {
+        title: ' Ingreso a Taller',
         routerLink: 'taller/nuevo',
-   
-      },
-      {
-        title: 'Listado de Autos',
-        routerLink: 'taller/listado'
+
       },
       {
         title: 'Busqueda Avanzada',
@@ -45,28 +46,28 @@ export const menuItems = [
       },
       {
         title: 'Reportes',
-        routerLink: ''
+        routerLink: 'charts/ng2charts'
       }
     ]
-  }, 
+  },
    {
     title: 'Inventario',
     routerLink: 'form-elements',
-    icon: 'fa-pencil-square-o',
+    icon: 'fa fa-archive',
     selected: false,
     expanded: false,
     order: 400,
     subMenu: [
       {
-        title: 'Listado de Items',
-        routerLink: ''
+        title: 'Panel Inventario',
+        routerLink: 'inventario/panel'
       },
       {
-        title: 'Reportes',
-        routerLink: ''
+        title: 'Productos',
+        routerLink: 'productos/listado'
       }
     ]
-  }, 
+  },
    {
     title: 'Nomina',
     routerLink: 'form-elements',
@@ -84,7 +85,7 @@ export const menuItems = [
         routerLink: ''
       }
     ]
-  }, 
+  },
 
   {
     title: 'Facturacion',
@@ -103,7 +104,7 @@ export const menuItems = [
         routerLink: ''
       }
     ]
-  }, 
+  },
    {
     title: 'Sistema',
     routerLink: 'form-elements',
@@ -121,7 +122,7 @@ export const menuItems = [
         routerLink: 'roles/listado'
       }
     ]
-  }, 
+  },
 
 ];
 
@@ -160,7 +161,7 @@ let exampleMenu = [
       {
         title: 'Components',
         routerLink: 'ui/components'
-      },           
+      },
       {
         title: 'Icons',
         routerLink: 'ui/icons'
@@ -202,7 +203,7 @@ let exampleMenu = [
     selected: false,
     expanded: false,
     order: 350
-  }, 
+  },
   {
     title: 'Form Elements',
     routerLink: 'form-elements',
@@ -228,7 +229,7 @@ let exampleMenu = [
         routerLink: 'form-elements/wizard'
       }
     ]
-  },  
+  },
   {
     title: 'Tables',
     routerLink: 'tables',
@@ -280,11 +281,11 @@ let exampleMenu = [
       {
         title: 'Google Maps',
         routerLink: 'maps/googlemaps'
-      },         
+      },
       {
         title: 'Leaflet Maps',
         routerLink: 'maps/leafletmaps'
-      }     
+      }
     ]
   },
   {
@@ -294,7 +295,7 @@ let exampleMenu = [
     selected: false,
     expanded: false,
     order: 650,
-    subMenu: [        
+    subMenu: [
       {
         title: 'Login',
         routerLink: '/login'
