@@ -28,7 +28,7 @@
                                         <ng-select
                                         formControlName="auto_id"
                                         [(options)]="autos"
-                                        [placeholder]="auto"
+                                        [placeholder]="autosLabel"
                                         [multiple]="false"
                                     >
                                     </ng-select>
@@ -95,13 +95,13 @@
                                                                         </button>
                                                                         <div class="dropdown-menu">
 
-                                                                             <a  data-toggle="modal" data-target="#nuevo-auto" class="dropdown-item">Crear Nuevo</a>
+                                                                             <a  data-toggle="modal" data-target="#nuevo-servicio" class="dropdown-item">Crear Nuevo</a>
                                                                         </div>
                                                                          </div>
                                                                                 <ng-select
                                                                                 formControlName="servicio_id"
                                                                                 [(options)]="servicios"
-                                                                                [placeholder]="auto"
+                                                                                [placeholder]="serviciosLabel"
                                                                                 [multiple]="false"
                                                                             >
                                                                             </ng-select>
@@ -118,13 +118,30 @@
                                            </div>
 
                                         </form>
+                                        <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Servicio</th>
+                                                        <th>Horas</th>
+                                                
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let servicio of listadoServicios; let i = index ">
+                                                        <th scope="row">{{i+1}}</th>
+                                                        <td>{{servicio.nombre}}</td>
+                                                        <td><span class="badge badge-main badge-pill big-text">{{servicio.horas}}</span></td>
+                                                        <td><button (click)="eliminarServicio(servicio,i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+                                                    </tr>
+                                               
+                                                </tbody>
+                                        </table>
+
                                         <div class="items">
                                                 <ul class="list-group">
 
-                                                        <li *ngFor="let servicio of listadoServicios" class="list-group-item justify-content-between">
-                                                            <h4>{{servicio.nombre}}</h4>
-                                                            <span class="badge badge-main badge-pill big-text">{{servicio.horas}} Horas</span>
-                                                        </li>
+                                            
                                                         <li  class="list-group-item justify-content-between">
                                                             &nbsp;
                                                                 <span class="badge badge-warning badge-pill big-text">Tiempo Estimado {{totalServicio}} Horas</span>
@@ -153,29 +170,66 @@
                         </div>
                         <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
                             <div class="card-block">
-                                    <form [formGroup]="productosForm" class="row form-inline">
-                                            <div class="form-group col-md-4 col-sm-6">
-                                                    <ng-select formControlName="producto_id"
-                                                                 [(options)]="productos"
-                                                                 [placeholder]="productosLabel"
-                                                                 [multiple]="false"
-                                                        >
-                                                    </ng-select>
-                                                    </div>
-                                                    <div class="form-group col-md-4 col-sm-6">
-                                                            <input type="number" formControlName="cantidad" class="form-control" placeholder="Cantidad">
+                                    <form [formGroup]="productosForm">
+                                                    <div class="row">
+                                                            <div class="form-group col-md-4 col-sm-6">
+                                                                    
+                                                                <div class="input-group">
+                                                                        <div class="input-group-btn">
+                                                                            <button type="button" class="btn btn-main dropdown-toggle"
+                                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    <i class="fa fa-shopping-bag"></i>
+                                                                            </button>
+                                                                            <div class="dropdown-menu">
+
+                                                                                    <a  data-toggle="modal" data-target="#nuevo-producto" class="dropdown-item">Crear Nuevo</a>
+                                                                            </div>
+                                                                                </div>
+                                                                                    <ng-select
+                                                                                    formControlName="producto_id"
+                                                                                    [(options)]="productos"
+                                                                                    [placeholder]="productosLabel"
+                                                                                    [multiple]="false"
+                                                                                >
+                                                                                </ng-select>
+                                                                    </div>
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-sm-6">
+                                                                <input type="number" formControlName="cantidad" class="form-control" placeholder="Cantidad">
+                                                            </div>
+    
+                                                        <div class="form-group col-md-3 col-sm-6">
+                                                            <button (click)="addProducto()" type="submit" class="btn btn-main">Agregar</button>
                                                         </div>
 
-                                            <div class="form-group col-md-3 col-sm-6">
-                                                <button (click)="addProducto()" type="submit" class="btn btn-main">Agregar</button>
-                                            </div>
+                                                    </div>
+                                            
+                                                   
                                         </form>
+                                        <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Producto</th>
+                                                        <th>Cantidad</th>
+                                                
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let producto of listadoProductos; let i = index ">
+                                                        <th scope="row">{{i+1}}</th>
+                                                        <td>{{producto.nombre}}</td>
+                                                        <td><span class="badge badge-main badge-pill big-text">{{producto.cantidad}}</span></td>
+                                                        <td><button (click)="eliminarProducto(producto,i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+                                                    </tr>
+                                               
+                                                </tbody>
+                                        </table>
+
+
                                         <div class="items">
                                                 <ul class="list-group">
-                                                <li *ngFor="let producto of listadoProductos" class="list-group-item justify-content-between">
-                                                    <h4>{{producto.nombre}}</h4>
-                                                    <span class="badge badge-main badge-pill big-text">{{producto.cantidad}}</span>
-                                                </li>
+                                              
                                                 <li  class="list-group-item justify-content-between">
                                                         &nbsp;
                                                         <span class="badge badge-warning badge-pill big-text pull-right">Costo Aproximado : {{totalProducto}} $</span>
@@ -245,16 +299,25 @@
                                                             </g>
                                                         </svg>
 
-                                                        <div class="items">
-                                                                <ul class="list-group">
-                                                                        <li class="list-group-item justify-content-between">
-                                                                            Puerta Izquierda
-                                                                            <span class="badge badge-main badge-pill">14</span>
-                                                                        </li>
-
-                                                                    </ul>
-
-                                                        </div>
+                                                        <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Parte del Carro</th>
+                                                                        <th>Observacion</th>
+                                                                        <th>Acciones</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let observacion of listadoDetalles; let i = index ">
+                                                                        <th scope="row">{{i+1}}</th>
+                                                                        <td>{{observacion.parte}}</td>
+                                                                        <td>{{observacion.observacion}}</td>
+                                                                        <td><button (click)="eliminarItem(i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+                                                                    </tr>
+                                                               
+                                                                </tbody>
+                                                        </table>
 
                                                         <svg version="1.1" width="800" height="600"
                                                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600">
@@ -290,16 +353,26 @@
 
                                             </div>
 
-                                            <div class="items">
-                                                    <ul class="list-group">
-                                                            <li class="list-group-item justify-content-between">
-                                                                Puerta Izquierda
-                                                                <span class="badge badge-main badge-pill">14</span>
-                                                            </li>
+                                            <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Parte del Carro</th>
+                                                            <th>Observacion</th>
+                                                            <th>Acciones</th>
 
-                                                        </ul>
-
-                                            </div>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let observacion of listadoDetalles; let i = index">
+                                                            <th scope="row">{{i+1}}</th>
+                                                            <td>{{observacion.parte}}</td>
+                                                            <td>{{observacion.observacion}}</td>
+                                                            <td><button (click)="eliminarItem(i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+                                                        </tr>
+                                                   
+                                                    </tbody>
+                                            </table>
 
 
                                 </div>
@@ -308,7 +381,7 @@
                 </div>
 
             </div>
-            <button [disabled]="!ingresoTallerForm.valid || listadoServicios.length == 0 || listadoProductos.length == 0  "  class="btn btn-main btn-block"><i class="fa fa-floppy-o"></i> GUARDAR</button>
+            <button (click)="saveTaller()" [disabled]="!ingresoTallerForm.valid || listadoServicios.length == 0 || listadoProductos.length == 0  "  class="btn btn-main btn-block"><i class="fa fa-floppy-o"></i> GUARDAR</button>
         </div>
 
     </div>
@@ -319,5 +392,9 @@
 
 
 <auto-form (saved)="updateSelect($event)"></auto-form>
+
+<producto-form (saved)="updateSelectProducto($event)"></producto-form>
+
+<servicio-form (saved)="updateSelectServicio($event)"></servicio-form>
 
 <detalle-form (saved)="addDetalle($event)"></detalle-form>

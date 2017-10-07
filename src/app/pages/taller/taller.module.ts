@@ -1,3 +1,5 @@
+import { ServicioFormComponent } from './../../componentes/servicio-form/servicio-form.component';
+import { ProductoFormComponent } from './../../componentes/producto-form/producto-form.component';
 import { SelectService } from './../../services/select.service';
 import { UserService } from './../../services/user.service';
 import { EndPointService } from './../../services/endpoint.service';
@@ -26,7 +28,7 @@ export const routes = [
     SelectModule,
     HttpModule,
   ],
-  declarations: [IngresoTallerComponent,AutoFormComponent,DetalleFormComponent],
+  declarations: [IngresoTallerComponent,AutoFormComponent,DetalleFormComponent,ProductoFormComponent,ServicioFormComponent],
   providers:[UserService,EndPointService,SelectService]
 })
 

@@ -21,6 +21,7 @@ export class IngresoTallerComponent implements OnInit {
          servicios:Array<any> = [];
          serviciosLabel:string = 'Elija Servicio';
          productosLabel:string = 'Elija Producto';
+         autosLabel:string = 'Elija Auto';
          listadoServicios:Array<any> = [];
          listadoProductos:Array<any> = [];
          listadoDetalles:Array<any> = [];
@@ -72,6 +73,18 @@ export class IngresoTallerComponent implements OnInit {
              })
 
          }
+         updateSelectProducto(val){
+            this.select.loadProductos().then((res)=>{
+                this.productos = res;
+            })
+
+        }
+        updateSelectServicio(val){
+            this.select.loadServicios().then((res)=>{
+                this.servicios = res;
+            })
+
+        }
 
            addService(){
                console.log(this.serviciosForm.value);
@@ -107,18 +120,41 @@ export class IngresoTallerComponent implements OnInit {
               this.productosForm.reset();
 
           }
-          addDetalle(){
-              console.log(this.serviciosForm.value);
-              let result = this.servicios.find((val)=>{
-                     return val.value == this.serviciosForm.value.servicio_id;
-              });
-              let saveVal={
-                  nombre: result.label
-              };
-              Object.assign(saveVal,this.serviciosForm.value);
-              this.listadoServicios.push(saveVal);
+          addDetalle(val){
+              this.listadoDetalles.push(val);
+             
 
           }
+          eliminarItem(i){
+              
+              this.listadoDetalles.splice(i);
+          }
+          eliminarProducto(producto,i){
+
+            this.ep.getProducto(producto.producto_id).then(res=>{
+                console.log(res);
+                console.log(producto.cantidad);
+                this.totalProducto -= (res.producto.precio_compra * producto.cantidad ) ;
+                this.listadoProductos.splice(i);
+
+            });
+            
+            
+
+        }
+          eliminarServicio(servicio,i){
+             this.totalServicio -= servicio.horas;
+                this.listadoServicios.splice(i);
+            }
+        
+        saveTaller(){
+            let request = {servicios: this.listadoServicios,productos:this.listadoProductos,detalles:this.listadoDetalles};
+            Object.assign(request,this.ingresoTallerForm.value);
+            console.log(request);
+            
+            
+        }
+          
 
 
 }

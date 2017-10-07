@@ -16,7 +16,7 @@ export class DetalleFormComponent implements OnInit {
   constructor(public fb:FormBuilder,public ep:EndPointService,public select:SelectService) {
     this.detalleForm = this.fb.group({
       parte:['',Validators.compose([Validators.required])],
-      descripcion:['',Validators.compose([Validators.required])],
+      observacion:['',Validators.compose([Validators.required])],
 
 
     });
@@ -26,5 +26,7 @@ export class DetalleFormComponent implements OnInit {
   }
   addDetalle(){
    this.saved.emit(this.detalleForm.value);
+   this.detalleForm.reset();
+   this.detalleForm.setValue({parte:'',observacion:''});
   }
 }
