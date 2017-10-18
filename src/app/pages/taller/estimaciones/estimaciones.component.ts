@@ -1,13 +1,13 @@
-import { GlobalService } from './../../services/global.service';
-import { SelectService } from './../../services/select.service';
-import { ValidationService } from './../../services/validation.service';
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { GlobalService } from './../../../services/global.service';
+import { SelectService } from './../../../services/select.service';
+import { ValidationService } from './../../../services/validation.service';
+import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataTableModule } from "angular2-datatable";
-import { PipesModule } from '../../theme/pipes/pipes.module';
-import { DirectivesModule } from '../../theme/directives/directives.module';
+import { PipesModule } from '../../../theme/pipes/pipes.module';
+import { DirectivesModule } from '../../../theme/directives/directives.module';
 import { DynamicTablesService } from './estimaciones.service';
 
 
@@ -18,7 +18,7 @@ import { DynamicTablesService } from './estimaciones.service';
   styleUrls: ['./estimaciones.component.scss'],
   providers: [ DynamicTablesService,SelectService ,GlobalService ]
 })
-export class EstimacionesComponent {
+export class EstimacionesComponent implements OnInit {
     public data: any;
     public searchText:string;
     estimacionForm:FormGroup;
@@ -27,6 +27,9 @@ export class EstimacionesComponent {
     autos:any = [];
     items:any = [];
     create:boolean=true;
+    cliente:string = "Seleccione cliente";
+    autoLabel:string = "Seleccione Auto";
+
     constructor(private _dynamicTablesService:DynamicTablesService,public fb:FormBuilder,public selectService:SelectService,public global:GlobalService){
         this.estimacionForm = this.fb.group({
             auto_id:['',Validators.compose([Validators.required])],
@@ -47,12 +50,13 @@ export class EstimacionesComponent {
             console.log("en component",res);
             this.data = res
         });  
-        this.selectService.loadClientes().then((res)=>{
-            this.clientes = res;
-        }) ;
-        this.selectService.loadAutos().then((res)=>{
-            this.autos = res;
-        }) ;
+        
+    }
+    ngOnInit(){
+     this.selectService.loadAutos().then((res)=>{
+         this.autos = res;
+     })
+     
     }
     savePresupuesto(){
             this.estimacionForm.controls['items'].setValue(this.items);

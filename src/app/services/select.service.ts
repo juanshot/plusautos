@@ -9,17 +9,19 @@ export class SelectService {
     loadClientes(){  
         let resultOptions = [];
         return this.ep.getClientes().then((resp)=>{
+            console.log(resp,'clientesss');
+            
             let format = resp.clientes;
             format.map((result)=>{
-               let obj = {
-                   value: result.id,
-                   label: result.nombre +' '+result.apellido
-               }
-               resultOptions.push(obj);
-               
-           })
-           return  resultOptions;
-
+                let obj = {
+                    value: result.id,
+                    label: result.nombre +''+result.apellido
+                }
+                resultOptions.push(obj);
+                
+            })
+            return  resultOptions;
+            
         })
    
         
@@ -64,6 +66,22 @@ export class SelectService {
         let resultOptions = [];
         return this.ep.getProductos().then((resp)=>{
             let format = resp.productos;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: result.nombre
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })     
+    }
+    loadProveedores(){  
+        let resultOptions = [];
+        return this.ep.getProveedores().then((resp)=>{
+            let format = resp.proveedores;
             format.map((result)=>{
                let obj = {
                    value: result.id,

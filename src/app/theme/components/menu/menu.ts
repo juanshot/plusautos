@@ -17,7 +17,7 @@ export const menuItems = [
     subMenu: [
        {
         title: 'Estimaciones',
-        routerLink: 'estimaciones/listado',
+        routerLink: 'taller/estimaciones',
 
       },
       {
@@ -36,9 +36,24 @@ export const menuItems = [
 
       },
       {
-        title: ' Ingreso a Taller',
-        routerLink: 'taller/nuevo',
-
+        title: 'Ingresos en Taller',
+        url: '#',
+        subMenu: [{
+          title: 'Nuevo Ingreso',
+          routerLink: 'taller/nuevo',
+          disabled: true,
+          selected: false,
+          expanded: false
+        },
+        {
+          title: 'Listado de Ingresos',
+          routerLink: 'taller/listado',
+          disabled: true,
+          selected: false,
+          expanded: false
+        }
+      
+      ]
       },
       {
         title: 'Busqueda Avanzada',
@@ -77,13 +92,10 @@ export const menuItems = [
     order: 400,
     subMenu: [
       {
-        title: 'Listado de Items',
-        routerLink: ''
+        title: 'Empleados',
+        routerLink: 'empleados/listado'
       },
-      {
-        title: 'Reportes',
-        routerLink: ''
-      }
+   
     ]
   },
 
@@ -96,11 +108,66 @@ export const menuItems = [
     order: 400,
     subMenu: [
       {
-        title: 'Listado de Items',
+        title: 'Facturar',
         routerLink: ''
       },
       {
-        title: 'Reportes',
+        title: 'Listado de Facturas',
+        routerLink: ''
+      }
+    ]
+  },
+  {
+    title: 'Comercializacion',
+    routerLink: 'form-elements',
+    icon: 'fa-money',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Proveedores',
+        routerLink: 'proveedores/listado'
+      },
+      {
+        title: 'Compras',
+        routerLink: ''
+      }
+    ]
+  },
+  {
+    title: 'Caja Banco',
+    routerLink: 'form-elements',
+    icon: 'fa-money',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Facturar',
+        routerLink: ''
+      },
+      {
+        title: 'Listado de Facturas',
+        routerLink: ''
+      }
+    ]
+  },
+
+  {
+    title: 'Contabilidad',
+    routerLink: 'form-elements',
+    icon: 'fa-money',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Facturar',
+        routerLink: ''
+      },
+      {
+        title: 'Listado de Facturas',
         routerLink: ''
       }
     ]

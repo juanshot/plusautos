@@ -44,17 +44,9 @@ export class EndPointService {
     }
     getUsers(){
            
-        return this.http.get(this.getApiUrl()+'get_users?token='+this.user.getToken()).map((res)=>{
-            if(res.status == 401) {
-                this.handleTokenInvalid()
-              } 
-            if(res.status == 500) {
-                throw new Error('Hubo un problema con el servidor')
-              } 
-              return res.json();
-         }).toPromise().then(
+        return this.http.get(this.getApiUrl()+'get_users?token='+this.user.getToken()).toPromise().then(
             (response)=>{
-                return response;
+                return response.json();
             },
             (err:Error)=>{
                 return err;
@@ -94,7 +86,47 @@ export class EndPointService {
             }
         )
     }
-    // formato para imagenes
+    //save empleado
+
+    saveEmpleado(request:Object){
+        return this.http.post(this.getApiUrl()+'save_empleado?token='+this.user.getToken(),request).toPromise().then(
+            (response)=>{
+                return response.json();    
+        },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
+
+    // get empleados
+
+    getEmpleados(){
+            
+        return this.http.get(this.getApiUrl()+'get_empleados?token='+this.user.getToken()).toPromise().then(
+            (response)=>{
+                return response.json();
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
+
+    }
+
+    // actualizacion de empleados
+    updateEmpleado(proveedore,id){
+        return this.http.post(this.getApiUrl()+`update_empleado/${id}?token=`+this.user.getToken(),proveedore).toPromise().then(
+            (response)=>{
+                console.log(response.json());
+                
+                return response.json()
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
 
 
         //save rol
@@ -138,6 +170,7 @@ export class EndPointService {
         
      return this.http.get(this.getApiUrl()+'get_clientes?token='+this.user.getToken()).toPromise().then(
          (response)=>{
+             
              return response.json();
          },
          (err:Error)=>{
@@ -304,8 +337,71 @@ getStockVacio(){
      )
 
 }
+// ingreso taller 
+saveIngresoTaller(taller){
+    return this.http.post(this.getApiUrl()+'ingresoTaller?token='+this.user.getToken(),taller).toPromise().then(
+        (response)=>{
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
 
+// Listado Ingresos
+getListadoIngresos(){
+    return this.http.get(this.getApiUrl()+'listado_ingreso_taller?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            
+            
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+   
+}
 
+// ingreso de proveedores
+saveProveedore(proveedore){
+    return this.http.post(this.getApiUrl()+'save_proveedor?token='+this.user.getToken(),proveedore).toPromise().then(
+        (response)=>{
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+
+// actualizacion de proveedores
+updateProveedore(proveedore,id){
+    return this.http.post(this.getApiUrl()+`update_proveedor/${id}?token=`+this.user.getToken(),proveedore).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+
+// Listado proveedores
+getProveedores(){
+    return this.http.get(this.getApiUrl()+'get_proveedores?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+   
+}
  handleTokenInvalid(){
         console.log('Token Invalid');
         

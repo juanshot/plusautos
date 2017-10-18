@@ -1,10 +1,10 @@
+import { ProveedoresComponent } from './proveedores.component';
+import { SelectModule } from 'angular2-select';
 import { environment } from './../../../environments/environment';
-import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 import { UserService } from './../../services/user.service';
 import { EndPointService } from './../../services/endpoint.service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from './../../theme/directives/directives.module';
-import { EmpleadoComponent } from './empleados.component';
 import { NgModule } from '@angular/core';
 import { DataTableModule } from "angular2-datatable";
 import { PipesModule } from '../../theme/pipes/pipes.module';
@@ -14,7 +14,7 @@ import { HttpModule } from '@angular/http';
 
 export const routes = [
     { path: '', redirectTo: '', pathMatch: 'full'},
-    { path: 'listado', component: EmpleadoComponent, data: { breadcrumb: 'Listado' } }
+    { path: 'listado', component: ProveedoresComponent, data: { breadcrumb: 'Listado' } }
   ];
 
 @NgModule({
@@ -26,11 +26,12 @@ export const routes = [
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forChild(routes),
-        HttpModule
+        HttpModule,
+        SelectModule
     ],
     exports: [],
-    declarations: [EmpleadoComponent,ImageUploaderComponent],
+    declarations: [ProveedoresComponent],
     providers: [EndPointService,UserService],
 })
 
-export class EmpleadosModule { }
+export class ProveedoresModule { }

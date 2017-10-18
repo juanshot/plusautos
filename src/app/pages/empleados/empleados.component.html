@@ -1,0 +1,259 @@
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">empleados</span>
+                <div class="widget-controls"> 
+                    <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                    <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                    <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                    <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>                          
+                    <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                </div>        
+            </div>
+            <div class="card-block widget-body">
+
+
+                <div class="w-200 pull-right bottom-15">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input class="form-control" id="table-search-input" [(ngModel)]="searchText" type="text" placeholder="Buscar por nombre...">
+                    </div>
+                </div> 
+                <div class="w-200 pull-left bottom-15">
+                       <button data-toggle="modal" data-target="#nuevo-empleado" class="btn btn-outline generic btn-sm">
+                           <i class="fa fa-plus-circle btn-sm "> </i>
+                           Nuevo
+                       </button>
+                    </div> 
+                <div class="table-responsive datatable">
+                    <table class="table table-striped table-hover table-sm" [mfData]="data  | SearchPipe : searchText" #mf="mfDataTable" [mfRowsOnPage]="10">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>                              
+                                <th><mfDefaultSorter by="nombre">Nombre</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="apellido">Apellido</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="cedula">Cedula</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="email">Email</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="date">Ultima Conexion</mfDefaultSorter></th>
+                                <th>Acciones</th>      
+                            </tr>
+                        </thead>
+                        <tbody>                           
+                            <tr *ngFor="let person of mf.data">
+                                <td> <img *ngIf="person.image ==''" src="assets/img/profile/juan.png" alt="user-img" class="img-circle user-img"> <img *ngIf="person.image !=''" src="{{person.image}}" alt="user-img" class="img-circle user-img"></td>
+                                <td><strong>{{person.nombre}}</strong></td>
+                                <td>
+                                   <strong>{{person.apellido}} </strong>
+                                </td>
+                                <td>
+                                    <strong>{{person.cedula}} </strong>
+                                 </td>
+                                 <td>
+                                    <strong>{{person.email}} </strong>
+                                 </td>
+                          
+                                <td>{{person.updated_at | date}}</td>
+
+                                <td><button class="btn btn-primary btn-sm">Deshabilitar</button></td>
+                                <td><button class="btn btn-warning btn-sm">Ver Actividad</button></td>
+                                </tr>
+                                <tr *ngIf="(mf.data | SearchPipe : searchText).length === 0">
+                                <td colspan="100">
+                                    No hay Resultados
+                                </td>
+                            </tr>                          
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="12">
+                                    <mfBootstrapPaginator [rowsOnPageSet]="[10, 25, 50, 100]"></mfBootstrapPaginator>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="nuevo-empleado" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header generic ">
+                        <h4 class="modal-title" id="modal-label"><i class="fa fa-user"></i> Nuevo empleado</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="clearfix">
+                                    <ul class="nav nav-tabs top pull-left w-100p">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#ta">Datos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#tb">Foto</a>
+                                        </li>
+                                                           
+                                    </ul>
+                                </div>
+                                <div class="tab-content top">
+                                        <div class="tab-pane active" id="ta">
+                                                <form [formGroup]="empleadoForm">
+                                                        <div class="row">
+                                                            <div class="col-md-6" >
+                                                                    <div [ngClass]="{'has-success':empleadoForm.get('nombres').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Nombres:</label>
+                                                                                    <input [ngClass]="{'form-control-success':empleadoForm.get('nombres').value != '' }" formControlName="nombres" type="text" class="form-control">
+                                                                            </div>
+
+                                                                    </div>
+                                                                    <div [ngClass]="{'has-success':empleadoForm.get('apellido_paterno').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Apellido Paterno:</label>
+                                                                                    <input [ngClass]="{'form-control-success':empleadoForm.get('apellido_paterno').value != '' }" formControlName="apellido_paterno" type="text" class="form-control">
+                                        
+                                                                            </div>
+
+                                                                    </div>
+
+                                                                    <div [ngClass]="{'has-success':empleadoForm.get('apellido_materno').value != '' }">
+                                                                        <div class="form-group">
+                                                                                <label for="">Apellido Materno:</label>
+                                                                                <input [ngClass]="{'form-control-success':empleadoForm.get('apellido_materno').value != '' }" formControlName="apellido_materno" type="text" class="form-control">
+                                    
+                                                                        </div>
+
+                                                                </div>
+                                                                   
+                                                                   
+                                                                    <div [ngClass]="{'has-danger':empleadoForm.get('cedula').value != '' && empleadoForm.get('cedula').hasError('invalidCedula'),
+                                                                
+                                                                                      'has-success': empleadoForm.get('cedula').value != '' && !empleadoForm.get('cedula').hasError('invalidCedula')              }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Cedula:</label>
+                                                                                    <input maxlength="10" formControlName="cedula" type="text" [ngClass]="{'form-control-danger':empleadoForm.get('cedula').value != '' && empleadoForm.get('cedula').hasError('invalidCedula'),
+                                                                                
+                                                                                                                                                            'form-control-success':empleadoForm.get('cedula').value != '' && !empleadoForm.get('cedula').hasError('invalidCedula')}" class="form-control">
+                                                                            </div>
+
+                                                                    </div>
+                                                                    <div [ngClass]="{'has-success':empleadoForm.get('estado_civil_id').value != '' }">
+                                                                            <div class="form-group">
+                                                                           
+                                                                                    <div class="form-group">
+                                                                                            <label for="exampleSelect1">Estado Civil</label>
+                                                                                            <select formControlName="estado_civil_id" class="form-control" id="exampleSelect1">
+                                                                                                    <option value="1">Soltero</option>
+                                                                                                    <option value="2">Casado</option>
+                                                                                                    <option value="3">Divorciado</option>
+                                                                                                    <option value="4">Viudo</option>
+                                                                                            </select>
+                                                                                        </div>
+
+                                                                                
+                                                                                   
+                                                                            </div>
+
+                                                                    </div>
+                                                                    <div [ngClass]="{'has-success':empleadoForm.get('fecha_nacimiento').value != '' }">
+                                                                        <div class="form-group">
+                                                                                <label for="">Fecha de Nacimiento:</label>
+                                                                                <input [ngClass]="{'form-control-success':empleadoForm.get('fecha_nacimiento').value != '' }" formControlName="fecha_nacimiento" type="date" class="form-control">
+                                    
+                                                                        </div>
+
+                                                                </div>
+                                                                <div [ngClass]="{'has-success':empleadoForm.get('lugar_nacimiento').value != '' }">
+                                                                    <div class="form-group">
+                                                                            <label for="">Lugar Nacimiento:</label>
+                                                                            <input [ngClass]="{'form-control-success':empleadoForm.get('lugar_nacimiento').value != '' }" formControlName="lugar_nacimiento" type="text" class="form-control">
+                                
+                                                                    </div>
+
+                                                            </div>
+
+                                                            <div [ngClass]="{'has-success':empleadoForm.get('lugar_nacimiento').value != '' }">
+                                                                <div class="form-group">
+                                                                        <label for="">Lugar Nacimiento:</label>
+                                                                        <input [ngClass]="{'form-control-success':empleadoForm.get('lugar_nacimiento').value != '' }" formControlName="lugar_nacimiento" type="text" class="form-control">
+                            
+                                                                </div>
+
+                                                        </div>
+                                                        <div >
+                                                            <div class="form-group">
+                                                                    <label for="">Grupo Sanguineo:</label>
+                                                                    <input formControlName="grupo_sanguineo" type="text" class="form-control">
+                        
+                                                            </div>
+
+                                                    </div>
+                                                                
+                                                            
+                                                               
+                                                                </div>
+                                                           
+                                                            <div class="col-md-6" >
+                                                                    <div [ngClass]="{'has-success':empleadoForm.get('telefono_domicilio').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Telefono Domicilio:</label>
+                                                                                    <input [ngClass]="{'form-control-success':empleadoForm.get('telefono_domicilio').value != '' }" formControlName="nombres" type="text" class="form-control">
+                                                                            </div>
+
+                                                                    </div>
+
+                                                                    <div [ngClass]="{'has-success':empleadoForm.get('telefono_celular').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Telefono Celular:</label>
+                                                                                    <input [ngClass]="{'form-control-success':empleadoForm.get('telefono_celular').value != '' }" formControlName="telefono_celular" type="text" class="form-control">
+                                                                            </div>
+
+                                                                    </div>
+                                                                   
+                                                                    <div [ngClass]="{'has-danger' : (empleadoForm.get('email').value != '' && empleadoForm.get('email').hasError('required')) || (empleadoForm.get('email').value != '' && empleadoForm.get('email').hasError('invalidEmail')), 
+                                                                    'has-success' : !empleadoForm.get('email').hasError('required') && empleadoForm.get('email').value !='' && !empleadoForm.get('email').hasError('invalidEmail')}">
+                                                                            <label class="form-control-label">Email</label>
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                                                                <input formControlName="email" class="form-control" [ngClass]="{'form-control-danger' : (empleadoForm.get('email').value != '' && empleadoForm.get('email').hasError('required')) || (empleadoForm.get('email').value != '' && empleadoForm.get('email').hasError('invalidEmail')), 
+                                                                                                                                                'form-control-success' :  !empleadoForm.get('email').hasError('required') && !empleadoForm.get('email').hasError('invalidEmail')}" type="text">                      
+                                                                            </div>
+                                                                            <span class="help-block text-danger" *ngIf="empleadoForm.get('email').value != '' && empleadoForm.get('email').hasError('required')">Email es requerido</span>                              
+                                                                            <span class="help-block text-danger" *ngIf="empleadoForm.get('email').value != '' && empleadoForm.get('email').hasError('invalidEmail')">Email Invalido</span>
+                                                                        </div>
+                                                                        <div [ngClass]="{'has-success':empleadoForm.get('direccion').value != '' }">
+                                                                                <div class="form-group">
+                                                                                        <label for="">Direccion:</label>
+                                                                                        <textarea [ngClass]="{'form-control-success':empleadoForm.get('direccion').value != '' }" formControlName="direccion" type="text" class="form-control"> </textarea>
+                                                                                </div>
+    
+                                                                        </div>
+                                                                 
+                                                                  
+                                                                </div>
+                                                        </div>
+                                                       
+                                                         
+                                                      </form>
+                                         
+                                        </div>
+                                        <div class="tab-pane" id="tb">
+                                                <div class="col-lg-6 col-12 bottom-15">
+                                                   
+                                                        <h6>Subir imagen</h6>
+                                                        <az-image-uploader></az-image-uploader>
+                                                    </div>
+                                        </div>
+ 
+                                    </div>  
+             
+                  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" [disabled]="!empleadoForm.valid" (click)="saveEmpleado()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

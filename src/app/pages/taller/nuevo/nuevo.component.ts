@@ -1,8 +1,9 @@
+import { DetalleFormComponent } from './../../../componentes/detalle-form/detalle-form';
 import { EndPointService } from './../../../services/endpoint.service';
 import { SelectService } from './../../../services/select.service';
 import { AutoFormComponent } from './../../../componentes/auto-form/auto-form.component';
 
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 @Component({
   selector: 'az-inputs',
@@ -27,12 +28,16 @@ export class IngresoTallerComponent implements OnInit {
          listadoDetalles:Array<any> = [];
          totalProducto =0;
          totalServicio =0;
+         part:string ='';
+         @ViewChild(DetalleFormComponent) detalle:DetalleFormComponent;
         constructor(public formBuilder:FormBuilder,public select:SelectService,public ep:EndPointService){
 
             this.ingresoTallerForm = this.formBuilder.group({
                 empleado_id:['',Validators.compose([Validators.required])],
                 auto_id:['',Validators.compose([Validators.required])],
-                fecha_ingreso:['',Validators.compose([Validators.required])],
+                fecha_ingreso:[''],
+                fecha_salida:[''],
+                status_taller_id:[''],
                 observaciones:['',Validators.compose([Validators.required])]
             });
 
@@ -148,10 +153,27 @@ export class IngresoTallerComponent implements OnInit {
             }
         
         saveTaller(){
-            let request = {servicios: this.listadoServicios,productos:this.listadoProductos,detalles:this.listadoDetalles};
+            this.listadoProductos.map((res)=>{
+                delete res.nombre;
+            });
+            this.listadoServicios.map((res)=>{
+                delete res.nombre;
+            });
+            this.ingresoTallerForm.controls['status_taller_id'].setValue(1);
+            let request = {servicios: this.listadoServicios,productos:this.listadoProductos,detalles:this.listadoDetalles,costo_total:this.totalProducto,tiempo_total:this.totalServicio};
+
             Object.assign(request,this.ingresoTallerForm.value);
             console.log(request);
+            this.ep.saveIngresoTaller(request).then((res)=>{
+                console.log(res);
+                
+            })
             
+            
+        }
+        setPart(part){
+            console.log(part);
+            this.detalle.setParte(part);
             
         }
           

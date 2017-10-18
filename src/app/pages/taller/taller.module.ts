@@ -1,3 +1,8 @@
+import { EstimacionesComponent } from './estimaciones/estimaciones.component';
+import { DirectivesModule } from './../../theme/directives/directives.module';
+import { DataTableModule } from 'angular2-datatable';
+import { PipesModule } from './../../theme/pipes/pipes.module';
+import { ListadoIngresosComponent } from './listado/listado-ingresos.component';
 import { ServicioFormComponent } from './../../componentes/servicio-form/servicio-form.component';
 import { ProductoFormComponent } from './../../componentes/producto-form/producto-form.component';
 import { SelectService } from './../../services/select.service';
@@ -17,6 +22,8 @@ import {DetalleFormComponent} from "../../componentes/detalle-form/detalle-form"
 export const routes = [
 
   { path: 'nuevo', component: IngresoTallerComponent, data: { breadcrumb: 'Nuevo' } },
+  { path: 'listado', component: ListadoIngresosComponent, data: { breadcrumb: 'Listado' } },
+  { path: 'estimaciones', component: EstimacionesComponent, data: { breadcrumb: 'Presupuestos' } },
 ];
 
 @NgModule({
@@ -27,8 +34,11 @@ export const routes = [
     RouterModule.forChild(routes),
     SelectModule,
     HttpModule,
+    PipesModule,
+    DataTableModule,
+    DirectivesModule
   ],
-  declarations: [IngresoTallerComponent,AutoFormComponent,DetalleFormComponent,ProductoFormComponent,ServicioFormComponent],
+  declarations: [IngresoTallerComponent,AutoFormComponent,DetalleFormComponent,ProductoFormComponent,ServicioFormComponent,ListadoIngresosComponent,EstimacionesComponent],
   providers:[UserService,EndPointService,SelectService]
 })
 
