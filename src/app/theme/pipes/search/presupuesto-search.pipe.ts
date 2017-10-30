@@ -7,8 +7,6 @@ export class PresupuestoSearchPipe implements PipeTransform {
     if (value) {
       return value.filter(presup=> {
         if (presup.id) {
-            console.log(presup.id);
-            
           return presup.id.toString().search(searchText) !== -1;
         }
       });

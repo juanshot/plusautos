@@ -19,7 +19,7 @@
           <div class="tab-pane active" id="ta">
             <form [formGroup]="detalleForm">
               <div class="row">
-                <div class="col-md-6" >
+                <div class="col-md-4" >
                   <div [ngClass]="{'has-success':detalleForm.get('parte').value != '' }">
                     <div class="form-group">
                       <label>Parte del Carro:</label>
@@ -29,7 +29,19 @@
                 </div>
            
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div [ngClass]="{'has-success':detalleForm.get('observacion').value != '' }">
+                        <div class="form-group">
+                            <label>Observacion:</label>
+                            <select formControlName="detalle" class="form-control" >
+                              <option value="rayon">Rayon</option>
+                              <option value="golpe">Golpe</option>
+                              <option value="cambio">Cambio</option>
+                            </select>
+                          </div>
+                    </div>
+                  </div>
+                <div class="col-md-4">
                     <div [ngClass]="{'has-success':detalleForm.get('observacion').value != '' }">
                         <div class="form-group">
                             <label>Observacion:</label>
@@ -39,7 +51,8 @@
                  
 
                 </div>
-              </div>
+                </div>
+              
 
 
             </form>

@@ -63,7 +63,7 @@
                           
                         
 
-                                <td><button class="btn btn-warning btn-sm">Ver historial de Taller</button><button class="btn btn-success btn-sm">Ver Autos</button></td>
+                                <td><button data-toggle="modal" data-target="#talleres-modal" (click)="getTalleresCliente(cliente)"  class="btn btn-warning btn-sm">Ver historial de Taller</button><button data-toggle="modal" data-target="#autos-modal" (click)="getAutosCliente(cliente.id)" class="btn btn-success btn-sm">Ver Autos</button></td>
                                 </tr>
                                 <tr *ngIf="(mf.data | SearchPipe : searchText).length === 0">
                                 <td colspan="100">
@@ -208,4 +208,130 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="autos-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header generic ">
+                            <h4 class="modal-title" id="modal-label"><i class="fa fa-car"></i> Autos de Cliente</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="clearfix">
+                                        <ul class="nav nav-tabs top pull-left w-100p">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#ta">Autos</a>
+                                            </li>
+                                          
+                                                               
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content top">
+                                            <div class="tab-pane active" id="ta">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Placa</th>
+                                                            <th>Marca</th>
+                                                            <th>Modelo</th>
+                                                            <th>Ano</th>
+                                                            <th>Kilometraje</th>
+                                                        
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let auto of autos">
+                                                            <th scope="row">{{auto.placa}}</th>
+                                                            <td>{{auto.marca}}</td>
+                                                            <td>{{auto.modelo}}</td>
+                                                            <td>{{auto.ano}}</td>
+                                                            <td>{{auto.kilometros}}</td>
+                                                           
+                                                        </tr>
+                                                      
+                                                    </tbody>
+                                                </table>
+                                             
+                                            </div>
+                                   
+     
+                                        </div>  
+                 
+                      
+                        </div>
+                        <div class="modal-footer">
+                           
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="talleres-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header generic ">
+                            <h4 class="modal-title" id="modal-label"><i class="fa fa-calendar"></i> Historial de Ingreso a Taller</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="clearfix">
+                                        <ul class="nav nav-tabs top pull-left w-100p">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#ta">Historial</a>
+                                            </li>
+                                          
+                                                               
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content top">
+                                            <div class="tab-pane active" id="ta">
+                                                    <div *ngFor="let autoTaller of talleres" class="card">
+                                                            <div class="card-header">
+                                                                <i class="fa fa-car"></i> {{autoTaller.marca}} {{autoTaller.modelo}} : {{autoTaller.placa}}  
+                                                            </div>
+                                                            <div class="card-block">
+                                                                    <table class="table table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Fecha Entrada</th>
+                                                                                    <th>Estatus</th>
+                                                                                    <th>Costo de Servicio (Taller)</th>
+                                                                                    <th>Fecha Salida</th>
+                                                                                    
+                                                                                
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr *ngFor="let taller of autoTaller.ingreso_tallers">
+                                                                                    <th scope="row">{{taller.fecha_ingreso}}</th>
+                                                                                    <td>Estatus</td>
+                                                                                    <td>{{taller.costo_total}}</td>
+                                                                                    <td>{{taller.fecha_salida}}</td>
+                                                                                 
+                                                                                   
+                                                                                </tr>
+                                                                              
+                                                                            </tbody>
+                                                                        </table>
+                                                            </div>
+                                                           
+                                                        </div>
+                                               
+                                             
+                                            </div>
+                                   
+     
+                                        </div>  
+                 
+                      
+                        </div>
+                        <div class="modal-footer">
+                           
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </div>

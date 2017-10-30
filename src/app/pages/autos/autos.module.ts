@@ -1,3 +1,5 @@
+import {  ModelosComponent } from './modelos/modelos.component';
+import { MarcasComponent } from './marcas/marcas.component';
 import { SelectModule } from 'angular2-select';
 import { AutoComponent } from './autos.component';
 import { environment } from './../../../environments/environment';
@@ -14,7 +16,9 @@ import { HttpModule } from '@angular/http';
 
 export const routes = [
     { path: '', redirectTo: '', pathMatch: 'full'},
-    { path: 'listado', component: AutoComponent, data: { breadcrumb: 'Listado' } }
+    { path: 'listado', component: AutoComponent, data: { breadcrumb: 'Listado' } },
+    { path: 'marcas', component: MarcasComponent, data: { breadcrumb: 'Marcas' } },
+    { path: 'modelos', component: ModelosComponent, data: { breadcrumb: 'Marcas' } },
   ];
 
 @NgModule({
@@ -30,7 +34,7 @@ export const routes = [
         SelectModule
     ],
     exports: [],
-    declarations: [AutoComponent],
+    declarations: [AutoComponent,MarcasComponent,ModelosComponent],
     providers: [EndPointService,UserService],
 })
 

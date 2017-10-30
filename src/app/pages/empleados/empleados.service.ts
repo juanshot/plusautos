@@ -47,6 +47,19 @@ export class DynamicTablesService {
         
         )
         }
+        updateEmpleado(empleado,id){
+            return this.ep.updateEmpleado(empleado,id).then(
+                (result)=>{
+                    return result;
+                
+            },
+            (error)=>{
+                return error;
+            }
+
+        
+        )
+        }
 
     
 

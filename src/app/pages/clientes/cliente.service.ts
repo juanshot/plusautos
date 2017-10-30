@@ -32,6 +32,32 @@ export class ClienteService {
         
         )
         }
+        getAutosCliente(cliente){
+            return this.ep.getAutosCliente(cliente).then(
+                (result)=>{
+                    return result.autos;
+                
+            },
+            (error)=>{
+                return error;
+            }
+
+        
+        )
+        }
+        getTalleresCliente(cliente){
+            return this.ep.getTalleresCliente(cliente).then(
+                (result)=>{
+                    return result.talleres;
+                
+            },
+            (error)=>{
+                return error;
+            }
+
+        
+        )
+        }
 
     
 

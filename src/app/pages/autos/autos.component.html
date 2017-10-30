@@ -55,7 +55,7 @@
                           
                                 <td>{{auto.cliente.nombre}} {{auto.cliente.apellido}} </td>
 
-                                <td><button class="btn btn-warning btn-sm">Ver historial de Taller</button></td>
+                                <td><button data-toggle="modal" data-target="#talleres-modal" (click)="getTalleresAuto(auto.id)" class="btn btn-warning btn-sm">Ver historial de Taller</button></td>
                                 </tr>
                                 <tr *ngIf="(mf.data | AutoPipe : searchText).length === 0">
                                 <td colspan="100">
@@ -153,6 +153,21 @@
         
                                                                         </div>
 
+                                                                        <div [ngClass]="{'has-success':autoForm.get('codigo_carroceria').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Codigo Carroceria:</label>
+                                                                                    <input [ngClass]="{'form-control-success':autoForm.get('codigo_carroceria').value != ''}" formControlName="codigo_carroceria" type="text" class="form-control">
+                                                                            </div>
+    
+                                                                    </div>
+                                                                    <div [ngClass]="{'has-success':autoForm.get('codigo_motor').value != '' }">
+                                                                        <div class="form-group">
+                                                                                <label for="">Codigo Motor:</label>
+                                                                                <input [ngClass]="{'form-control-success':autoForm.get('codigo_motor').value != ''}" formControlName="codigo_motor" type="text" class="form-control">
+                                                                        </div>
+
+                                                                </div>
+
                                                                        
                                                                     <div [ngClass]="{'has-success':autoForm.get('kilometros').value != '' }">
                                                                                     <div class="form-group">
@@ -196,3 +211,61 @@
             </div>
         </div>
 </div>
+
+
+<div class="modal fade" id="talleres-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header generic ">
+                    <h4 class="modal-title" id="modal-label"><i class="fa fa-car"></i> Ingresos al Taller </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                        <div class="clearfix">
+                                <ul class="nav nav-tabs top pull-left w-100p">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#ta">Autos</a>
+                                    </li>
+                                  
+                                                       
+                                </ul>
+                            </div>
+                            <div class="tab-content top">
+                                    <div class="tab-pane active" id="ta">
+                                            <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Fecha Entrada</th>
+                                                            <th>Estatus</th>
+                                                            <th>Costo de Servicio (Taller)</th>
+                                                            <th>Fecha Salida</th>
+                                                            
+                                                        
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let taller of talleres">
+                                                            <th scope="row">{{taller.fecha_ingreso}}</th>
+                                                            <td>Estatus</td>
+                                                            <td>{{taller.costo_total}}$</td>
+                                                            <td>{{taller.fecha_salida}}</td>
+                                                         
+                                                           
+                                                        </tr>
+                                                      
+                                                    </tbody>
+                                                </table>
+                                    </div>
+                           
+
+                                </div>  
+         
+              
+                </div>
+                <div class="modal-footer">
+                   
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>

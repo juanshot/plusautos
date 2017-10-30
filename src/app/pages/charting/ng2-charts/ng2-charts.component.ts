@@ -56,10 +56,10 @@ export class Ng2ChartsComponent  {
 
     ngOnInit() { 
         //--- Bar Chart --- 
-        this.barChartLabels = ['2007', '2008', '2009', '2010', '2011', '2012'];
+        this.barChartLabels = [ 'Abril', 'Mayo', 'Junio','Julio','Agosto'];
         this.barChartData =  [
-            {data: [59, 80, 72, 56, 55, 40], label: 'Series A'},
-            {data: [48, 40, 19, 75, 27, 80], label: 'Series B'}
+            {data: [59, 80, 72, 56, 55, 40], label: 'Gastos'},
+            {data: [48, 40, 19, 75, 27, 80], label: 'Ingresos'}
         ];
         this.barChartColors = [
             {
@@ -191,7 +191,7 @@ export class Ng2ChartsComponent  {
 
 
         //--- Doughnut/Pie Chart ---
-        this.doughnutChartLabels = ['Downloads', 'Sales', 'Orders'];
+        this.doughnutChartLabels = ['Mas de 50% Ganancia', 'Menos de 50%', 'Perdida en Ganancia'];
         this.doughnutChartData = [350, 420, 130];
         this.doughnutChartColors = [
             { 

@@ -22,6 +22,7 @@ export class AutoComponent {
     public searchText:string;
     clientes:any = [];
     autoForm:FormGroup;
+    talleres:any =[];
     constructor(private _dynamicTablesService:AutoService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService){
         this.autoForm = this.fb.group({
             placa:['',Validators.compose([Validators.required])],
@@ -29,7 +30,9 @@ export class AutoComponent {
             modelo:['',Validators.compose([Validators.required])],
             marca:['',Validators.compose([Validators.required])],
             cliente_id:['',Validators.compose([Validators.required])],
-            kilometros:['',Validators.compose([Validators.required])]
+            kilometros:['',Validators.compose([Validators.required])],
+            codigo_carroceria:[''],
+            codigo_motor:['']
 
         })
         _dynamicTablesService.getAll().then(res=>{
@@ -52,10 +55,15 @@ export class AutoComponent {
                 this._dynamicTablesService.getAll().then(res=>{
                     console.log("en component",res);
                     this.data = res;
-                    this.autoForm.setValue({placa:'',modelo:'',ano:'',cliente_id:'',marca:'',kilometros:''});
+                    this.autoForm.setValue({placa:'',modelo:'',ano:'',cliente_id:'',marca:'',kilometros:'',codigo_carroceria:'',codigo_motor:''});
 
                 });    
         })      
+    }
+    getTalleresAuto(id){
+        this._dynamicTablesService.getTalleresAuto(id).then((result)=>{
+           this.talleres = result;  
+    })  
     }
     
 }

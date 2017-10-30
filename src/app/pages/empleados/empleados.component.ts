@@ -19,12 +19,14 @@ import { DynamicTablesService } from './empleados.service';
 export class EmpleadoComponent {
     public data: any;
     public searchText:string;
+    public editMode:boolean =false;
+    public empleadoId;
     empleadoForm:FormGroup;
     @ViewChild(ImageUploaderComponent)
     imageComponent:ImageUploaderComponent
     constructor(private _dynamicTablesService:DynamicTablesService,public fb:FormBuilder,public ep:EndPointService){
         this.empleadoForm = this.fb.group({
-            nombres:['',Validators.compose([Validators.required])],
+            nombre:['',Validators.compose([Validators.required])],
             apellido_paterno:['',Validators.compose([Validators.required])],
             apellido_materno:['',Validators.compose([Validators.required])],
             fecha_nacimiento:['',Validators.compose([Validators.required])],
@@ -43,11 +45,27 @@ export class EmpleadoComponent {
         _dynamicTablesService.getAll().then(res=>{
             console.log("en component",res);
             this.data = res
-        });    
+        });  
+        
+       
     }
     guardarempleado(){
         console.log(this.empleadoForm.value);
         
+    }
+    editEmpleado(empleado){
+        this.editMode = true;
+        let tipoIdVal ='';
+        this.empleadoId = empleado.id;
+        empleado.cedula != null?tipoIdVal = 'cedula': tipoIdVal = 'ruc';
+        this.empleadoForm.setValue({nombre:empleado.nombre,apellido_paterno:empleado.apellido_paterno, apellido_materno:empleado.apellido_materno, fecha_nacimiento: empleado.fecha_nacimiento, lugar_nacimiento: empleado.lugar_nacimiento ,grupo_sanguineo: empleado.fecha_nacimiento, telefono_domicilio:empleado.telefono_domicilio, telefono_celular:empleado.telefono_celular , cedula:empleado.cedula,direccion:empleado.direccion,email:empleado.email,image:empleado.image,referencia:'',estado_civil_id:empleado.estado_civil_id});
+   
+    }
+    newEmpleado(){
+        this.editMode = false;
+        this.empleadoForm.setValue({nombre:'',apellido_paterno:'', apellido_materno:'',cedula:'',image:'',email:'',estado_civil_id:'',grupo_sanguineo:'',telefono_domicilio:'',telefono_celular:'',direccion:'',referencia:'',lugar_nacimiento:'',fecha_nacimiento:''});
+        
+       
     }
     saveEmpleado(){
         if(this.imageComponent.file != undefined){
@@ -57,7 +75,7 @@ export class EmpleadoComponent {
                         this._dynamicTablesService.getAll().then(res=>{
                             console.log("en component",res);
                             this.data = res
-                            this.empleadoForm.setValue({nombre:'',apellido:'',cedula:'',image:'',email:'',password:''});
+                            this.empleadoForm.setValue({nombre:'',apellido_paterno:'', apellido_materno:'',cedula:'',image:'',email:'',estado_civil_id:'',grupo_sanguineo:'',telefono_domicilio:'',telefono_celular:'',direccion:'',referencia:'',lugar_nacimiento:'',fecha_nacimiento:''});
                         });  
                         
                         
@@ -73,7 +91,7 @@ export class EmpleadoComponent {
                 this._dynamicTablesService.getAll().then(res=>{
                     console.log("en component",res);
                     this.data = res;
-                    this.empleadoForm.setValue({nombre:'',apellido:'',cedula:'',image:'',email:''});
+                    this.empleadoForm.setValue({nombre:'',apellido_paterno:'', apellido_materno:'',cedula:'',image:'',email:'',estado_civil_id:'',grupo_sanguineo:'',telefono_domicilio:'',telefono_celular:'',direccion:'',referencia:'',lugar_nacimiento:'',fecha_nacimiento:''});
 
                 });    
             })
@@ -87,6 +105,18 @@ export class EmpleadoComponent {
 
         
     }
+    updateEmpleado(){
+      
+        this._dynamicTablesService.updateEmpleado(this.empleadoForm.value,this.empleadoId).then((result)=>{
+            this._dynamicTablesService.getAll().then(res=>{
+                console.log("en component",res);
+                this.data = res;
+                this.empleadoForm.setValue({nombre:'',apellido_paterno:'', apellido_materno:'',cedula:'',image:'',email:'',estado_civil_id:'',grupo_sanguineo:'',telefono_domicilio:'',telefono_celular:'',direccion:'',referencia:'',lugar_nacimiento:'',fecha_nacimiento:''});
+                
+
+            });    
+    })      
+}
     
 }
 

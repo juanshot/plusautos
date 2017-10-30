@@ -1,0 +1,250 @@
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">Facturas</span>
+                <div class="widget-controls"> 
+                    <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                    <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                    <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                    <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>                          
+                    <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                </div>        
+            </div>
+            <div class="card-block widget-body">
+
+
+                <div class="w-200 pull-right bottom-15">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input class="form-control" id="table-search-input" [(ngModel)]="searchText" type="text" placeholder="Buscar por numero...">
+                    </div>
+                </div> 
+                <div class="w-200 pull-left bottom-15">
+                       <button data-toggle="modal" data-target="#nuevo-factura" class="btn btn-outline generic btn-sm">
+                           <i class="fa fa-plus-circle btn-sm "> </i>
+                           Nuevo
+                       </button>
+                    </div> 
+                    <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                 
+                                        <th>Numero</th>
+                                        <th>Auto / Cliente</th>
+                                        <th>Servicios</th>
+                                        <th>Subtotal</th>
+                                        <th>Iva</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let factura of data">
+                                        <td>{{factura.id}}</td>
+                                        <td>  <b>Cliente:</b> {{factura.cliente.nombre}} {{factura.cliente.apellido}} <br/> <b>Auto:</b> {{factura.auto.marca}} {{factura.auto.modelo}} - placa: {{factura.auto.placa}}</td>
+                                        <td> 
+                                                <ul class="list-group">
+                                                        <li *ngFor="let item of factura.factura_items" class="list-group-item justify-content-between">                        
+                                                            <b>{{item.cantidad}}</b> {{item.descripcion}}
+                                                            <span class="badge badge-main badge-pill">{{item.precio}}$</span>
+                                                        </li>
+                                                     
+                                                 
+                                                 </ul>  
+                                        </td>
+                                        <td> <span class="badge badge-success big-text">{{factura.subTotal}} $</span></td>
+                                        <td> <span class="badge badge-warning big-text"> {{factura.iva}}</span></td>
+                                        <td><span class="badge badge-main big-text">{{factura.total}}$</span>  </td>
+                                       
+                                    </tr>
+                              
+                             
+                                </tbody>
+                            </table>
+                        </div>
+             
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="nuevo-factura" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header generic ">
+                        <h4 class="modal-title" id="modal-label"><i class="fa fa-factura"></i> Nueva factura</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="clearfix">
+                                    <ul class="nav nav-tabs top pull-left w-100p">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#ta">Datos</a>
+                                        </li>
+                                                           
+                                    </ul>
+                                </div>
+                                <div class="tab-content top">
+                                        <div class="tab-pane active" id="ta">
+                                                <form [formGroup]="facturaForm">
+                                                        <div class="row">
+                                                            <div class="col-md-6" >
+                                                                    <div [ngClass]="{'has-success':facturaForm.get('fecha').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Fecha:</label>
+                                                                                    <input [ngClass]="{'form-control-success':facturaForm.get('fecha').value != '' }" formControlName="fecha" type="date" class="form-control">
+                                                                            </div>
+
+                                                                    </div>
+                                                                    <div [ngClass]="{'has-success':facturaForm.get('sub_total').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">SubTotal:</label>
+                                                                                    <input disabled [ngClass]="{'form-control-success':facturaForm.get('sub_total').value != '' }" formControlName="sub_total" type="number" class="form-control bg-success text-white">
+                                        
+                                                                            </div>
+
+                                                                    </div>
+                                                                    <div [ngClass]="{'has-success':facturaForm.get('iva').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Monto de Iva:</label>
+                                                                                    <input disabled [ngClass]="{'form-control-success':facturaForm.get('iva').value != '' }" formControlName="iva" type="number" class="form-control bg-warning text-white">
+                                        
+                                                                            </div>
+
+                                                                    </div>
+                                                                    <div [ngClass]="{'has-success':facturaForm.get('total').value != '' }">
+                                                                            <div class="form-group">
+                                                                                    <label for="">Monto Total:</label>
+                                                                                    <input disabled [ngClass]="{'form-control-success':facturaForm.get('total').value != '' }" formControlName="total" type="number" class="form-control bg-primary text-white">
+                                        
+                                                                            </div>
+
+                                                                    </div>
+                                                                   
+                                       
+                                                                
+                                                            
+                                                               
+                                                                </div>
+                                                           
+                                                            <div class="col-md-6"  >
+                                                                    
+
+                                                        
+                                                        <div class="form-group">
+                                                                <label for="exampleSelect1">Orden de Trabajo</label>
+                                                                        <ng-select
+                                                                        formControlName="ingreso_taller_id"
+                                                                        [(options)]="talleres"
+                                                                        [placeholder]="autosLabel"
+                                                                        [multiple]="false"
+                                                                    >
+                                                                    </ng-select>
+                                                                 
+                                                            
+                                                                    
+
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                    <label for="exampleSelect1">Cliente</label>
+                                                                            <ng-select
+                                                                            formControlName="cliente_id"
+                                                                            [(options)]="clientes"
+                                                                            [placeholder]="clientesLabel"
+                                                                            [multiple]="false"
+                                                                        >
+                                                                        </ng-select>
+                                                                     
+                                                                
+                                                                        
+
+                                                                </div>
+        
+                                                                        
+                                                                 
+                                                                  
+                                                                </div>
+                                                        </div>
+                                                       
+                                                         
+                                                      </form>
+                                                      <div class="card card-outline-default text-center">
+                                                        <div class="card-header ">
+                                                                Listado de Servicios Realizados
+                                                            </div>
+                                                        <div class="card-block">
+                                                                <form [formGroup]="itemfacturaForm" class="row form-inline">
+                                                                        <div class="form-group col-md-10 col-sm-6" [ngClass]="{}">
+                                        
+                                                                            <div class="row">
+                                                                
+                                                                                <div class="col-md-8">
+                                                                                    <div class="form-group">
+                                                                                                <ng-select
+                                                                                                formControlName="servicio_id"
+                                                                                                [(options)]="servicios"
+                                                                                                [placeholder]="servicioLabel"
+                                                                                                [multiple]="false"
+                                                                                                (selected)="onSelectedServicio($event)"
+                                                                                            >
+                                                                                            </ng-select>
+                                                                                         
+                                                                                    
+                                                                                            
+                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                        <input  type="number" formControlName="precio" class="form-control" placeholder="$">
+                                                                                </div>
+                                                                            </div>
+                                                                           
+                                                                           
+                                                                        </div>
+                                                                     
+                                                                    
+                                                                        <div class="form-group col-md-2 col-sm-6" *ngIf="create">
+                                                                            <button [disabled]="!itemfacturaForm.valid" (click)="addItem()" type="submit" class="btn btn-primary">Agregar</button>
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-group col-md-2 col-sm-6" *ngIf="!create">
+                                                                            <button [disabled]="!itemfacturaForm.valid" (click)="editRole()" type="submit" class="btn btn-primary">Editar</button>
+                                                                        </div>
+                                                                </form>  
+                                                                <table class="table table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Servicio Realizado</th>
+                                                                                <th>Precio</th>
+                                                                                <th></th>
+                        
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr *ngFor="let item of items;let i = index">
+                                                        
+                                                                                <th>{{item.servicio_nombre}}</th>
+                                                                                <th>{{item.precio}} $</th>
+                                                                                <td><button (click)="eliminarItem(i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+                                                                            </tr>
+                                                                            
+                                                                        </tbody>
+                                                                    </table>
+                                                        </div>
+                                                    </div>
+                                         
+                                        </div>
+                                    
+ 
+                                    </div>  
+             
+                  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" [disabled]="!facturaForm.valid" (click)="savefactura()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

@@ -16,13 +16,36 @@ export const menuItems = [
     order: 400,
     subMenu: [
        {
-        title: 'Estimaciones',
+        title: 'Cotizaciones',
         routerLink: 'taller/estimaciones',
 
       },
       {
         title: 'Autos',
-        routerLink: 'autos/listado',
+        routerLink: '#',
+        subMenu: [{
+          title: 'Listado',
+          routerLink: 'autos/listado',
+          disabled: true,
+          selected: false,
+          expanded: false
+        },
+        {
+          title: 'Marcas',
+          routerLink: 'autos/marcas',
+          disabled: true,
+          selected: false,
+          expanded: false
+        },
+        {
+          title: 'Modelos',
+          routerLink: 'autos/modelos',
+          disabled: true,
+          selected: false,
+          expanded: false
+        }
+      
+      ]
 
       },
       {
@@ -108,13 +131,9 @@ export const menuItems = [
     order: 400,
     subMenu: [
       {
-        title: 'Facturar',
-        routerLink: ''
-      },
-      {
         title: 'Listado de Facturas',
-        routerLink: ''
-      }
+        routerLink: 'facturas/listado'
+      },
     ]
   },
   {
@@ -131,25 +150,17 @@ export const menuItems = [
       },
       {
         title: 'Compras',
-        routerLink: ''
-      }
-    ]
-  },
-  {
-    title: 'Caja Banco',
-    routerLink: 'form-elements',
-    icon: 'fa-money',
-    selected: false,
-    expanded: false,
-    order: 400,
-    subMenu: [
-      {
-        title: 'Facturar',
-        routerLink: ''
-      },
-      {
-        title: 'Listado de Facturas',
-        routerLink: ''
+        routerLink: '',
+        subMenu: [
+          {
+            title: 'Nueva',
+            routerLink: 'compras/nueva'
+          },
+          {
+            title: 'Listado',
+            routerLink: 'compras/listado'
+          }
+        ]
       }
     ]
   },
@@ -163,12 +174,8 @@ export const menuItems = [
     order: 400,
     subMenu: [
       {
-        title: 'Facturar',
-        routerLink: ''
-      },
-      {
-        title: 'Listado de Facturas',
-        routerLink: ''
+        title: 'Listado de Cuentas',
+        routerLink: 'cuentas/listado'
       }
     ]
   },

@@ -56,6 +56,9 @@ export class EstimacionesComponent implements OnInit {
      this.selectService.loadAutos().then((res)=>{
          this.autos = res;
      })
+     this.selectService.loadClientes().then((res)=>{
+        this.clientes = res;
+    })
      
     }
     savePresupuesto(){

@@ -1,0 +1,205 @@
+<div>
+    <div class="row">
+            <div class="col">
+                    <div widget class="card" style="margin-bottom: 20px;">
+                        <div class="card-header">
+                            <span>DATOS DE COMPRA</span>
+                            <div class="widget-controls">              
+                                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                                <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                                <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>                          
+                                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                            </div>        
+                        </div>
+                        <div class="card-block widget-body">
+                                
+                                        <div class="row form-inline" style="margin-bottom: 20px;">
+                                                <div class="form-group col-md-4 col-sm-6">
+                                                        <label for="exampleSelect1">Fecha</label>
+                                                        <input (input)="setFecha()" [(ngModel)]="fecha_factura" placeholder="Fecha Recepcion" class="form-control" type="date">  
+                                                </div>
+                                              
+                                                <div class="form-group col-md-4 col-sm-6">
+                                                        <label for="exampleSelect1">Autorizacion</label>
+                                                        <input (input)="setAutorizacion()" [(ngModel)]="autorizacion_sri" placeholder="Autorizacion SRI" class="form-control" type="text">
+                                                        
+                                                </div>
+                                                <div class="form-group col-md-4 col-sm-6">
+                                                        <label for="exampleSelect1">Numero de Factura</label>
+                                                       <input (input)="setNumFactura()" [(ngModel)]="nFactura" placeholder="No. Factura" class="form-control" type="number">
+                                                </div>
+                                         
+                                            
+                                            </div>
+
+                                
+            
+                            <div class="row form-inline" style="margin-bottom: 20px;">
+                                <div class="form-group col-md-3 col-sm-6">
+                                        <button data-toggle="modal" data-target="#select-proveedor" class="btn btn-outline generic btn-sm">
+                                                <i class="fa fa-user btn-sm "> </i>
+                                                Proveedor
+                                        </button>
+                                </div>
+                                <div class="form-group col-md-3 col-sm-6">
+                                    <input type="text" class="form-control" [(ngModel)]="holderNombre" disabled placeholder="Razon Social">
+                                </div>  
+                                <div class="form-group col-md-3 col-sm-6">
+                                        <input type="text" [(ngModel)]="holderRuc" disabled class="form-control" placeholder="Ruc">
+                                </div> 
+                                <div class="form-group col-md-3 col-sm-6">
+                                        <input type="text" [(ngModel)]="holderDireccion" disabled class="form-control" placeholder="Direccion">
+                                </div> 
+                            </div>
+                            <div class="row">
+                                    
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                    
+                                                
+                                                    <label for="exampleSelect1">Metodo de Pago</label>
+                                                    <select [(ngModel)]="metodoPagoId" (change)="getCuentasContado()" class="form-control">
+                                                        <option value="1">Credito</option>
+                                                        <option value="2">Contado</option>
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                    <div  *ngIf="metodoPagoId == 2" class="form-group">
+                                                            <label for="exampleSelect1">Cuenta Asociada</label>
+                                                            <select   (change)="selectCuenta($event)" [(ngModel)]="cuentaId" class="form-control">
+                                                                <option *ngFor="let cuenta of cuentasContado" value="{{cuenta.id}}">{{cuenta.nombre}}</option>
+                                                               
+                                                            </select>
+                                                          
+                                                        </div>
+
+                                                        <div  *ngIf="metodoPagoId == 1" class="form-group">
+                                                                <label for="exampleSelect1">Cuenta Asociada</label>
+                                                              
+                                                                <select   (change)="selectCuenta($event)" disabled [(ngModel)]="cuentaId" class="form-control">
+                                                                    <option *ngFor="let cuenta of cuentasContado" selected="selected" value="{{cuenta.id}}">{{cuenta.nombre}}</option>
+                                                                   
+                                                                </select>
+                                                            </div>
+                                                  
+                                            </div>  
+                                        
+                                        
+
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+
+             
+
+    </div>
+       
+    </div>
+<div class="row">
+  
+    <div class="col">
+            <div widget class="card">
+                <div class="card-header">
+                    <span class="text-uppercase">Items de Compra</span>
+                    <div class="widget-controls"> 
+                        <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                        <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                        <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                        <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>                          
+                        <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                    </div>        
+                </div>
+                <div class="card-block widget-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card custom"> 
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                                <button data-toggle="modal" data-target="#select-producto" class="btn btn-outline generic btn-sm">
+                                                        <i class="fa fa-plus btn-sm "> </i>
+                                                         Producto
+                                                    </button>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <form [formGroup]="itemCompraForm" class="row form-inline" style="margin-top: 20px;">
+                                            
+                                           
+                                            <div class="form-group col-md-2 col-sm-6">
+                                                    <input type="text" formControlName="producto_nombre"  disabled class="form-control" placeholder="Producto">
+                                            </div>  
+                                            <div class="form-group col-md-2 col-sm-6">
+                                                    <input type="number" formControlName="cantidad"class="form-control" placeholder="Cantidad">
+                                            </div> 
+                                            <div class="form-group col-md-2 col-sm-6">
+                                                <input type="number" formControlName="iva" class="form-control" placeholder="Iva">
+                                        </div> 
+                                        <div class="form-group col-md-2 col-sm-6">
+                                                <input type="number" formControlName="precio"  class="form-control" placeholder="Precio">
+                                        </div> 
+                                            <div class="form-group col-md-2 col-sm-6">
+                                                    <button (click)="setItem()" [disabled]="!itemCompraForm.valid"  class="btn btn-success btn-outline  btn-sm">
+                                                            <i class="fa fa-check btn-sm "> </i>
+                                                            Agregar
+                                                    </button>
+                                            </div> 
+                                        
+                                        </form>
+                                  
+                                    
+                                        <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Cantidad</th>
+                                                        <th>IVA</th>
+                                                        <th>Precio</th>
+                                                        <th></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of compraItems;let i = index">
+                                                        <th scope="row">{{item.producto_nombre}}</th>
+                                                        <th>{{item.cantidad}}</th>
+                                                        <th>{{item.iva}}$</th>
+                                                        <th>{{item.precio}} $</th>
+                                                        <td><button (click)="eliminarItem(i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                                <tfoot>
+                                                    <div class="pull-right">Total: {{compraForm.value.total}}</div>
+                                                    
+                                                </tfoot>
+                                            </table>
+
+                            </div>
+                        </div>
+                   
+                    </div>
+    
+    
+                 
+                </div>
+            </div>
+        </div>
+
+ 
+    
+    
+</div>
+<button [disabled]="!compraForm.valid" (click)="guardarCompra()" class="btn btn-main btn-block">Guardar Compra</button>
+
+
+<div *ngIf="saved" class="alert alert-success alert-dismissible fade show" role="alert">
+        <button [disabled]="!compraForm.valid" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Compra Guardada</strong> Se puede ver en listado de compras.
+    </div>
+<select-proveedor (selected)="setProveedor($event)"></select-proveedor>
+<select-producto (selected)="setProducto($event)"></select-producto>

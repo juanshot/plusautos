@@ -115,8 +115,51 @@ export class EndPointService {
     }
 
     // actualizacion de empleados
-    updateEmpleado(proveedore,id){
-        return this.http.post(this.getApiUrl()+`update_empleado/${id}?token=`+this.user.getToken(),proveedore).toPromise().then(
+    updateEmpleado(empleado,id){
+        return this.http.post(this.getApiUrl()+`update_empleado/${id}?token=`+this.user.getToken(),empleado).toPromise().then(
+            (response)=>{
+                console.log(response.json());
+                
+                return response.json()
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
+
+    //save compra
+
+    saveCompra(request:Object){
+        return this.http.post(this.getApiUrl()+'save_compra?token='+this.user.getToken(),request).toPromise().then(
+            (response)=>{
+                return response.json();    
+        },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
+
+    // get compras
+
+    getCompras(){
+            
+        return this.http.get(this.getApiUrl()+'get_compras?token='+this.user.getToken()).toPromise().then(
+            (response)=>{
+                return response.json();
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
+
+    }
+
+    // actualizacion de compras
+
+    updateCompra(compra,id){
+        return this.http.post(this.getApiUrl()+`update_compra/${id}?token=`+this.user.getToken(),compra).toPromise().then(
             (response)=>{
                 console.log(response.json());
                 
@@ -165,6 +208,8 @@ export class EndPointService {
 
  }
 
+        //**   CLIENTES */
+
     // obtener lista de clientes
     getClientes(){
         
@@ -179,17 +224,58 @@ export class EndPointService {
      )
 
  }
-//guardar cliente
- saveCliente(request:Object){
-    return this.http.post(this.getApiUrl()+'save_cliente?token='+this.user.getToken(),request).toPromise().then(
-        (response)=>{
-            return response.json();    
-    },
-        (err:Error)=>{
-            return err;
+    //guardar cliente
+    saveCliente(request:Object){
+        return this.http.post(this.getApiUrl()+'save_cliente?token='+this.user.getToken(),request).toPromise().then(
+            (response)=>{
+                return response.json();    
+        },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
+    //obtener autos de un cliente
+    getAutosCliente(cliente){
+
+        return this.http.get(this.getApiUrl()+`get_autos_cliente/${cliente}?token=`+this.user.getToken()).toPromise().then(
+            (response)=>{
+                return response.json();    
+        },
+            (err:Error)=>{
+                return err;
+            }
+        )
+
+    }
+
+    //obtener talleres de un cliente
+    getTalleresCliente(cliente){
+        
+                return this.http.get(this.getApiUrl()+`get_talleres_cliente/${cliente}?token=`+this.user.getToken()).toPromise().then(
+                    (response)=>{
+                        return response.json();    
+                },
+                    (err:Error)=>{
+                        return err;
+                    }
+                )
+        
+            }
+    
+//obtener talleres de un cliente
+getTalleresAuto(auto){
+    
+            return this.http.get(this.getApiUrl()+`get_talleres_auto/${auto}?token=`+this.user.getToken()).toPromise().then(
+                (response)=>{
+                    return response.json();    
+            },
+                (err:Error)=>{
+                    return err;
+                }
+            )
+    
         }
-    )
-}
 
 // obtener lista de presupuestos
     getPresupuestos(){
@@ -402,6 +488,217 @@ getProveedores(){
     )
    
 }
+
+//// facturas/////
+
+// ingreso de facturas
+saveFactura(factura){
+    return this.http.post(this.getApiUrl()+'save_factura?token='+this.user.getToken(),factura).toPromise().then(
+        (response)=>{
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+
+// actualizacion de factura
+updateFactura(factura,id){
+    return this.http.post(this.getApiUrl()+`update_factura/${id}?token=`+this.user.getToken(),factura).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+
+// Listado de facturas
+getFacturas(){
+    return this.http.get(this.getApiUrl()+'get_facturas?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+   
+}
+
+getPrecioServicio(servicio){
+    return this.http.get(this.getApiUrl()+`get_precio_servicio/${servicio}?token=`+this.user.getToken()).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+   
+}
+
+
+
+// marcas autos
+
+getMarcas(){
+    return this.http.get(this.getApiUrl()+'get_marca_autos?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+    
+}
+
+saveMarca(marca){
+    return this.http.post(this.getApiUrl()+'save_marca_auto?token='+this.user.getToken(),marca).toPromise().then(
+        (response)=>{
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+updateMarca(marca,id){
+    
+    return this.http.post(this.getApiUrl()+`update_marca_auto/${id}?token=`+this.user.getToken(),marca).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+
+
+
+}
+
+
+// mcuentas
+
+getCuentas(){
+    return this.http.get(this.getApiUrl()+'get_cuentas?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+    
+}
+
+getCuentasMadre(){
+    return this.http.get(this.getApiUrl()+'get_cuentas_madre?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+    
+}
+getCuentasContado(){
+    return this.http.get(this.getApiUrl()+'get_cuentas_contado?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+    
+}
+
+saveCuenta(cuenta){
+    return this.http.post(this.getApiUrl()+'save_cuenta?token='+this.user.getToken(),cuenta).toPromise().then(
+        (response)=>{
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+updateCuenta(cuenta,id){
+    
+    return this.http.post(this.getApiUrl()+`update_cuenta/${id}?token=`+this.user.getToken(),cuenta).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+
+
+
+}
+
+// modelos autos
+
+getModelos(){
+    return this.http.get(this.getApiUrl()+'get_modelo_autos?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+    
+}
+
+saveModelo(marca){
+    return this.http.post(this.getApiUrl()+'save_modelo_auto?token='+this.user.getToken(),marca).toPromise().then(
+        (response)=>{
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+updateModelo(marca,id){
+    
+    return this.http.post(this.getApiUrl()+`update_modelo_auto/${id}?token=`+this.user.getToken(),marca).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+
+
+
+}
+
+
+
+
+
  handleTokenInvalid(){
         console.log('Token Invalid');
         

@@ -34,6 +34,20 @@ export class AutoService {
         )
         }
 
+        getTalleresAuto(auto){
+            return this.ep.getTalleresAuto(auto).then(
+                (result)=>{
+                    return result.talleres;
+                
+            },
+            (error)=>{
+                return error;
+            }
+
+        
+        )
+        }
+
     
 
 

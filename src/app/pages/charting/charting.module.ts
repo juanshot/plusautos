@@ -8,7 +8,7 @@ import { Ng2ChartsComponent } from './ng2-charts/ng2-charts.component';
 
 export const routes = [
   { path: '', redirectTo: 'ng2charts', pathMatch: 'full' },
-  { path: 'ng2charts', component: Ng2ChartsComponent,  data: { breadcrumb: 'Ng2 Charts' }  }
+  { path: 'ng2charts', component: Ng2ChartsComponent,  data: { breadcrumb: 'Graficos' }  }
 ];
 
 @NgModule({

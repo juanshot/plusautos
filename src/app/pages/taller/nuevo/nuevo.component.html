@@ -304,6 +304,7 @@
                                                                     <tr>
                                                                         <th>#</th>
                                                                         <th>Parte del Carro</th>
+                                                                        <th>Detalle</th>
                                                                         <th>Observacion</th>
                                                                         <th>Acciones</th>
                                                                     </tr>
@@ -312,6 +313,7 @@
                                                                     <tr *ngFor="let observacion of listadoDetalles; let i = index ">
                                                                         <th scope="row">{{i+1}}</th>
                                                                         <td>{{observacion.parte}}</td>
+                                                                        <td>{{observacion.detalle}}</td>
                                                                         <td>{{observacion.observacion}}</td>
                                                                         <td><button (click)="eliminarItem(i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
                                                                     </tr>
@@ -358,6 +360,7 @@
                                                         <tr>
                                                             <th>#</th>
                                                             <th>Parte del Carro</th>
+                                                            <th>Detalle</th>
                                                             <th>Observacion</th>
                                                             <th>Acciones</th>
 
@@ -367,6 +370,7 @@
                                                         <tr *ngFor="let observacion of listadoDetalles; let i = index">
                                                             <th scope="row">{{i+1}}</th>
                                                             <td>{{observacion.parte}}</td>
+                                                            <td>{{observacion.detalle}}</td>
                                                             <td>{{observacion.observacion}}</td>
                                                             <td><button (click)="eliminarItem(i)" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
                                                         </tr>

@@ -22,6 +22,8 @@ export class ClienteComponent {
     public searchText:string;
     clientes:any = [];
     clienteForm:FormGroup;
+    autos:any = [];
+    talleres:any = [];
     constructor(private _dynamicTablesService:ClienteService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService){
         this.clienteForm = this.fb.group({
             nombre:['',Validators.compose([Validators.required])],
@@ -54,6 +56,24 @@ export class ClienteComponent {
                 });    
         })      
     }
+
+    getAutosCliente(cliente){
+                this._dynamicTablesService.getAutosCliente(cliente).then((result)=>{
+
+                    this.autos = result;
+                    console.log(this.autos);
+                    
+                })
+    }
+    getTalleresCliente(cliente){
+        this._dynamicTablesService.getTalleresCliente(cliente.id).then((result)=>{
+
+            this.talleres = result;
+            console.log(this.talleres);
+            
+        })
+}
+
     
 }
 

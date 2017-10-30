@@ -94,6 +94,39 @@ export class SelectService {
 
         })     
     }
+    loadMarcaCarros(){  
+        let resultOptions = [];
+        return this.ep.getMarcas().then((resp)=>{
+            let format = resp.marcas;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: result.nombre
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })     
+    }
+    loadCuentasMadre(){  
+        let resultOptions = [];
+        return this.ep.getCuentasMadre().then((resp)=>{
+            let format = resp.cuentas;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: result.codigo +' '+result.nombre
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })     
+    }
+
 
     loadUnidadMedida(){  
         let resultOptions = [];
@@ -103,6 +136,25 @@ export class SelectService {
                let obj = {
                    value: result.id,
                    label: result.nombre
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })
+   
+        
+    }
+
+    loadIngresosTaller(){  
+        let resultOptions = [];
+        return this.ep.getListadoIngresos().then((resp)=>{
+            let format = resp.listadoIngresos;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: 'Orden de Taller #'+result.id
                }
                resultOptions.push(obj);
                

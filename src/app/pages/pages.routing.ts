@@ -13,7 +13,7 @@ export const routes: Routes = [
             { path:'', redirectTo:'dashboard', pathMatch:'full' },
             { path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule', data: { breadcrumb: 'Panel de Control' }  },
             { path: 'maps', loadChildren: 'app/pages/maps/maps.module#MapsModule', data: { breadcrumb: 'Maps' } },
-            { path: 'charts', loadChildren: 'app/pages/charting/charting.module#ChartingModule', data: { breadcrumb: 'Charts' } },
+            { path: 'charts', loadChildren: 'app/pages/charting/charting.module#ChartingModule', data: { breadcrumb: 'Reportes' } },
             { path: 'ui', loadChildren: 'app/pages/ui/ui.module#UiModule', data: { breadcrumb: 'UI' } },
             { path: 'mail', loadChildren: 'app/pages/mail/mail.module#MailModule', data: { breadcrumb: 'Mail' } },
             { path: 'calendar', loadChildren: 'app/pages/calendar/calendar.module#CalendarModule', data: { breadcrumb: 'Calendar' } },
@@ -30,6 +30,9 @@ export const routes: Routes = [
              { path: 'inventario', loadChildren: 'app/pages/inventarioPanel/panel-inventario.module#PanelInventarioModule', data: { breadcrumb: 'Inventario' } },
              { path: 'empleados', loadChildren: 'app/pages/empleados/empleados.module#EmpleadosModule', data: { breadcrumb: 'Empleados' } },
              { path: 'proveedores', loadChildren: 'app/pages/proveedores/proveedores.module#ProveedoresModule', data: { breadcrumb: 'proveedores' } },
+             { path: 'compras', loadChildren: 'app/pages/compras/compras.module#ComprasModule', data: { breadcrumb: 'Compras' } },
+             { path: 'cuentas', loadChildren: 'app/pages/cuentas/cuentas.module#CuentasModule', data: { breadcrumb: 'Cuentas' } },
+             { path: 'facturas', loadChildren: 'app/pages/facturas/facturas.module#FacturasModule', data: { breadcrumb: 'Facturas' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } }
         ]

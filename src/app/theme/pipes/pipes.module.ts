@@ -1,3 +1,4 @@
+import { CompraSearchPipe } from './search/compras-search.pipe';
 import { PresupuestoSearchPipe } from './search/presupuesto-search.pipe';
 import { AutoSearchPipe } from './search/auto-search.pipe';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,8 @@ import { SearchPipe } from './search/search.pipe';
         MailSearchPipe,
         SearchPipe,
         AutoSearchPipe,
-        PresupuestoSearchPipe
+        PresupuestoSearchPipe,
+        CompraSearchPipe
     ],
     exports: [
         AppPicturePipe,
@@ -25,7 +27,8 @@ import { SearchPipe } from './search/search.pipe';
         MailSearchPipe,
         SearchPipe,
         AutoSearchPipe,
-        PresupuestoSearchPipe
+        PresupuestoSearchPipe,
+        CompraSearchPipe
     ]
 })
 export class PipesModule { }
