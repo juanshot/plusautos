@@ -292,6 +292,21 @@ getTalleresAuto(auto){
      )
 
  }
+ getPdfPresupuesto(id){
+
+    return this.http.get(this.getApiUrl()+`get_pdf_presupuesto/${id}?token=`+this.user.getToken()).toPromise().then(
+        (response)=>{
+            
+            
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+
+
+ }
 //guardar presupuesto
 
  savePresupuesto(request:Object){

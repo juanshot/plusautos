@@ -21,6 +21,16 @@ export class DynamicTablesService {
             }
         )
         }
+        public  getPdfPresupuesto(id) {
+            return this.ep.getPdfPresupuesto(id).then(
+                (response)=>{
+                return response.presupuesto;
+            },
+                (err)=>{
+                    console.log('error:',err);   
+                }
+            )
+            }
         savePresupuesto(presupuesto){
             return this.ep.savePresupuesto(presupuesto).then(
                 (result)=>{

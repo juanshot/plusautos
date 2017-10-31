@@ -1,3 +1,4 @@
+import { EndPointService } from './../../services/endpoint.service';
 import { GlobalService } from '../../services/global.service';
 import { SelectService } from '../../services/select.service';
 import { ValidationService } from '../../services/validation.service';
@@ -31,8 +32,9 @@ export class FacturasComponent implements OnInit {
     cliente:string = "Seleccione cliente";
     autoLabel:string = "Seleccione Auto";
     servicioLabel:string = "Seleccione Servicio....";
+    url:any;
 
-    constructor(private _FacturaService:FacturaService,public fb:FormBuilder,public selectService:SelectService,public global:GlobalService){
+    constructor(private _FacturaService:FacturaService,public fb:FormBuilder,public selectService:SelectService,public global:GlobalService,public ep:EndPointService){
         this.facturaForm = this.fb.group({
             ingreso_taller_id:['',Validators.compose([Validators.required])],
             fecha:['',Validators.compose([Validators.required])],
@@ -52,6 +54,7 @@ export class FacturasComponent implements OnInit {
             console.log("en component",res);
             this.data = res
         });  
+        this.url = this.ep.getApiUrl();
         
     }
     ngOnInit(){

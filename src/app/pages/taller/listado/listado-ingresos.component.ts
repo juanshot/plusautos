@@ -8,6 +8,7 @@ import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { DataTableModule } from "angular2-datatable";
 import { PipesModule } from '../../../theme/pipes/pipes.module';
 import { DirectivesModule } from '../../../theme/directives/directives.module';
+
 @Component({
   selector: 'listadoIngresos-component',
   encapsulation: ViewEncapsulation.None,
@@ -20,6 +21,7 @@ export class ListadoIngresosComponent {
     public searchText:string;
     listadoIngresoForm:FormGroup;
     create:boolean = true;
+    url:any ;
  
     constructor(private _listadoIngresosService:ListadoIngresosService,public fb:FormBuilder,public ep:EndPointService){
         this.listadoIngresoForm = this.fb.group({
@@ -32,6 +34,7 @@ export class ListadoIngresosComponent {
             console.log("en component",res);
             this.data = res
         });    
+        this.url  = this.ep.getApiUrl();
     }
     
 }

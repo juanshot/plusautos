@@ -42,21 +42,21 @@
                                 <tbody>
                                     <tr *ngFor="let factura of data">
                                         <td>{{factura.id}}</td>
-                                        <td>  <b>Cliente:</b> {{factura.cliente.nombre}} {{factura.cliente.apellido}} <br/> <b>Auto:</b> {{factura.auto.marca}} {{factura.auto.modelo}} - placa: {{factura.auto.placa}}</td>
+                                        <td>  <b>Cliente:</b> {{factura.cliente.nombre}} {{factura.cliente.apellido}} <br/> <b>Auto:</b> {{factura.ingreso_taller.auto.marca}} {{factura.ingreso_taller.auto.modelo}} - placa: {{factura.ingreso_taller.auto.placa}}</td>
                                         <td> 
                                                 <ul class="list-group">
                                                         <li *ngFor="let item of factura.factura_items" class="list-group-item justify-content-between">                        
-                                                            <b>{{item.cantidad}}</b> {{item.descripcion}}
+                                                            <b>{{item.servicio.nombre}}</b> 
                                                             <span class="badge badge-main badge-pill">{{item.precio}}$</span>
                                                         </li>
                                                      
                                                  
                                                  </ul>  
                                         </td>
-                                        <td> <span class="badge badge-success big-text">{{factura.subTotal}} $</span></td>
+                                        <td> <span class="badge badge-success big-text">{{factura.sub_total}} $</span></td>
                                         <td> <span class="badge badge-warning big-text"> {{factura.iva}}</span></td>
                                         <td><span class="badge badge-main big-text">{{factura.total}}$</span>  </td>
-                                       
+                                        <td> <a href="{{url}}get_pdf_factura/{{factura.id}}"><button  class="btn btn-main btn-sm"><i class="fa fa-file-pdf-o"></i>Factura</button></a>  </td>
                                     </tr>
                               
                              

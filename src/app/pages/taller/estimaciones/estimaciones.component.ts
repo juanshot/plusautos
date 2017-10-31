@@ -1,3 +1,4 @@
+import { EndPointService } from './../../../services/endpoint.service';
 import { GlobalService } from './../../../services/global.service';
 import { SelectService } from './../../../services/select.service';
 import { ValidationService } from './../../../services/validation.service';
@@ -8,8 +9,7 @@ import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { DataTableModule } from "angular2-datatable";
 import { PipesModule } from '../../../theme/pipes/pipes.module';
 import { DirectivesModule } from '../../../theme/directives/directives.module';
-import { DynamicTablesService } from './estimaciones.service';
-
+import { DynamicTablesService } from './estimaciones.service'
 
 @Component({
   selector: 'estimaciones-component',
@@ -29,8 +29,9 @@ export class EstimacionesComponent implements OnInit {
     create:boolean=true;
     cliente:string = "Seleccione cliente";
     autoLabel:string = "Seleccione Auto";
+    url:any;
 
-    constructor(private _dynamicTablesService:DynamicTablesService,public fb:FormBuilder,public selectService:SelectService,public global:GlobalService){
+    constructor(private _dynamicTablesService:DynamicTablesService,public fb:FormBuilder,public selectService:SelectService,public global:GlobalService,public ep:EndPointService){
         this.estimacionForm = this.fb.group({
             auto_id:['',Validators.compose([Validators.required])],
             fecha:['',Validators.compose([Validators.required])],
@@ -51,6 +52,9 @@ export class EstimacionesComponent implements OnInit {
             this.data = res
         });  
         
+        this.url = ep.getApiUrl();
+        console.log('url definitive',this.url);
+        
     }
     ngOnInit(){
      this.selectService.loadAutos().then((res)=>{
@@ -67,6 +71,12 @@ export class EstimacionesComponent implements OnInit {
             console.log(this.estimacionForm.value);
             
             this._dynamicTablesService.savePresupuesto(this.estimacionForm.value).then((result)=>{
+            
+            
+                this._dynamicTablesService.getPdfPresupuesto(result.presupuesto).then((res)=>{
+                    console.log(res);
+                    
+                });
                 this._dynamicTablesService.getAll().then(res=>{
                     console.log("en component",res);
                     this.data = res;
