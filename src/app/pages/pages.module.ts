@@ -1,3 +1,5 @@
+import { SelectModule } from 'angular2-select';
+import { ClienteFormComponent } from './../componentes/cliente-form/cliente-form.component';
 import { EndPointService } from './../services/endpoint.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,6 +32,7 @@ import { SearchComponent } from './search/search.component';
     BreadcrumbComponent,
     BackTopComponent,
     SearchComponent 
+
   ],
   providers:[]
 })

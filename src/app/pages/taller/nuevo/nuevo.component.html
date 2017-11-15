@@ -40,13 +40,13 @@
                             <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="input-11">Fecha y Hora de Entrada</label>
-                                        <input formControlName="fecha_ingreso" type="datetime-local" class="form-control"  value="2011-08-19T13:45:00" id="input-11">
+                                        <input formControlName="fecha_ingreso" max="{{currentDate}}" type="date" class="form-control"  value="2011-08-19T13:45:00" id="input-11">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="input-11">Fecha y Hora de Salida (Aproximada)</label>
-                                        <input formControlName="fecha_salida" type="datetime-local" class="form-control"  value="2011-08-19T13:45:00" id="input-11">
+                                        <input formControlName="fecha_salida" type="date" class="form-control"  value="2011-08-19T13:45:00" id="input-11">
                                     </div>
                                 </div>
 
@@ -55,13 +55,15 @@
 
 
                      <div class="form-group">
-                    <label for="exampleSelect3">Responsable</label>
-                    <select formControlName="empleado_id" class="form-control custom-select" id="exampleSelect3">
-                        <option selected>Empleados</option>
-                        <option value="1">Yulimar Goyoneche</option>
-                        <option value="2">Victor Torres</option>
-                        <option value="3">Carlos Perez</option>
-                    </select>
+                    <label for="exampleSelect3">Quien Recibe</label>
+
+                     <ng-select
+                            formControlName="empleado_id"
+                            [(options)]="empleados"
+                            [placeholder]="empleadosLabel"
+                            [multiple]="false"
+                        >
+                      </ng-select>
                 </div>
                 <div class="form-group">
                     <label for="textarea-1">Observaciones</label>
@@ -386,12 +388,24 @@
 
             </div>
             <button (click)="saveTaller()" [disabled]="!ingresoTallerForm.valid || listadoServicios.length == 0 || listadoProductos.length == 0  "  class="btn btn-main btn-block"><i class="fa fa-floppy-o"></i> GUARDAR</button>
+
+            
         </div>
 
     </div>
 
+  
+
 
 </div>
+<div *ngIf="noStock"  class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>No hay stock disponible para este servicio</strong> .
+</div>
+
+
 
 
 

@@ -1,3 +1,5 @@
+import { UserService } from './../../services/user.service';
+import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -12,6 +14,7 @@ import { DatamapComponent } from './datamap/datamap.component';
 import { DynamicChartComponent } from './dynamic-chart/dynamic-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import 'chart.js/dist/Chart.js';
+import { EndPointService } from '../../services/endpoint.service';
 
 export const routes = [
   { path: '', component: DashboardComponent, pathMatch: 'full' }
@@ -24,6 +27,7 @@ export const routes = [
     ChartsModule,
     DirectivesModule,
     PipesModule,
+    HttpModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
@@ -33,7 +37,8 @@ export const routes = [
     FeedComponent,
     DatamapComponent,
     DynamicChartComponent
-  ]
+  ],
+  providers:[EndPointService,UserService]
 })
 
 export class DashboardModule { }

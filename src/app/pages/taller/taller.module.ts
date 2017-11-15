@@ -1,3 +1,4 @@
+import { SeguimientoTallerComponent } from './seguimiento-taller/seguimiento-taller';
 import { EstimacionesComponent } from './estimaciones/estimaciones.component';
 import { DirectivesModule } from './../../theme/directives/directives.module';
 import { DataTableModule } from 'angular2-datatable';
@@ -24,6 +25,7 @@ export const routes = [
   { path: 'nuevo', component: IngresoTallerComponent, data: { breadcrumb: 'Nuevo' } },
   { path: 'listado', component: ListadoIngresosComponent, data: { breadcrumb: 'Listado' } },
   { path: 'estimaciones', component: EstimacionesComponent, data: { breadcrumb: 'Presupuestos' } },
+  { path: 'seguimiento', component: SeguimientoTallerComponent, data: { breadcrumb: 'Seguimiento' } },
 ];
 
 @NgModule({
@@ -38,7 +40,7 @@ export const routes = [
     DataTableModule,
     DirectivesModule
   ],
-  declarations: [IngresoTallerComponent,AutoFormComponent,DetalleFormComponent,ProductoFormComponent,ServicioFormComponent,ListadoIngresosComponent,EstimacionesComponent],
+  declarations: [IngresoTallerComponent,AutoFormComponent,DetalleFormComponent,ProductoFormComponent,ServicioFormComponent,ListadoIngresosComponent,EstimacionesComponent,SeguimientoTallerComponent],
   providers:[UserService,EndPointService,SelectService]
 })
 

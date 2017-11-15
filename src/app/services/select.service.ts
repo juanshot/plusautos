@@ -78,6 +78,22 @@ export class SelectService {
 
         })     
     }
+    loadEmpleados(){  
+        let resultOptions = [];
+        return this.ep.getEmpleados().then((resp)=>{
+            let format = resp.empleados;
+            format.map((result)=>{
+               let obj = {
+                   value: result.id,
+                   label: result.nombre +' '+result.apellido_paterno
+               }
+               resultOptions.push(obj);
+               
+           })
+           return  resultOptions;
+
+        })     
+    }
     loadProveedores(){  
         let resultOptions = [];
         return this.ep.getProveedores().then((resp)=>{

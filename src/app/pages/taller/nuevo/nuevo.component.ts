@@ -1,3 +1,4 @@
+import { GlobalService } from './../../../services/global.service';
 import { DetalleFormComponent } from './../../../componentes/detalle-form/detalle-form';
 import { EndPointService } from './../../../services/endpoint.service';
 import { SelectService } from './../../../services/select.service';
@@ -9,7 +10,8 @@ import {FormBuilder,FormGroup,Validators} from '@angular/forms';
   selector: 'az-inputs',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './nuevo.component.html',
-  styleUrls:['./nuevo.component.scss']
+  styleUrls:['./nuevo.component.scss'],
+  providers:[GlobalService]
 })
 export class IngresoTallerComponent implements OnInit {
 
@@ -19,18 +21,22 @@ export class IngresoTallerComponent implements OnInit {
          autoPicked:boolean = false;
          autos:Array<any> = [];
          productos:Array<any> = [];
+         empleados:Array<any> = [];
          servicios:Array<any> = [];
          serviciosLabel:string = 'Elija Servicio';
          productosLabel:string = 'Elija Producto';
          autosLabel:string = 'Elija Auto';
+         empleadosLabel:string = 'Quien Recibe...';
          listadoServicios:Array<any> = [];
          listadoProductos:Array<any> = [];
          listadoDetalles:Array<any> = [];
          totalProducto =0;
          totalServicio =0;
+         noStock:boolean = false;
          part:string ='';
+         currentDate:any;
          @ViewChild(DetalleFormComponent) detalle:DetalleFormComponent;
-        constructor(public formBuilder:FormBuilder,public select:SelectService,public ep:EndPointService){
+        constructor(public formBuilder:FormBuilder,public select:SelectService,public ep:EndPointService,public global:GlobalService){
 
             this.ingresoTallerForm = this.formBuilder.group({
                 empleado_id:['',Validators.compose([Validators.required])],
@@ -67,7 +73,13 @@ export class IngresoTallerComponent implements OnInit {
           });
           this.select.loadProductos().then((res)=>{
               this.productos = res;
-          })
+          });
+          this.select.loadEmpleados().then((res)=>{
+            this.empleados = res;
+        })
+          this.currentDate = this.global.currentDateFormat();
+          console.log(this.currentDate);
+          
 
 
        }
@@ -165,7 +177,10 @@ export class IngresoTallerComponent implements OnInit {
             Object.assign(request,this.ingresoTallerForm.value);
             console.log(request);
             this.ep.saveIngresoTaller(request).then((res)=>{
-                console.log(res);
+                if(res['msg']){
+                    this.noStock = true;
+                    
+                }
                 
             })
             
@@ -176,6 +191,8 @@ export class IngresoTallerComponent implements OnInit {
             this.detalle.setParte(part);
             
         }
+
+        
           
 
 

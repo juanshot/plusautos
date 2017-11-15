@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
 export class TodoService {
 
   private _todoList = [
-    { text: 'Chequeo de Auto matricula : A3345' },
-    { text: 'Desarme de Auto Matricula: A7677'},
+    // { text: 'Chequeo de Auto matricula : A3345' },
+    // { text: 'Desarme de Auto Matricula: A7677'},
 
   ];
 

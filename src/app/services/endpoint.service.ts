@@ -5,6 +5,7 @@ import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
+//http://13.54.231.75/api_masautos/public/api/
 export class EndPointService {
     private apiUrl:string='http://localhost:8000/api/';
     constructor(public http:Http,public user:UserService) { }
@@ -445,7 +446,9 @@ saveIngresoTaller(taller){
             return response.json()
         },
         (err:Error)=>{
-            return err;
+            console.log(err);
+            
+            return  err;
         }
     )
 }
@@ -709,6 +712,60 @@ updateModelo(marca,id){
 
 
 }
+
+/////**** seguimientos  */
+
+getSeguimientos(){
+    return this.http.get(this.getApiUrl()+'get_seguimientos?token='+this.user.getToken()).toPromise().then(
+        (response)=>{
+            return response.json();
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+    
+}
+
+saveSeguimiento(seguimiento){
+    return this.http.post(this.getApiUrl()+'save_seguimiento?token='+this.user.getToken(),seguimiento).toPromise().then(
+        (response)=>{
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+}
+updateSeguimiento(seguimiento,id){
+    
+    return this.http.post(this.getApiUrl()+`update_seguimiento/${id}?token=`+this.user.getToken(),seguimiento).toPromise().then(
+        (response)=>{
+            console.log(response.json());
+            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    )
+
+
+
+}
+getFacturaMes(){
+
+    return this.http.get(this.getApiUrl()+`get_sum_factura?token=`+this.user.getToken()).toPromise().then(
+        (response)=>{            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    );
+}
+
+
 
 
 

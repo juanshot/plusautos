@@ -13,12 +13,20 @@ export class DashboardComponent  {
     public config:any;
     public configFn:any; 
     public bgColor:any;
-    public date = new Date(); 
-    public weatherData:any;
+    listadoIngresos:any =[];
+    sumaMes:any=0;
+    sumaSemana:any =0;
+
 
     constructor(private _appConfig:AppConfig, private _dashboardService:DashboardService){
-        this.config = this._appConfig.config;
-        this.configFn = this._appConfig;
-        this.weatherData = _dashboardService.getWeatherData();       
+           this._dashboardService.getListadoIngresos().then((res)=>{
+               this.listadoIngresos = res.listadoIngresos;
+           }) ;
+
+           this._dashboardService.getSumaFacturas().then((res)=>{
+            console.log(res);
+            this.sumaMes = res.mes;
+            this.sumaSemana = res.semana;
+        }) ;
     } 
 }
