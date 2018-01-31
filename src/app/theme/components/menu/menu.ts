@@ -59,7 +59,7 @@ export const menuItems = [
 
       },
       {
-        title: 'Ingresos en Taller',
+        title: 'Taller',
         url: '#',
         subMenu: [{
           title: 'Nuevo Ingreso',
@@ -74,10 +74,18 @@ export const menuItems = [
           disabled: true,
           selected: false,
           expanded: false
-        }
+        },
+        {
+          title: 'Seguimiento en Taller',
+          routerLink: 'taller/seguimiento',
+          disabled: true,
+          selected: false,
+          expanded: false
+        }  
       
       ]
       },
+      
       {
         title: 'Busqueda Avanzada',
         routerLink: ''

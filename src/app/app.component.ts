@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-
 @Component({
   selector: 'az-root',
   encapsulation: ViewEncapsulation.None,

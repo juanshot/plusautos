@@ -165,7 +165,6 @@ export class LoginComponent {
 
     public onSubmit(values:Object):void {
         if (this.form.valid) {
-            console.log(values);
             this.ep.loginRequest(values).then((response=>{
                   if(response.status ==401){
                     this.invalid = true;

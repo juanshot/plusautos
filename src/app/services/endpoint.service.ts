@@ -43,7 +43,8 @@ export class EndPointService {
             }
         )
     }
-    getUsers(){
+
+    getUsers(page?){
            
         return this.http.get(this.getApiUrl()+'get_users?token='+this.user.getToken()).toPromise().then(
             (response)=>{
@@ -55,6 +56,11 @@ export class EndPointService {
         )
 
     }
+    //Obtener data de modelo standart
+    getModel(model,page?){
+        return this.http.get(`${this.getApiUrl()}`)
+    }
+
     // obtener listado de roles
     getRoles(){
         

@@ -1,15 +1,14 @@
 import 'pace';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AgmCoreModule } from 'angular2-google-maps/core';
-
 import { routing } from './app.routing';
 import { AppConfig } from './app.config';
 
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './pages/error/error.component';
-
+import { AuthGuardService } from './services/auth-guard.service';
+import { AnonGuardService } from './services/anon-guard.service';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -19,12 +18,9 @@ import { ErrorComponent } from './pages/error/error.component';
   ],
   imports: [
     BrowserModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDe_oVpi9eRSN99G4o6TwVjJbFBNr58NxE'
-    }),
-    routing   
+    routing
   ],
-  providers: [AppConfig],
+  providers: [AppConfig,AuthService,AnonGuardService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserService } from './../../../services/user.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { AppState } from '../../../app.state';
@@ -13,7 +14,7 @@ export class NavbarComponent {
     public isMenuCollapsed:boolean = false;
     public user:any = {};
 
-    constructor(private _state:AppState,public userService:UserService) {
+    constructor(private _state:AppState,public userService:UserService,public router:Router) {
         this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
         });
@@ -26,5 +27,8 @@ export class NavbarComponent {
         this.isMenuCollapsed = !this.isMenuCollapsed; 
         this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);        
     }
-
+    cerrarSesion(){
+        localStorage.clear();
+        this.router.navigate(['/login']);
+    }    
 }

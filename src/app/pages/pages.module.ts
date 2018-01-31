@@ -23,7 +23,7 @@ import { SearchComponent } from './search/search.component';
     PipesModule,
     routing
   ],
-  declarations: [ 
+  declarations: [
     PagesComponent,
     BlankComponent,
     MenuComponent,
@@ -31,7 +31,7 @@ import { SearchComponent } from './search/search.component';
     MessagesComponent,
     BreadcrumbComponent,
     BackTopComponent,
-    SearchComponent 
+    SearchComponent
 
   ],
   providers:[]

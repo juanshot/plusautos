@@ -11,6 +11,9 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "files": [
+      "typings/index.d.ts"
+  ]
   }
 }
