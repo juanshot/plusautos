@@ -27,7 +27,7 @@ export class EstimacionesComponent implements OnInit {
     autos:any = [];
     items:any = [];
     create:boolean=true;
-    cliente:string = "Seleccione cliente";
+    clienteLabel:string = "Seleccione cliente";
     autoLabel:string = "Seleccione Auto";
     url:any;
 

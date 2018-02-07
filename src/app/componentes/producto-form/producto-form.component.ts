@@ -11,6 +11,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class ProductoFormComponent implements OnInit {
     productoForm:FormGroup;
     unidades:Array<any>=[];
+    unidadLabel:string ="Seleccione unidad..."
     @Output() saved:EventEmitter<boolean> = new EventEmitter<boolean>();
     constructor(public fb:FormBuilder,public ep:EndPointService,public select:SelectService) { 
         this.productoForm = this.fb.group({

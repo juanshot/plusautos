@@ -5,7 +5,8 @@ import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-//http://13.54.231.75/api_masautos/public/api/
+//''
+//http://52.63.214.247/mas_autos_api_/public/api/
 export class EndPointService {
     private apiUrl:string='http://localhost:8000/api/';
     constructor(public http:Http,public user:UserService) { }

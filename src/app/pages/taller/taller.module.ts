@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../../componentes/components.module';
 import { SeguimientoTallerComponent } from './seguimiento-taller/seguimiento-taller';
 import { EstimacionesComponent } from './estimaciones/estimaciones.component';
 import { DirectivesModule } from './../../theme/directives/directives.module';
@@ -38,9 +39,10 @@ export const routes = [
     HttpModule,
     PipesModule,
     DataTableModule,
-    DirectivesModule
+    DirectivesModule,
+    ComponentsModule
   ],
-  declarations: [IngresoTallerComponent,AutoFormComponent,DetalleFormComponent,ProductoFormComponent,ServicioFormComponent,ListadoIngresosComponent,EstimacionesComponent,SeguimientoTallerComponent],
+  declarations: [IngresoTallerComponent,ListadoIngresosComponent,EstimacionesComponent,SeguimientoTallerComponent],
   providers:[UserService,EndPointService,SelectService]
 })
 

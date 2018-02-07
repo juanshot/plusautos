@@ -11,6 +11,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class AutoFormComponent implements OnInit {
     autoForm:FormGroup;
     clientes:Array<any> = [];
+    clienteLabel:string = "Seleccione Cliente.."
     @Output() saved:EventEmitter<boolean> = new EventEmitter<boolean>();
     constructor(public fb:FormBuilder,public ep:EndPointService,public select:SelectService) { 
         this.autoForm = this.fb.group({

@@ -23,6 +23,7 @@ export class AutoComponent {
     clientes:any = [];
     autoForm:FormGroup;
     talleres:any =[];
+    clienteLabel:string ="Seleccione cliente..."
     constructor(private _dynamicTablesService:AutoService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService){
         this.autoForm = this.fb.group({
             placa:['',Validators.compose([Validators.required])],

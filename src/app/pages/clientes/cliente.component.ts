@@ -31,8 +31,10 @@ export class ClienteComponent {
             direccion:['',Validators.compose([Validators.required])],
             celular:['',Validators.compose([Validators.required])],
             telefono:['',Validators.compose([Validators.required])],
-            cedula:['',Validators.compose([Validators.required])],
-            email:['',Validators.compose([Validators.required,ValidationService.emailValidator])]
+            cedula:[''],
+            email:['',Validators.compose([Validators.required,ValidationService.emailValidator])],
+            tipoId:[],
+            ruc:[]
 
         },{validator: ValidationService.validacionCedula('cedula')})
         _dynamicTablesService.getAll().then(res=>{
@@ -51,7 +53,7 @@ export class ClienteComponent {
                 this._dynamicTablesService.getAll().then(res=>{
                     console.log("en component",res);
                     this.data = res;
-                    this.clienteForm.setValue({nombre:'',apellido:'',cedula:'',direccion:'',celular:'',telefono:'',email:''});
+                    this.clienteForm.setValue({nombre:'',apellido:'',cedula:'',direccion:'',celular:'',telefono:'',email:'',tipoId:''});
 
                 });    
         })      

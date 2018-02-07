@@ -23,6 +23,7 @@ export class ProductosComponent {
     create:boolean = true;
     unidades:any =[];
     productoId:number = 0;
+    unidadLabel:string="Seleccione Unidad";
  
     constructor(private _productosService:ProductosService,public fb:FormBuilder,public ep:EndPointService,public select:SelectService){
         this.productoForm = this.fb.group({

@@ -33,6 +33,7 @@
                                 <th>Nombre</th>   
                                 <th><mfDefaultSorter by="apellido">Apellido</mfDefaultSorter></th>                           
                                 <th><mfDefaultSorter by="cedula">Cedula</mfDefaultSorter></th>
+                                <th><mfDefaultSorter by="cedula">Ruc</mfDefaultSorter></th>
                                 <th><mfDefaultSorter by="telefono">Telefono</mfDefaultSorter></th>
                                 <th><mfDefaultSorter by="celular">Celular</mfDefaultSorter></th>
                                 <th><mfDefaultSorter by="direccion">Direccion</mfDefaultSorter></th>
@@ -50,6 +51,9 @@
                                 <td>
                                     <strong>{{cliente.cedula}} </strong>
                                  </td>
+                                 <td>
+                                        <strong>{{cliente.ruc}} </strong>
+                                     </td>
                                  <td>
                                     <strong>{{cliente.telefono}} </strong>
                                  </td>
@@ -120,19 +124,50 @@
                                                                                 </div>
     
                                                                         </div>
+                                                                        <div>
+                                                                            <div class="form-group">
+                                                                                    <label for="">Tipo de Identificacion:</label>
+                                                                                    <select  formControlName="tipoId" class="form-control">
+                                                                                        <option value="cedula">Cedula</option>
+                                                                                        <option value="ruc">Ruc</option>
+                                                                                    </select>
+                                                                            </div>
+    
+                                                                        </div>
+
+                                                                       
+                                                                      
                                                                        
                                                                        
-                                                                        <div [ngClass]="{'has-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'),
+                                                                        <div *ngIf="clienteForm.get('tipoId').value == 'cedula'" [ngClass]="{'has-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'),
                                                                     
                                                                                           'has-success': clienteForm.get('cedula').value != '' && !clienteForm.get('cedula').hasError('invalidCedula')              }">
                                                                                 <div class="form-group">
                                                                                         <label for="">Cedula:</label>
-                                                                                        <input maxlength="10" formControlName="cedula" type="text" [ngClass]="{'form-control-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'),
-                                                                                    
-                                                                                                                                                                'form-control-success':clienteForm.get('cedula').value != '' && !clienteForm.get('cedula').hasError('invalidCedula')}" class="form-control">
+                                                                                        <div class="input-group">
+                                                                                                <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                                                                                <input maxlength="10" formControlName="cedula" type="text" [ngClass]="{'form-control-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'), 'form-control-success':clienteForm.get('cedula').value != '' && !clienteForm.get('cedula').hasError('invalidCedula')}" class="form-control">
+                                                                                                
+                                                                                        </div>
+                                                                                        
+                                                                                       
                                                                                 </div>
     
                                                                         </div>
+
+                                                                        <div *ngIf="clienteForm.get('tipoId').value == 'ruc'">
+                                                                                    <div class="form-group">
+                                                                                            <label for="">Ruc:</label>
+                                                                                            <div class="input-group">
+                                                                                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                                                                                    <input maxlength="15" formControlName="ruc" type="text"  class="form-control">
+                                                                                                    
+                                                                                            </div>
+                                                                                            
+                                                                                           
+                                                                                    </div>
+        
+                                                                            </div>
                                                                     
                                                                 
                                                                    
@@ -202,7 +237,7 @@
                   
                     </div>
                     <div class="modal-footer">
-                        <button type="button" [disabled]="!clienteForm.valid" (click)="saveCliente()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                        <button type="button" (click)="saveCliente()" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>

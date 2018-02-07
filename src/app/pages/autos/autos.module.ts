@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../../componentes/components.module';
 import {  ModelosComponent } from './modelos/modelos.component';
 import { MarcasComponent } from './marcas/marcas.component';
 import { SelectModule } from 'angular2-select';
@@ -31,7 +32,8 @@ export const routes = [
         ReactiveFormsModule,
         RouterModule.forChild(routes),
         HttpModule,
-        SelectModule
+        SelectModule,
+        ComponentsModule
     ],
     exports: [],
     declarations: [AutoComponent,MarcasComponent,ModelosComponent],

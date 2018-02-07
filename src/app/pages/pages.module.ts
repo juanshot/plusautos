@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../componentes/components.module';
 import { SelectModule } from 'angular2-select';
 import { ClienteFormComponent } from './../componentes/cliente-form/cliente-form.component';
 import { EndPointService } from './../services/endpoint.service';
@@ -20,6 +21,7 @@ import { SearchComponent } from './search/search.component';
   imports: [
     CommonModule,
     DirectivesModule,
+    ComponentsModule,
     PipesModule,
     routing
   ],

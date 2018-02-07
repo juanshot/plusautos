@@ -29,11 +29,10 @@ export class FacturasComponent implements OnInit {
     servicios:any = [];
     items:any = [];
     create:boolean=true;
-    cliente:string = "Seleccione cliente";
+    clienteLabel:string = "Seleccione cliente";
     autoLabel:string = "Seleccione Auto";
     servicioLabel:string = "Seleccione Servicio....";
     url:any;
-
     constructor(private _FacturaService:FacturaService,public fb:FormBuilder,public selectService:SelectService,public global:GlobalService,public ep:EndPointService){
         this.facturaForm = this.fb.group({
             ingreso_taller_id:['',Validators.compose([Validators.required])],

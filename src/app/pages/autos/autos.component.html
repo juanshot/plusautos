@@ -155,7 +155,7 @@
 
                                                                         <div [ngClass]="{'has-success':autoForm.get('codigo_carroceria').value != '' }">
                                                                             <div class="form-group">
-                                                                                    <label for="">Codigo Carroceria:</label>
+                                                                                    <label for="">Numero de Chasis:</label>
                                                                                     <input [ngClass]="{'form-control-success':autoForm.get('codigo_carroceria').value != ''}" formControlName="codigo_carroceria" type="text" class="form-control">
                                                                             </div>
     
@@ -177,7 +177,7 @@
                                                                                                  <ng-select
                                                                                                     formControlName="cliente_id"
                                                                                                     [(options)]="clientes"
-                                                                                                    [placeholder]="cliente"
+                                                                                                    [placeholder]="clienteLabel"
                                                                                                     [multiple]="false"
                                                                                                 >
                                                                                                 </ng-select>

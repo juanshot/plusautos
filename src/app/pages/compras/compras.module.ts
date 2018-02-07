@@ -1,6 +1,5 @@
+import { ComponentsModule } from './../../componentes/components.module';
 import { ListadoComprasComponent } from './listado/listado-compras.component';
-import { SelectProductoComponent } from './../../componentes/select-producto/select-producto.component';
-import { SelectProveedorComponent } from './../../componentes/select-proveedor/select-proveedor.component';
 import { ComprasComponent } from './compras.component';
 import { SelectModule } from 'angular2-select';
 import { environment } from './../../../environments/environment';
@@ -31,10 +30,11 @@ export const routes = [
         ReactiveFormsModule,
         RouterModule.forChild(routes),
         HttpModule,
-        SelectModule
+        SelectModule,
+        ComponentsModule
     ],
     exports: [],
-    declarations: [ComprasComponent,SelectProveedorComponent,SelectProductoComponent,ListadoComprasComponent],
+    declarations: [ComprasComponent,ListadoComprasComponent],
     providers: [EndPointService,UserService],
 })
 
