@@ -5,7 +5,7 @@ import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-//''
+//'http://localhost:8000/api/'
 //http://52.63.214.247/mas_autos_api_/public/api/
 export class EndPointService {
     private apiUrl:string='http://localhost:8000/api/';
@@ -771,6 +771,22 @@ getFacturaMes(){
         }
     );
 }
+
+//get detail of an specific model
+
+getDetail(model, id){
+
+    return this.http.get(`${this.getApiUrl()}get_${model}/${id}?token=${this.user.getToken()}`).toPromise().then(
+        (response)=>{            
+            return response.json()
+        },
+        (err:Error)=>{
+            return err;
+        }
+    );
+}
+
+
 
 
 

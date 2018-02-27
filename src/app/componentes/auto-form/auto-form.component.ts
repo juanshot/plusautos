@@ -20,8 +20,9 @@ export class AutoFormComponent implements OnInit {
             modelo:['',Validators.compose([Validators.required])],
             marca:['',Validators.compose([Validators.required])],
             cliente_id:['',Validators.compose([Validators.required])],
-            kilometros:['',Validators.compose([Validators.required])]
-
+            kilometros:['',Validators.compose([Validators.required])],
+            codigo_motor: [''],
+            codigo_carroceria: ['']
         });
        
     }

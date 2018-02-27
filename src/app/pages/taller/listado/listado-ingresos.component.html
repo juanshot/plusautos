@@ -67,7 +67,7 @@
                                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                                         <a href="{{url}}get_pdf_taller/{{listadoIngreso.id}}"><button  class="btn btn-main btn-sm"><i class="fa fa-file-pdf-o"></i>Orden de Trabajo</button></a>
                                                         <button type="button" class="btn btn-primary"> <i class="fa fa-eye"></i> Ver Proceso</button>
-                                                    <button type="button" class="btn btn-success"> <i class="fa fa-pencil"></i> Editar Ingreso</button>
+                                                    <button (click)="editIngreso(listadoIngreso)" type="button" class="btn btn-success"> <i class="fa fa-pencil"></i> Editar Ingreso</button>
                                                    
                             
                                                 </div>

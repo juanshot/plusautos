@@ -184,6 +184,10 @@ export const menuItems = [
       {
         title: 'Listado de Cuentas',
         routerLink: 'cuentas/listado'
+      },
+      {
+        title: 'Arbol de cuentas',
+        routerLink: 'cuentas/general'
       }
     ]
   },

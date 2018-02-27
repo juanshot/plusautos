@@ -10,11 +10,11 @@ import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 @Component({
   selector: 'az-inputs',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './nuevo.component.html',
-  styleUrls:['./nuevo.component.scss'],
+  templateUrl: './ingreso-edit.component.html',
+  styleUrls:['./ingreso-edit.scss'],
   providers:[GlobalService]
 })
-export class IngresoTallerComponent implements OnInit {
+export class IngresoEditComponent implements OnInit {
 
          ingresoTallerForm:FormGroup;
          serviciosForm:FormGroup;
@@ -37,6 +37,7 @@ export class IngresoTallerComponent implements OnInit {
          part:string ='';
          currentDate:any;
          sub = null
+         taller:any = {}
          @ViewChild(DetalleFormComponent) detalle:DetalleFormComponent;
         constructor(public formBuilder:FormBuilder,public select:SelectService,public ep:EndPointService,public global:GlobalService,public router:Router, public route: ActivatedRoute){
 
@@ -63,10 +64,28 @@ export class IngresoTallerComponent implements OnInit {
      }
 
        ngOnInit(){
+           this.ingresoTallerForm.valueChanges.subscribe((res) => {
+               console.log(res)
+           })
             this.sub = this.route
-                .queryParams
+                .params
                 .subscribe(params => {
-                    console.log(params)
+                    console.log('params',params.id)
+                    this.select.loadDetail('taller', params.id)
+                    .then((res) => {
+                        console.log('resultado del id', res)
+                        this.taller = res.taller;
+                        this.ingresoTallerForm.setValue({
+                            empleado_id: '',
+                            auto_id: '',
+                            fecha_ingreso: this.taller.fecha_ingreso || '',
+                            fecha_salida: this.taller.fecha_salida || '',
+                            status_taller_id: this.taller.status_taller_id || '',
+                            observaciones: this.taller.observaciones || '',
+
+                        })
+                        this.ingresoTallerForm.controls['auto_id'].setValue(10)
+                    })
             });
           this.select.loadAutos().then((res)=>{
               this.autos = res;

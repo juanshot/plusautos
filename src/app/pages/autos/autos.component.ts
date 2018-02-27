@@ -53,12 +53,17 @@ export class AutoComponent {
     saveAuto(){
 
             this._dynamicTablesService.saveAuto(this.autoForm.value).then((result)=>{
-                this._dynamicTablesService.getAll().then(res=>{
+                this._dynamicTablesService.getAll()
+                .then(res=>{
                     console.log("en component",res);
                     this.data = res;
                     this.autoForm.setValue({placa:'',modelo:'',ano:'',cliente_id:'',marca:'',kilometros:'',codigo_carroceria:'',codigo_motor:''});
 
-                });    
+                }).catch((err)=>{
+
+                })
+                
+                ;    
         })      
     }
     getTalleresAuto(id){

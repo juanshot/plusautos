@@ -1,3 +1,4 @@
+import { IngresoEditComponent } from './edit/ingreso-edit.component';
 import { ComponentsModule } from './../../componentes/components.module';
 import { SeguimientoTallerComponent } from './seguimiento-taller/seguimiento-taller';
 import { EstimacionesComponent } from './estimaciones/estimaciones.component';
@@ -24,6 +25,7 @@ import {DetalleFormComponent} from "../../componentes/detalle-form/detalle-form"
 export const routes = [
 
   { path: 'nuevo', component: IngresoTallerComponent, data: { breadcrumb: 'Nuevo' } },
+  { path: 'edit/:id', component: IngresoEditComponent, data: { breadcrumb: 'Editar' } },
   { path: 'listado', component: ListadoIngresosComponent, data: { breadcrumb: 'Listado' } },
   { path: 'estimaciones', component: EstimacionesComponent, data: { breadcrumb: 'Presupuestos' } },
   { path: 'seguimiento', component: SeguimientoTallerComponent, data: { breadcrumb: 'Seguimiento' } },
@@ -42,7 +44,7 @@ export const routes = [
     DirectivesModule,
     ComponentsModule
   ],
-  declarations: [IngresoTallerComponent,ListadoIngresosComponent,EstimacionesComponent,SeguimientoTallerComponent],
+  declarations: [IngresoTallerComponent,ListadoIngresosComponent,EstimacionesComponent,SeguimientoTallerComponent, IngresoEditComponent],
   providers:[UserService,EndPointService,SelectService]
 })
 

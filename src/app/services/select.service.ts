@@ -181,4 +181,15 @@ export class SelectService {
    
         
     }
+
+    loadDetail(model,id){  
+        let resultOptions = [];
+        return this.ep.getDetail(model,id).then((resp)=>{
+           
+           return  resp;
+
+        })
+   
+        
+    }
 }

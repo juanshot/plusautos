@@ -8,6 +8,7 @@ import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { DataTableModule } from "angular2-datatable";
 import { PipesModule } from '../../../theme/pipes/pipes.module';
 import { DirectivesModule } from '../../../theme/directives/directives.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'listadoIngresos-component',
@@ -23,7 +24,7 @@ export class ListadoIngresosComponent {
     create:boolean = true;
     url:any ;
  
-    constructor(private _listadoIngresosService:ListadoIngresosService,public fb:FormBuilder,public ep:EndPointService){
+    constructor(private _listadoIngresosService:ListadoIngresosService,public fb:FormBuilder,public ep:EndPointService, public router:Router){
         this.listadoIngresoForm = this.fb.group({
             nombre:['',Validators.compose([Validators.required])],
             precio:['',Validators.compose([Validators.required])],
@@ -35,6 +36,9 @@ export class ListadoIngresosComponent {
             this.data = res
         });    
         this.url  = this.ep.getApiUrl();
+    }
+    editIngreso (ingreso) {
+        this.router.navigate([`pages/taller/edit/${ingreso.id}`]);   
     }
     
 }

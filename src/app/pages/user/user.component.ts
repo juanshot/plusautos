@@ -19,6 +19,7 @@ import { DynamicTablesService } from './user.service';
 export class UserComponent {
     public data: any;
     public searchText:string;
+    public userId = null
     userForm:FormGroup;
     @ViewChild(ImageUploaderComponent)
     imageComponent:ImageUploaderComponent
@@ -78,6 +79,17 @@ export class UserComponent {
 
 
         
+    }
+    setDetail (user) {
+        this.userForm.setValue({
+            nombre: user.nombre || '',
+            apellido: user.apellido || '',
+            cedula: user.cedula || '',
+            email: user.email || '',
+            password: user.password || '',
+            image: user.image || ''
+        })
+        this.userId = user._id
     }
     
 }

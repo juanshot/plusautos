@@ -29,7 +29,7 @@
                                                                 </div>
                                                                 <div [ngClass]="{'has-success':autoForm.get('ano').value != '' }">
                                                                         <div class="form-group">
-                                                                                <label for="">Ano:</label>
+                                                                                <label for="">Año:</label>
                                                                                 <input [ngClass]="{'form-control-success':autoForm.get('ano').value != '' }" formControlName="ano" type="number" class="form-control">
                                     
                                                                         </div>
@@ -71,10 +71,25 @@
                                                                     <div [ngClass]="{'has-success':autoForm.get('kilometros').value != '' }">
                                                                             <div class="form-group">
                                                                                     <label for="">Kilometraje:</label>
-                                                                                    <input [ngClass]="{'form-control-success':autoForm.get('kilometros').value != ''}" formControlName="kilometros" type="text" class="form-control">
+                                                                                    <input [ngClass]="{'form-control-success':autoForm.get('kilometros').value != ''}" formControlName="kilometros" type="number" class="form-control">
                                                                             </div>
     
                                                                     </div>
+
+                                                                <div [ngClass]="{'has-success':autoForm.get('codigo_carroceria').value != '' }">
+                                                                    <div class="form-group">
+                                                                            <label for="">Numero de Chasis:</label>
+                                                                            <input [ngClass]="{'form-control-success':autoForm.get('codigo_carroceria').value != ''}" formControlName="codigo_carroceria" type="number" class="form-control">
+                                                                    </div>
+
+                                                            </div>
+                                                            <div [ngClass]="{'has-success':autoForm.get('codigo_motor').value != '' }">
+                                                                <div class="form-group">
+                                                                        <label for="">Codigo Motor:</label>
+                                                                        <input [ngClass]="{'form-control-success':autoForm.get('codigo_motor').value != ''}" formControlName="codigo_motor" type="text" class="form-control">
+                                                                </div>
+
+                                                        </div>
 
                                                                    
                                                                 <div [ngClass]="{'has-success':autoForm.get('kilometros').value != '' }">
