@@ -13,11 +13,11 @@ import { DirectivesModule } from '../../../theme/directives/directives.module';
 @Component({
   selector: 'cuenta-component',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './cuentas.component.html',
-  styleUrls: ['./cuentas.component.scss'],
+  templateUrl: './cuentas-general.component.html',
+  styleUrls: ['./cuentas-general.component.scss'],
   providers: [ CuentaService, SelectService ]
 })
-export class CuentasComponent {
+export class CuentasGeneralComponent {
     public data: any;
     public searchText:string;
     cuentas:any = [];

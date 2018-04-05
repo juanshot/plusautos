@@ -76,8 +76,8 @@ export class IngresoEditComponent implements OnInit {
                         console.log('resultado del id', res)
                         this.taller = res.taller;
                         this.ingresoTallerForm.setValue({
-                            empleado_id: '',
-                            auto_id: '',
+                            empleado_id: this.taller.empleado_id || '',
+                            auto_id:  this.taller.auto_id || '',
                             fecha_ingreso: this.taller.fecha_ingreso || '',
                             fecha_salida: this.taller.fecha_salida || '',
                             status_taller_id: this.taller.status_taller_id || '',
@@ -85,7 +85,12 @@ export class IngresoEditComponent implements OnInit {
 
                         })
                         this.ingresoTallerForm.controls['auto_id'].setValue(10)
-                    })
+                        this.listadoServicios = this.taller.servicios
+                        this.listadoProductos = this.taller.productos
+                        this.listadoDetalles = this.taller.detalles
+                    });
+
+                  
             });
           this.select.loadAutos().then((res)=>{
               this.autos = res;
@@ -190,7 +195,7 @@ export class IngresoEditComponent implements OnInit {
                 this.listadoServicios.splice(i);
             }
         
-        saveTaller(){
+        editTaller(){
             this.listadoProductos.map((res)=>{
                 delete res.nombre;
             });

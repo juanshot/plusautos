@@ -1,7 +1,6 @@
 import { GlobalService } from './../../services/global.service';
 import { SelectProveedorComponent } from './../../componentes/select-proveedor/select-proveedor.component';
 import { SelectService } from './../../services/select.service';
-import { CompraService } from './compras.service';
 import { ValidationService } from './../../services/validation.service';
 import { EndPointService } from './../../services/endpoint.service';
 
@@ -13,20 +12,21 @@ import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { DataTableModule } from "angular2-datatable";
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { DirectivesModule } from '../../theme/directives/directives.module';
+import { GastosService } from './gastos.service';
 @Component({
-  selector: 'compra-component',
+  selector: 'gasto-component',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './compras.component.html',
-  styleUrls: ['./compras.component.scss'],
-  providers: [ CompraService, SelectService ,GlobalService]
+  templateUrl: './gastos.component.html',
+  styleUrls: ['./gastos.component.scss'],
+  providers: [ GastosService, SelectService ,GlobalService]
 })
-export class ComprasComponent {
+export class GastosComponent {
     public data: any;
     public searchText:string;
-    compras:any = [];
+    gastos:any = [];
     editMode:boolean = false;
-    compraForm:FormGroup;
-    itemCompraForm:FormGroup;
+    gastoForm:FormGroup;
+    itemGastoForm:FormGroup;
     proveedorId:any ;
     proveedores:any;
     holderNombre:string = '';
@@ -36,7 +36,7 @@ export class ComprasComponent {
     labelTipoPagos:string ='Seleccione Metodo Pago';
     labelProducto:string ='Seleccione producto';
     productos:any = [];
-    compraItems:any =[];
+    gastoItems:any =[];
     cuentasContado:any = [];
     metodoPagoId:number= 1 ;
     cuentaId:number;
@@ -44,8 +44,8 @@ export class ComprasComponent {
     saved:boolean = false;
     fecha_factura:any;
     autorizacion_sri:any;
-    constructor(private _dynamicTablesService:CompraService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService,public global:GlobalService){
-        this.compraForm = this.fb.group({
+    constructor(private _dynamicTablesService:GastosService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService,public global:GlobalService){
+        this.gastoForm = this.fb.group({
             metodo_pago_id:['',Validators.compose([Validators.required])],
             proveedor_id:['',Validators.compose([Validators.required])],
             num_factura:['',Validators.compose([Validators.required])],
@@ -55,17 +55,15 @@ export class ComprasComponent {
             sub_total:[0],
             autorizacion_sri:['',Validators.compose([Validators.required])],
             fecha_factura:['',Validators.compose([Validators.required])],
-            compra_items:['']
+            gasto_items:['']
 
 
         });
-        this.itemCompraForm = this.fb.group({
-            producto_id:[''],
-            descripcion: [''],
+        this.itemGastoForm = this.fb.group({
+            nombre:[''],
             cantidad:['',Validators.compose([Validators.required])],
             precio:['',Validators.compose([Validators.required])],
-            iva:['',Validators.compose([Validators.required])],
-            producto_nombre:['']
+            iva:['',Validators.compose([Validators.required])]
 
         })
         _dynamicTablesService.getAll().then(res=>{
@@ -81,31 +79,32 @@ export class ComprasComponent {
             this._dynamicTablesService.getCuentasContado().then((res)=>{
                 this.cuentasContado = res;
             })
-        this.compraForm.valueChanges.subscribe((res)=>{
+        this.gastoForm.valueChanges.subscribe((res)=>{
             console.log(res);
             
         })
         
     }
     saveProveedor(){
-            let request = this.compraForm.value;
+            let request = this.gastoForm.value;
+            console.log('este es el request', request)
             delete request.tipoId; 
-            this._dynamicTablesService.savecompra(request).then((result)=>{
+            this._dynamicTablesService.savegasto(request).then((result)=>{
                 this._dynamicTablesService.getAll().then(res=>{
                     console.log("en component",res);
                     this.data = res;
-                    this.compraForm.setValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
+                    this.gastoForm.patchValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
                 });    
         })      
     }
     updateProveedor(){
-        let request = this.compraForm.value;
+        let request = this.gastoForm.value;
         delete request.tipoId; 
-        this._dynamicTablesService.updatecompra(request,this.proveedorId).then((result)=>{
+        this._dynamicTablesService.updategasto(request,this.proveedorId).then((result)=>{
             this._dynamicTablesService.getAll().then(res=>{
                 console.log("en component",res);
                 this.data = res;
-                this.compraForm.setValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
+                this.gastoForm.patchValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
 
             });    
     })      
@@ -115,42 +114,40 @@ export class ComprasComponent {
         let tipoIdVal ='';
         this.proveedorId = proveedor.id;
         proveedor.cedula != null?tipoIdVal = 'cedula': tipoIdVal = 'ruc';
-        this.compraForm.setValue({nombre:proveedor.nombre,cedula:proveedor.cedula,direccion:proveedor.direccion,celular:proveedor.cedula,telefono:proveedor.telefono,correo:'g@g.com',ruc:proveedor.ruc,tipoId:tipoIdVal});
+        this.gastoForm.patchValue({nombre:proveedor.nombre,cedula:proveedor.cedula,direccion:proveedor.direccion,celular:proveedor.cedula,telefono:proveedor.telefono,correo:'g@g.com',ruc:proveedor.ruc,tipoId:tipoIdVal});
     }
     newProveedor(){
         this.editMode = false;
-        this.compraForm.setValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
+        this.gastoForm.patchValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
     }
     setProveedor(proveedor){
             this.holderDireccion = proveedor.direccion;
             this.holderNombre = proveedor.nombre;
             this.holderRuc = proveedor.cedula;
-            this.compraForm.controls['proveedor_id'].setValue(proveedor.id);
+            this.gastoForm.controls['proveedor_id'].setValue(proveedor.id);
 
             console.log(proveedor);
             
     }
     setProducto(producto){
         console.log(producto);
-        this.itemCompraForm.controls['producto_id'].setValue(producto.id);
-        this.itemCompraForm.controls['producto_nombre'].setValue(producto.nombre);
+        this.itemGastoForm.controls['producto_id'].setValue(producto.id);
+        this.itemGastoForm.controls['producto_nombre'].setValue(producto.nombre);
         
     }
     setItem(){
         
-        this.compraItems.push(this.itemCompraForm.value);
-        console.log(this.compraItems);
-        this.compraForm.controls['total'].setValue(this.compraForm.value.total + this.itemCompraForm.value.precio );
-        this.compraForm.controls['iva'].setValue(this.compraForm.value.iva + this.itemCompraForm.value.iva );
-        this.itemCompraForm.setValue({
-            producto_id:'',
+        this.gastoItems.push(this.itemGastoForm.value);
+        console.log(this.gastoItems);
+        this.gastoForm.controls['total'].setValue(this.gastoForm.value.total + this.itemGastoForm.value.precio );
+        this.gastoForm.controls['iva'].setValue(this.gastoForm.value.iva + this.itemGastoForm.value.iva );
+        this.itemGastoForm.patchValue({
+            nombre:'',
             iva:'',
             precio:'',
-            cantidad:'',
-            producto_nombre:''
-
+            cantidad:''
         });
-        let arrayAux = this.compraItems;
+        let arrayAux = this.gastoItems;
         let totalVal = 0;
         let total = totalVal;
         
@@ -159,37 +156,34 @@ export class ComprasComponent {
 
     eliminarItem(index){
         console.log(index);
-        this.compraForm.controls['total'].setValue(this.compraForm.value.total - this.compraItems[index].precio );
-        this.compraForm.controls['iva'].setValue(this.compraForm.value.iva - this.compraItems[index].iva );       
-        this.compraItems.splice(index);   
+        this.gastoForm.controls['total'].setValue(this.gastoForm.value.total - this.gastoItems[index].precio );
+        this.gastoForm.controls['iva'].setValue(this.gastoForm.value.iva - this.gastoItems[index].iva );       
+        this.gastoItems.splice(index);   
     }
     getCuentasContado(){
-        this.compraForm.controls['metodo_pago_id'].setValue(this.metodoPagoId);
+        this.gastoForm.controls['metodo_pago_id'].setValue(this.metodoPagoId);
        
        
       
     }
-    guardarCompra(){
-        this.compraForm.controls['num_factura'].setValue(this.nFactura);
-        this.compraItems.map((res)=>{
-            return delete res['producto_nombre'];
-        });
-        console.log('result demap',this.compraItems);
+    guardarGasto(){
+        this.gastoForm.controls['num_factura'].setValue(this.nFactura);
+        console.log('result demap',this.gastoItems);
         
-        this.compraForm.controls['compra_items'].setValue(this.compraItems);
-        console.log(this.compraForm.value);
+        this.gastoForm.controls['gasto_items'].setValue(this.gastoItems);
+        console.log('este es el req', this.gastoForm.value)
        
         
-        this._dynamicTablesService.savecompra(this.compraForm.value).then((res)=>{
+        this._dynamicTablesService.savegasto(this.gastoForm.value).then((res)=>{
             console.log(res);
             this.saved = true;
             this.cuentaId =0;
             this.metodoPagoId = 1;
-            this.compraForm.controls['metodo_pago_id'].setValue(1);
-            this.compraForm.controls['cuenta_id'].setValue(0);
-            this.compraForm.controls['iva'].setValue(0);
-            this.compraForm.controls['total'].setValue(0);
-            this.compraItems=[];
+            this.gastoForm.controls['metodo_pago_id'].setValue(1);
+            this.gastoForm.controls['cuenta_id'].setValue(0);
+            this.gastoForm.controls['iva'].setValue(0);
+            this.gastoForm.controls['total'].setValue(0);
+            this.gastoItems=[];
             this.fecha_factura = '';
             this.autorizacion_sri='';
             this.nFactura= 0;
@@ -205,20 +199,20 @@ export class ComprasComponent {
     }
     selectCuenta(cuenta){
         console.log(this.cuentaId);
-        this.compraForm.controls['cuenta_id'].setValue(this.cuentaId);
+        this.gastoForm.controls['cuenta_id'].setValue(this.cuentaId);
     }
     setFecha(){
-        this.compraForm.controls['fecha_factura'].setValue(this.fecha_factura);
+        this.gastoForm.controls['fecha_factura'].setValue(this.fecha_factura);
     }
     setAutorizacion(){
-        this.compraForm.controls['autorizacion_sri'].setValue(this.autorizacion_sri);
+        this.gastoForm.controls['autorizacion_sri'].setValue(this.autorizacion_sri);
     }
     setNumFactura(){
-        this.compraForm.controls['num_factura'].setValue(this.nFactura);
+        this.gastoForm.controls['num_factura'].setValue(this.nFactura);
     }
     calcIva(){
-        let iva = (((this.itemCompraForm.value.precio * 12) / 100) * this.itemCompraForm.value.cantidad).toFixed(2)
-        this.itemCompraForm.controls['iva'].setValue(iva);
+        let iva = (((this.itemGastoForm.value.precio * 12) / 100) * this.itemGastoForm.value.cantidad).toFixed(2)
+        this.itemGastoForm.controls['iva'].setValue(iva);
     }
     
 }

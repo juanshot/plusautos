@@ -3,7 +3,7 @@
             <div class="col">
                     <div widget class="card" style="margin-bottom: 20px;">
                         <div class="card-header">
-                            <span>DATOS DE COMPRA</span>
+                            <span>DATOS DE GASTO</span>
                             <div class="widget-controls">              
                                 <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
                                 <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -102,7 +102,7 @@
     <div class="col">
             <div widget class="card">
                 <div class="card-header">
-                    <span class="text-uppercase">Items de Compra</span>
+                    <span class="text-uppercase">Items de gasto</span>
                     <div class="widget-controls"> 
                         <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
                         <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -115,21 +115,12 @@
                     <div class="row">
                         <div class="col">
                             <div class="card custom"> 
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                                <button data-toggle="modal" data-target="#select-producto" class="btn btn-outline generic btn-sm">
-                                                        <i class="fa fa-plus btn-sm "> </i>
-                                                         Producto
-                                                    </button>
-                                        </div>
-                                    </div>
                                     
-
-                                    <form [formGroup]="itemCompraForm" class="row form-inline" style="margin-top: 20px;">
+                                    <form [formGroup]="itemGastoForm" class="row form-inline" style="margin-top: 20px;">
                                             
                                            
                                             <div class="form-group col-md-2 col-sm-6">
-                                                    <input type="text" formControlName="producto_nombre"  disabled class="form-control" placeholder="Producto">
+                                                    <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre">
                                             </div>  
                                             <div class="form-group col-md-2 col-sm-6">
                                                     <input type="number" formControlName="cantidad"class="form-control" placeholder="Cantidad">
@@ -141,7 +132,7 @@
                                             <input type="number" formControlName="iva" class="form-control" placeholder="Iva">
                                     </div> 
                                             <div class="form-group col-md-2 col-sm-6">
-                                                    <button (click)="setItem()" [disabled]="!itemCompraForm.valid"  class="btn btn-success btn-outline  btn-sm">
+                                                    <button (click)="setItem()" [disabled]="!itemGastoForm.valid"  class="btn btn-success btn-outline  btn-sm">
                                                             <i class="fa fa-check btn-sm "> </i>
                                                             Agregar
                                                     </button>
@@ -162,8 +153,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let item of compraItems;let i = index">
-                                                        <th scope="row">{{item.producto_nombre}}</th>
+                                                    <tr *ngFor="let item of gastoItems;let i = index">
+                                                        <th scope="row">{{item.nombre}}</th>
                                                         <th>{{item.cantidad}}</th>
                                                         <th>{{item.iva}}$</th>
                                                         <th>{{item.precio}} $</th>
@@ -172,7 +163,7 @@
                                                     
                                                 </tbody>
                                                 <tfoot>
-                                                    <div class="pull-right">Total: {{compraForm.value.total}}</div>
+                                                    <div class="pull-right">Total: {{gastoForm.value.total}}</div>
                                                     
                                                 </tfoot>
                                             </table>
@@ -192,14 +183,13 @@
     
     
 </div>
-<button [disabled]="!compraForm.valid" (click)="guardarCompra()" class="btn btn-main btn-block">Guardar Compra</button>
+<button [disabled]="!gastoForm.valid" (click)="guardarGasto()" class="btn btn-main btn-block">Guardar Gasto</button>
 
 
 <div *ngIf="saved" class="alert alert-success alert-dismissible fade show" role="alert">
-        <button [disabled]="!compraForm.valid" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button [disabled]="!gastoForm.valid" type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <strong>Compra Guardada</strong> Se puede ver en listado de compras.
+        <strong>Gasto Guardada</strong> Se puede ver en listado de gastos.
     </div>
 <select-proveedor (selected)="setProveedor($event)"></select-proveedor>
-<select-producto (selected)="setProducto($event)"></select-producto>

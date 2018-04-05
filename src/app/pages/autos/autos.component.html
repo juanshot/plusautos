@@ -173,7 +173,7 @@
                                                                                     <div class="form-group">
                                                                                         <label for="exampleSelect1">Seleccione Cliente</label>
                                                                                         <div class="input-group">
-                                                                                            <div class="input-group-addon"><i class="fa fa-user-plus"></i></div>
+                                                                                            <div class="input-group-addon" data-toggle="modal" data-target="#nuevo-cliente"><i class="fa fa-user-plus"></i></div>
                                                                                                  <ng-select
                                                                                                     formControlName="cliente_id"
                                                                                                     [(options)]="clientes"
@@ -212,6 +212,7 @@
         </div>
 </div>
 
+<cliente-form (saved)="createClient($event)"></cliente-form>
 
 <div class="modal fade" id="talleres-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
         <div class="modal-dialog modal-lg" role="document">

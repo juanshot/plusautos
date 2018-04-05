@@ -17,93 +17,128 @@
                             </div>
                             <div class="tab-content top">
                                     <div class="tab-pane active" id="ta">
-                                            <form [formGroup]="clienteForm">
-                                                    <div class="row">
-                                                        <div class="col-md-6" >
-                                                                <div [ngClass]="{'has-success':clienteForm.get('placa').value != '' }">
-                                                                        <div class="form-group">
-                                                                                <label for="">Placa:</label>
-                                                                                <input [ngClass]="{'form-control-success':clienteForm.get('placa').value != '' }" formControlName="placa" type="text" class="form-control">
-                                                                        </div>
-
-                                                                </div>
-                                                                <div [ngClass]="{'has-success':clienteForm.get('ano').value != '' }">
-                                                                        <div class="form-group">
-                                                                                <label for="">Ano:</label>
-                                                                                <input [ngClass]="{'form-control-success':clienteForm.get('ano').value != '' }" formControlName="ano" type="number" class="form-control">
-                                    
-                                                                        </div>
-
-                                                                </div>
-                                                                <div [ngClass]="{'has-success':clienteForm.get('marca').value != '' }" >
-                                                                        <div [ngClass]="{'has-success':clienteForm.get('marca').value != '' }">
+                                        <form [formGroup]="clienteForm">
+                                                        <div class="row">
+                                                                <div class="col-md-6" >
+                                                                        <div [ngClass]="{'has-success':clienteForm.get('nombre').value != '' }">
                                                                                 <div class="form-group">
-                                                                                        <label for="">Marca:</label>
-                                                                                        <input [ngClass]="{'form-control-success':clienteForm.get('marca').value != '' }" formControlName="marca" type="text" class="form-control">
-                                            
+                                                                                        <label for="">Nombre:</label>
+                                                                                        <input [ngClass]="{'form-control-success':clienteForm.get('nombre').value != '' }" formControlName="nombre" type="text" class="form-control">
                                                                                 </div>
-
+        
                                                                         </div>
-
-                                                                </div>
-                                                               
-                                                               
-                                                               
-                                                                
-                                                            
-                                                        
-                                                           
-                                                            </div>
-                                                       
-                                                        <div class="col-md-6" >  
-                                                            
-                                                                <div [ngClass]="{'has-success':clienteForm.get('modelo').value != '' }">
-                                                                        <div class="form-group">
-                                                                                <label for="">Modelo:</label>
-                                                                                <input [ngClass]="{'form-control-success':clienteForm.get('modelo').value != '' }" formControlName="modelo" type="text" class="form-control">
-                                    
-                                                                        </div>
-
-                                                                </div>
-                                                                       
-                                                                  
-                                                            
-                                                                    <div [ngClass]="{'has-success':clienteForm.get('kilometros').value != '' }">
-                                                                            <div class="form-group">
-                                                                                    <label for="">Kilometraje:</label>
-                                                                                    <input [ngClass]="{'form-control-success':clienteForm.get('kilometros').value != ''}" formControlName="kilometros" type="text" class="form-control">
-                                                                            </div>
-    
-                                                                    </div>
-
-                                                                   
-                                                                <div [ngClass]="{'has-success':clienteForm.get('kilometros').value != '' }">
+                                                                        <div [ngClass]="{'has-success':clienteForm.get('apellido').value != '' }">
                                                                                 <div class="form-group">
-                                                                                    <label for="exampleSelect1">Seleccione Cliente</label>
-                                                                                    <div class="input-group">
-                                                                                        <div class="input-group-addon"><i class="fa fa-user-plus"></i></div>
-                                                                                             <ng-select
-                                                                                                formControlName="cliente_id"
-                                                                                                [(options)]="clientes"
-                                                                                                [placeholder]="clienteLabel"
-                                                                                                [multiple]="false"
-                                                                                            >
-                                                                                            </ng-select>
-                                                                                    </div>
-                                                                                  
+                                                                                        <label for="">Apellido:</label>
+                                                                                        <input [ngClass]="{'form-control-success':clienteForm.get('apellido').value != '' }" formControlName="apellido" type="text" class="form-control">
+                                                
+                                                                                </div>
+        
+                                                                        </div>
+                                                                        <div>
+                                                                                <div class="form-group">
+                                                                                        <label for="">Tipo de Identificacion:</label>
+                                                                                        <select  formControlName="tipoId" class="form-control">
+                                                                                        <option value="cedula">Cedula</option>
+                                                                                        <option value="ruc">Ruc</option>
+                                                                                        </select>
+                                                                                </div>
+        
+                                                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        <div *ngIf="clienteForm.get('tipoId').value == 'cedula'" [ngClass]="{'has-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'),
+                                                                        
+                                                                                                'has-success': clienteForm.get('cedula').value != '' && !clienteForm.get('cedula').hasError('invalidCedula')              }">
+                                                                                <div class="form-group">
+                                                                                        <label for="">Cedula:</label>
+                                                                                        <div class="input-group">
+                                                                                                <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                                                                                <input maxlength="10" formControlName="cedula" type="text" [ngClass]="{'form-control-danger':clienteForm.get('cedula').value != '' && clienteForm.get('cedula').hasError('invalidCedula'), 'form-control-success':clienteForm.get('cedula').value != '' && !clienteForm.get('cedula').hasError('invalidCedula')}" class="form-control">
+                                                                                                
+                                                                                        </div>
                                                                                         
-                
+                                                                                        
                                                                                 </div>
+        
+                                                                        </div>
+
+                                                                        <div *ngIf="clienteForm.get('tipoId').value == 'ruc'">
+                                                                                        <div class="form-group">
+                                                                                                <label for="">Ruc:</label>
+                                                                                                <div class="input-group">
+                                                                                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                                                                                        <input maxlength="15" formControlName="ruc" type="text"  class="form-control">
+                                                                                                        
+                                                                                                </div>
+                                                                                                
+                                                                                                
+                                                                                        </div>
+        
+                                                                                </div>
+                                                                        
+                                                                
+                                                                        
+                                                                        </div>
+                                                                
+                                                                <div class="col-md-6"  >
+                                                                        
+                                                                        <div [ngClass]="{'has-danger' : (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('required')) || (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('invalidEmail')), 
+                                                                        'has-success' : !clienteForm.get('email').hasError('required') && clienteForm.get('email').value !='' && !clienteForm.get('email').hasError('invalidEmail')}">
+                                                                                <label class="form-control-label">Email</label>
+                                                                                <div class="input-group">
+                                                                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                                                                        <input formControlName="email" class="form-control" [ngClass]="{'form-control-danger' : (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('required')) || (clienteForm.get('email').value != '' && clienteForm.get('email').hasError('invalidEmail')), 
+                                                                                                                                                        'form-control-success' :  !clienteForm.get('email').hasError('required') && !clienteForm.get('email').hasError('invalidEmail')}" type="text">                      
+                                                                                </div>
+                                                                                <span class="help-block text-danger" *ngIf="clienteForm.get('email').value != '' && clienteForm.get('email').hasError('required')">Email es requerido</span>                              
+                                                                                <span class="help-block text-danger" *ngIf="clienteForm.get('email').value != '' && clienteForm.get('email').hasError('invalidEmail')">Email Invalido</span>
+                                                                                </div>
+
+                                                                                <div [ngClass]="{'has-success':clienteForm.get('telefono').value != '' }">
+                                                                                        <div class="form-group">
+                                                                                                <label for="">Telefono Casa:</label>
+                                                                                                <div class="input-group">
+                                                                                                <div class="input-group-addon"> <i class="fa fa-phone"></i> </div>
+                                                                                                <input [ngClass]="{'form-control-success':clienteForm.get('telefono').value != '' }" formControlName="telefono" type="text" class="form-control">
+                                                                                                </div>
+                                                                                                
+                                                
+                                                                                        </div>
+        
+                                                                                </div>
+                                                                                <div [ngClass]="{'has-success':clienteForm.get('celular').value != '' }">
+                                                                                        <div class="form-group">
+                                                                                                <label for="">Telefono Movil:</label>
+                                                                                        <div class="input-group">
+                                                                                                <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                                                                                <input [ngClass]="{'form-control-success':clienteForm.get('celular').value != '' }" formControlName="celular" type="text" class="form-control">
+                                                                                        </div>
+                                                                                                
+                                                                                                
+                                                
+                                                                                        </div>
+        
+                                                                                </div>
+                                                                                <div [ngClass]="{'has-success':clienteForm.get('direccion').value != '' }">
+                                                                                        <div class="form-group">
+                                                                                                <label for="">Direccion:</label>
+                                                                                                <textarea  [ngClass]="{'form-control-success':clienteForm.get('direccion').value != '' }" formControlName="direccion"  class="form-control"> </textarea>
+                                                
+                                                                                        </div>
+        
+                                                                                </div>
+                                                                        
+                                                                        
+                                                                        
+                                                                        </div>
                                                                 </div>
-                                                                    
-                                                             
-                                                              
-                                                            </div>
-                                                    </div>
-                                                   
-                                                     
-                                                  </form>
-                                     
+                                                        
+                                                                
+                                        </form>
                                     </div>
                            
 

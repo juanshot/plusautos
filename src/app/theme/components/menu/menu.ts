@@ -169,6 +169,20 @@ export const menuItems = [
             routerLink: 'compras/listado'
           }
         ]
+      },
+      {
+        title: 'Gastos',
+        routerLink: '',
+        subMenu: [
+          {
+            title: 'Nueva',
+            routerLink: 'gastos/nueva'
+          },
+          {
+            title: 'Listado',
+            routerLink: 'gastos/listado'
+          }
+        ]
       }
     ]
   },

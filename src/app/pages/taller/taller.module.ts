@@ -1,3 +1,4 @@
+import { Ng2CompleterModule } from 'ng2-completer';
 import { IngresoEditComponent } from './edit/ingreso-edit.component';
 import { ComponentsModule } from './../../componentes/components.module';
 import { SeguimientoTallerComponent } from './seguimiento-taller/seguimiento-taller';
@@ -42,7 +43,8 @@ export const routes = [
     PipesModule,
     DataTableModule,
     DirectivesModule,
-    ComponentsModule
+    ComponentsModule,
+    Ng2CompleterModule
   ],
   declarations: [IngresoTallerComponent,ListadoIngresosComponent,EstimacionesComponent,SeguimientoTallerComponent, IngresoEditComponent],
   providers:[UserService,EndPointService,SelectService]

@@ -27,6 +27,7 @@ export const routes: Routes = [
              { path: 'empleados', loadChildren: 'app/pages/empleados/empleados.module#EmpleadosModule', data: { breadcrumb: 'Empleados' } },
              { path: 'proveedores', loadChildren: 'app/pages/proveedores/proveedores.module#ProveedoresModule', data: { breadcrumb: 'proveedores' } },
              { path: 'compras', loadChildren: 'app/pages/compras/compras.module#ComprasModule', data: { breadcrumb: 'Compras' } },
+             { path: 'gastos', loadChildren: 'app/pages/gastos/gastos.module#GastosModule', data: { breadcrumb: 'Gastos' } },
              { path: 'cuentas', loadChildren: 'app/pages/cuentas/cuentas.module#CuentasModule', data: { breadcrumb: 'Cuentas' } },
              { path: 'facturas', loadChildren: 'app/pages/facturas/facturas.module#FacturasModule', data: { breadcrumb: 'Facturas' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },

@@ -54,7 +54,7 @@ export class ProductosComponent {
                     console.log("en component",res);
                     this.data = res
                 }); 
-                this.productoForm.setValue({nombre:'',cantidad:'',unidad_medida_id:'',precio_compra:''});
+                this.productoForm.patchValue({nombre:'',cantidad:'',unidad_medida_id:'',precio_compra:''});
 
             });    
         })     
@@ -68,14 +68,14 @@ export class ProductosComponent {
                     console.log("en component",res);
                     this.data = res
                 }); 
-                this.productoForm.setValue({nombre:'',cantidad:'',unidad_medida_id:'',precio_compra:''});
+                this.productoForm.patchValue({nombre:'',cantidad:'',unidad_medida_id:'',precio_compra:''});
                 this.create = true;
             });    
         })     
     }
     assignProducto(producto){
         this.create = false;
-        this.productoForm.setValue({nombre:producto.nombre,cantidad:producto.cantidad,unidad_medida_id:producto.unidad_medida_id.toString(),precio_compra:producto.precio_compra});
+        this.productoForm.patchValue({nombre:producto.nombre,cantidad:producto.cantidad,unidad_medida_id:producto.unidad_medida_id.toString(),precio_compra:producto.precio_compra});
         this.productoForm.controls['unidad_medida_id'].setValue('1');
         this.productoId = producto.id;
     }

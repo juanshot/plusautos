@@ -4,6 +4,7 @@ import { EndPointService } from './../../../services/endpoint.service';
 import { SelectService } from './../../../services/select.service';
 import { AutoFormComponent } from './../../../componentes/auto-form/auto-form.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CompleterService, CompleterData } from 'ng2-completer';
 
 import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
@@ -36,9 +37,11 @@ export class IngresoTallerComponent implements OnInit {
          noStock:boolean = false;
          part:string ='';
          currentDate:any;
-         sub = null
+         sub = null;
+         public dataService;
+
          @ViewChild(DetalleFormComponent) detalle:DetalleFormComponent;
-        constructor(public formBuilder:FormBuilder,public select:SelectService,public ep:EndPointService,public global:GlobalService,public router:Router, public route: ActivatedRoute){
+        constructor(public formBuilder:FormBuilder,public select:SelectService,public ep:EndPointService,public global:GlobalService,public router:Router, public route: ActivatedRoute, public completerService: CompleterService){
 
             this.ingresoTallerForm = this.formBuilder.group({
                 empleado_id:['',Validators.compose([Validators.required])],
@@ -90,6 +93,8 @@ export class IngresoTallerComponent implements OnInit {
        ngOnDestroy () {
            this.sub.unsubscribe()
        }
+
+ 
 
          updateSelect(val){
              this.select.loadAutos().then((res)=>{

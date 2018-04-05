@@ -2,6 +2,7 @@ import { SelectService } from './../../services/select.service';
 import { EndPointService } from './../../services/endpoint.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ValidationService } from './../../services/validation.service';
 
 @Component({
     selector: 'cliente-form',
@@ -15,17 +16,19 @@ export class ClienteFormComponent implements OnInit {
     @Output() saved:EventEmitter<boolean> = new EventEmitter<boolean>();
     constructor(public fb:FormBuilder,public ep:EndPointService,public select:SelectService) { 
         this.clienteForm = this.fb.group({
-            placa:['',Validators.compose([Validators.required])],
-            ano:['',Validators.compose([Validators.required])],
-            modelo:['',Validators.compose([Validators.required])],
-            marca:['',Validators.compose([Validators.required])],
-            cliente_id:['',Validators.compose([Validators.required])],
-            kilometros:['',Validators.compose([Validators.required])]
+            nombre:['',Validators.compose([Validators.required])],
+            apellido:['',Validators.compose([Validators.required])],
+            direccion:['',Validators.compose([Validators.required])],
+            celular:['',Validators.compose([Validators.required])],
+            telefono:['',Validators.compose([Validators.required])],
+            cedula:[''],
+            email:[''],
+            tipoId:[],
+            ruc:[]
 
-        });
+        })
        
     }
-
     ngOnInit() {
         this.select.loadClientes().then((res)=>{
             this.clientes = res;
@@ -34,9 +37,7 @@ export class ClienteFormComponent implements OnInit {
     savecliente(){
         this.ep.saveCliente(this.clienteForm.value).then(
             (result)=>{
-            this.saved.emit(true);
-            
-             
+            this.saved.emit(true);   
         },
         (err)=>{
             this.saved.emit(false);

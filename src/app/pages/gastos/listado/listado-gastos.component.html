@@ -1,0 +1,93 @@
+<div class="row">
+        <div class="col">
+            <div widget class="card">
+                <div class="card-header">
+                    <span class="text-uppercase">compras</span>
+                    <div class="widget-controls"> 
+                        <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                        <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                        <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                        <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>                          
+                        <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                    </div>        
+                </div>
+                <div class="card-block widget-body">
+    
+    
+                    <div class="w-200 pull-right bottom-15">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input class="form-control" id="table-search-input" [(ngModel)]="searchText" type="text" placeholder="Buscar por numero...">
+                        </div>
+                    </div> 
+                    <div class="w-200 pull-left bottom-15">
+                         
+                        </div> 
+                    <div class="table-responsive datatable">
+                        <table class="table table-striped table-hover table-sm" [mfData]="data  | PresupuestoPipe : searchText" #mf="mfDataTable" [mfRowsOnPage]="10">
+                            <thead>
+                                <tr>
+                                    <th>#</th>    
+                                    <th><mfDefaultSorter by="num_factura">Factura Numero</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="fecha_factura">Fecha de Factura</mfDefaultSorter></th>  
+                                    <th><mfDefaultSorter by="proveedor_id">Proveedor</mfDefaultSorter></th>                   
+                                    <th><mfDefaultSorter by="metodo_pago_id">Metodo de Pago</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="">Pagado con </mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="iva">iva</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="precio">Total</mfDefaultSorter></th>
+                               
+                                    <th>Acciones</th>      
+                                </tr>
+                            </thead>
+                            <tbody>                           
+                                <tr *ngFor="let compra of mf.data">
+                                   
+                                    <td><strong>{{compra.id}}</strong></td>
+
+                                    <td><strong>{{compra.num_factura}}</strong></td>
+                                
+                                    <td>
+                                        <strong>{{compra.fecha_factura}} </strong>
+                                     </td>
+                                     <td>
+                                            <strong>{{compra.proveedor.nombre}} </strong>
+                                         </td>
+                                     <td>
+                                        <strong *ngIf="compra.metodo_pago_id  == 1"> Credito </strong> <strong *ngIf="compra.metodo_pago_id  == 2"> Contado </strong>
+                                     </td>
+                                     <td>
+                                         <strong  *ngIf="compra.metodo_pago_id  == 2">{{compra.cuenta.nombre}}  </strong> <strong  *ngIf="compra.metodo_pago_id  == 1"><button class="btn btn-primary btn-xs">Ver Deuda a Proveedor</button>  </strong>
+                                    </td>
+    
+                                    <td>
+                                            <div class="badge badge-main big-text"> <strong>{{compra.iva}} </strong></div>   
+                                    </td>
+
+                                    <td>
+                                            <div class="badge badge-main big-text"> <strong>{{compra.total}} </strong></div>   
+                                    </td>
+                              
+                            
+    
+                                    <td><button class="btn btn-warning btn-sm">Ver Items de la Compra </button><button data-toggle="modal" data-target="#nuevo-compra" (click)="editProveedor(compra)" class="btn btn-success btn-sm"> <i class="fa fa-pencil"></i> Editar</button> <button data-toggle="modal" data-target="#nuevo-compra" (click)="editProveedor(compra)" class="btn btn-danger btn-sm"> <i class="fa fa-pencil"></i>Anular</button></td>
+                                    </tr>
+                                    <tr *ngIf="(mf.data | PresupuestoPipe : searchText).length === 0">
+                                    <td colspan="100">
+                                        No hay Resultados
+                                    </td>
+                                </tr>                          
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="12">
+                                        <mfBootstrapPaginator [rowsOnPageSet]="[10, 25, 50, 100]"></mfBootstrapPaginator>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

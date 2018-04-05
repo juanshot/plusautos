@@ -32,11 +32,11 @@ export class ClienteComponent {
             celular:['',Validators.compose([Validators.required])],
             telefono:['',Validators.compose([Validators.required])],
             cedula:[''],
-            email:['',Validators.compose([Validators.required,ValidationService.emailValidator])],
+            email:[''],
             tipoId:[],
             ruc:[]
 
-        },{validator: ValidationService.validacionCedula('cedula')})
+        })
         _dynamicTablesService.getAll().then(res=>{
             console.log("en component",res);
             this.data = res

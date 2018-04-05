@@ -1,4 +1,6 @@
-import { CuentasComponent } from './cuentas.component';
+import { ComponentsModule } from './../../componentes/components.module';
+import { ListadoGastosComponent } from './listado/listado-gastos.component';
+import { GastosComponent } from './gastos.component';
 import { SelectModule } from 'angular2-select';
 import { environment } from './../../../environments/environment';
 import { UserService } from './../../services/user.service';
@@ -11,11 +13,11 @@ import { PipesModule } from '../../theme/pipes/pipes.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { CuentasGeneralComponent } from './cuentas-general/cuentas-general.component';
 
 export const routes = [
     { path: '', redirectTo: '', pathMatch: 'full'},
-    { path: 'listado', component: CuentasComponent, data: { breadcrumb: 'Listado' } }
+    { path: 'nueva', component: GastosComponent, data: { breadcrumb: 'Nueva Compra' } },
+    { path: 'listado', component: ListadoGastosComponent, data: { breadcrumb: 'Listado' } }
   ];
 
 @NgModule({
@@ -28,11 +30,12 @@ export const routes = [
         ReactiveFormsModule,
         RouterModule.forChild(routes),
         HttpModule,
-        SelectModule
+        SelectModule,
+        ComponentsModule
     ],
     exports: [],
-    declarations: [CuentasComponent, CuentasGeneralComponent],
+    declarations: [GastosComponent,ListadoGastosComponent],
     providers: [EndPointService,UserService],
 })
 
-export class CuentasModule { }
+export class GastosModule { }

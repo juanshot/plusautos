@@ -32,7 +32,7 @@ export class ProveedoresComponent {
             tipoId:[''],
             celular:[''],
             telefono:['',Validators.compose([Validators.required])],
-            correo:['',Validators.compose([Validators.required,ValidationService.emailValidator])],
+            correo:[''],
             direccion:['',Validators.compose([Validators.required])]
 
         })
@@ -75,7 +75,7 @@ export class ProveedoresComponent {
         let tipoIdVal ='';
         this.proveedorId = proveedor.id;
         proveedor.cedula != null?tipoIdVal = 'cedula': tipoIdVal = 'ruc';
-        this.proveedoreForm.setValue({nombre:proveedor.nombre,cedula:proveedor.cedula,direccion:proveedor.direccion,celular:proveedor.cedula,telefono:proveedor.telefono,correo:'g@g.com',ruc:proveedor.ruc,tipoId:tipoIdVal});
+        this.proveedoreForm.patchValue({nombre:proveedor.nombre,cedula:proveedor.cedula,direccion:proveedor.direccion,celular:proveedor.cedula,telefono:proveedor.telefono,correo:'g@g.com',ruc:proveedor.ruc,tipoId:tipoIdVal});
     }
     newProveedor(){
         this.editMode = false;

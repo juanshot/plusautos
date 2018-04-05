@@ -179,6 +179,49 @@ export class EndPointService {
         )
     }
 
+      //save gasto
+
+      saveGasto(request:Object){
+        return this.http.post(this.getApiUrl()+'save_gasto?token='+this.user.getToken(),request).toPromise().then(
+            (response)=>{
+                return response.json();    
+        },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
+
+    // get gastos
+
+    getGastos(){
+            
+        return this.http.get(this.getApiUrl()+'get_gastos?token='+this.user.getToken()).toPromise().then(
+            (response)=>{
+                return response.json();
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
+
+    }
+
+    // actualizacion de gasto
+
+    updateGasto(gasto,id){
+        return this.http.post(this.getApiUrl()+`update_gasto/${id}?token=`+this.user.getToken(),gasto).toPromise().then(
+            (response)=>{
+                console.log(response.json());
+                
+                return response.json()
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
+
 
         //save rol
 
