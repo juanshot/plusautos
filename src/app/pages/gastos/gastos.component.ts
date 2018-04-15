@@ -46,24 +46,23 @@ export class GastosComponent {
     autorizacion_sri:any;
     constructor(private _dynamicTablesService:GastosService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService,public global:GlobalService){
         this.gastoForm = this.fb.group({
-            metodo_pago_id:['',Validators.compose([Validators.required])],
-            proveedor_id:['',Validators.compose([Validators.required])],
-            num_factura:['',Validators.compose([Validators.required])],
+            metodo_pago_id:[''],
+            proveedor_id:[''],
+            num_factura:[''],
             cuenta_id:[''],
-            total:[0,Validators.compose([Validators.required])],
-            iva:[0,Validators.compose([Validators.required])],
+            total:[0],
+            iva:[0],
             sub_total:[0],
-            autorizacion_sri:['',Validators.compose([Validators.required])],
-            fecha_factura:['',Validators.compose([Validators.required])],
+            autorizacion_sri:[''],
+            fecha_factura:[''],
             gasto_items:['']
-
-
         });
         this.itemGastoForm = this.fb.group({
             nombre:[''],
             cantidad:['',Validators.compose([Validators.required])],
             precio:['',Validators.compose([Validators.required])],
-            iva:['',Validators.compose([Validators.required])]
+            iva:[''],
+            totalItem: [0,Validators.compose([Validators.required])]
 
         })
         _dynamicTablesService.getAll().then(res=>{
@@ -172,6 +171,8 @@ export class GastosComponent {
         
         this.gastoForm.controls['gasto_items'].setValue(this.gastoItems);
         console.log('este es el req', this.gastoForm.value)
+        this.gastoForm.controls['total'].setValue(this.totalFactura);
+        this.gastoForm.controls['iva'].setValue(this.iva);
        
         
         this._dynamicTablesService.savegasto(this.gastoForm.value).then((res)=>{
@@ -197,6 +198,10 @@ export class GastosComponent {
        
         
     }
+    calcPrecioTotItem(){
+        let total = (this.itemGastoForm.value.precio * this.itemGastoForm.value.cantidad).toFixed(3)
+        this.itemGastoForm.controls['totalItem'].setValue(total);
+    }
     selectCuenta(cuenta){
         console.log(this.cuentaId);
         this.gastoForm.controls['cuenta_id'].setValue(this.cuentaId);
@@ -213,6 +218,29 @@ export class GastosComponent {
     calcIva(){
         let iva = (((this.itemGastoForm.value.precio * 12) / 100) * this.itemGastoForm.value.cantidad).toFixed(2)
         this.itemGastoForm.controls['iva'].setValue(iva);
+    }
+    get iva () {
+        let result = this.gastoItems.map((item) => {
+            return  parseFloat(item.totalItem)
+        })
+        .reduce((a,b) =>{
+            return a + b
+        }, 0)
+
+        return ((result * 12) / 100).toFixed(2)
+    }
+    get subTotal () {
+        let result = this.gastoItems.map((item) => {
+            return  parseFloat(item.totalItem)
+        })
+        .reduce((a,b) =>{
+            return a + b
+        }, 0)
+
+        return (result).toFixed(2)
+    }
+    get totalFactura () {
+        return  this.iva + this.subTotal
     }
     
 }

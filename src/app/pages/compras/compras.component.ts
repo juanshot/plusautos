@@ -50,13 +50,12 @@ export class ComprasComponent {
             proveedor_id:['',Validators.compose([Validators.required])],
             num_factura:['',Validators.compose([Validators.required])],
             cuenta_id:[''],
-            total:[0,Validators.compose([Validators.required])],
-            iva:[0,Validators.compose([Validators.required])],
+            total:[0],
+            iva:[0],
             sub_total:[0],
             autorizacion_sri:['',Validators.compose([Validators.required])],
             fecha_factura:['',Validators.compose([Validators.required])],
             compra_items:['']
-
 
         });
         this.itemCompraForm = this.fb.group({
@@ -64,8 +63,9 @@ export class ComprasComponent {
             descripcion: [''],
             cantidad:['',Validators.compose([Validators.required])],
             precio:['',Validators.compose([Validators.required])],
-            iva:['',Validators.compose([Validators.required])],
-            producto_nombre:['']
+            iva:[''],
+            producto_nombre:[''],
+            totalItem: [0,Validators.compose([Validators.required])]
 
         })
         _dynamicTablesService.getAll().then(res=>{
@@ -94,7 +94,7 @@ export class ComprasComponent {
                 this._dynamicTablesService.getAll().then(res=>{
                     console.log("en component",res);
                     this.data = res;
-                    this.compraForm.setValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
+                    this.compraForm.patchValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
                 });    
         })      
     }
@@ -105,7 +105,7 @@ export class ComprasComponent {
             this._dynamicTablesService.getAll().then(res=>{
                 console.log("en component",res);
                 this.data = res;
-                this.compraForm.setValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
+                this.compraForm.patchValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
 
             });    
     })      
@@ -115,11 +115,11 @@ export class ComprasComponent {
         let tipoIdVal ='';
         this.proveedorId = proveedor.id;
         proveedor.cedula != null?tipoIdVal = 'cedula': tipoIdVal = 'ruc';
-        this.compraForm.setValue({nombre:proveedor.nombre,cedula:proveedor.cedula,direccion:proveedor.direccion,celular:proveedor.cedula,telefono:proveedor.telefono,correo:'g@g.com',ruc:proveedor.ruc,tipoId:tipoIdVal});
+        this.compraForm.patchValue({nombre:proveedor.nombre,cedula:proveedor.cedula,direccion:proveedor.direccion,celular:proveedor.cedula,telefono:proveedor.telefono,correo:'g@g.com',ruc:proveedor.ruc,tipoId:tipoIdVal});
     }
     newProveedor(){
         this.editMode = false;
-        this.compraForm.setValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
+        this.compraForm.patchValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
     }
     setProveedor(proveedor){
             this.holderDireccion = proveedor.direccion;
@@ -140,9 +140,7 @@ export class ComprasComponent {
         
         this.compraItems.push(this.itemCompraForm.value);
         console.log(this.compraItems);
-        this.compraForm.controls['total'].setValue(this.compraForm.value.total + this.itemCompraForm.value.precio );
-        this.compraForm.controls['iva'].setValue(this.compraForm.value.iva + this.itemCompraForm.value.iva );
-        this.itemCompraForm.setValue({
+        this.itemCompraForm.patchValue({
             producto_id:'',
             iva:'',
             precio:'',
@@ -178,6 +176,8 @@ export class ComprasComponent {
         
         this.compraForm.controls['compra_items'].setValue(this.compraItems);
         console.log(this.compraForm.value);
+        this.compraForm.controls['total'].setValue(this.totalFactura);
+        this.compraForm.controls['iva'].setValue(this.iva);
        
         
         this._dynamicTablesService.savecompra(this.compraForm.value).then((res)=>{
@@ -219,6 +219,33 @@ export class ComprasComponent {
     calcIva(){
         let iva = (((this.itemCompraForm.value.precio * 12) / 100) * this.itemCompraForm.value.cantidad).toFixed(2)
         this.itemCompraForm.controls['iva'].setValue(iva);
+    }
+    calcPrecioTotItem(){
+        let total = (this.itemCompraForm.value.precio * this.itemCompraForm.value.cantidad).toFixed(3)
+        this.itemCompraForm.controls['totalItem'].setValue(total);
+    }
+    get iva () {
+        let result = this.compraItems.map((item) => {
+            return  parseFloat(item.totalItem)
+        })
+        .reduce((a,b) =>{
+            return a + b
+        }, 0)
+
+        return (result * 12) / 100
+    }
+    get subTotal () {
+        let result = this.compraItems.map((item) => {
+            return  item.totalItem
+        })
+        .reduce((a,b) =>{
+            return a + b
+        }, 0)
+
+        return result
+    }
+    get totalFactura () {
+        return  this.iva + this.subTotal
     }
     
 }

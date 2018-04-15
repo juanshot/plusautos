@@ -19,7 +19,7 @@ export class ClienteFormComponent implements OnInit {
             nombre:['',Validators.compose([Validators.required])],
             apellido:['',Validators.compose([Validators.required])],
             direccion:['',Validators.compose([Validators.required])],
-            celular:['',Validators.compose([Validators.required])],
+            celular:[''],
             telefono:['',Validators.compose([Validators.required])],
             cedula:[''],
             email:[''],
@@ -45,4 +45,5 @@ export class ClienteFormComponent implements OnInit {
     
     )      
      }
+    
 }

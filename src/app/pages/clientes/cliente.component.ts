@@ -24,6 +24,8 @@ export class ClienteComponent {
     clienteForm:FormGroup;
     autos:any = [];
     talleres:any = [];
+    edit: boolean = false;
+    clientId: number = 0
     constructor(private _dynamicTablesService:ClienteService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService){
         this.clienteForm = this.fb.group({
             nombre:['',Validators.compose([Validators.required])],
@@ -53,11 +55,22 @@ export class ClienteComponent {
                 this._dynamicTablesService.getAll().then(res=>{
                     console.log("en component",res);
                     this.data = res;
-                    this.clienteForm.setValue({nombre:'',apellido:'',cedula:'',direccion:'',celular:'',telefono:'',email:'',tipoId:''});
+                    this.clienteForm.patchValue({nombre:'',apellido:'',cedula:'',direccion:'',celular:'',telefono:'',email:'',tipoId:'', ruc: ''});
 
                 });    
         })      
     }
+
+    editCliente(){
+        console.log('este es el id que envio',this.clientId)
+        this._dynamicTablesService.editCliente(this.clienteForm.value, this.clientId).then((result)=>{
+            this._dynamicTablesService.getAll().then(res=>{
+                console.log("en component",res);
+                this.data = res;
+                this.clienteForm.patchValue({nombre:'',apellido:'',cedula:'',direccion:'',celular:'',telefono:'',email:'',tipoId:'', ruc: ''});
+            });    
+    })      
+}
 
     getAutosCliente(cliente){
                 this._dynamicTablesService.getAutosCliente(cliente).then((result)=>{
@@ -66,6 +79,21 @@ export class ClienteComponent {
                     console.log(this.autos);
                     
                 })
+    }
+    setDetail (cliente) {
+        this.edit = true;
+        this.clientId = cliente.id;
+        this.clienteForm.patchValue({
+            nombre: cliente.nombre || '',
+            apellido: cliente.apellido || '',
+            direccion: cliente.direccion || '',
+            celular: cliente.celular || '',
+            telefono: cliente.telefono || '',
+            cedula: cliente.cedula || '',
+            email:  cliente.email || '',
+            tipoId: cliente.tipoId || '',
+            ruc: cliente.ruc || ''
+        })
     }
     getTalleresCliente(cliente){
         this._dynamicTablesService.getTalleresCliente(cliente.id).then((result)=>{

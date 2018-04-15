@@ -32,6 +32,17 @@ export class ClienteService {
         
         )
         }
+        editCliente(cliente, id){
+            return this.ep.editCliente(cliente, id).then(
+                (result)=>{
+                    return result;
+                
+            },
+            (error)=>{
+                return error;
+            }
+        )
+        }
         getAutosCliente(cliente){
             return this.ep.getAutosCliente(cliente).then(
                 (result)=>{

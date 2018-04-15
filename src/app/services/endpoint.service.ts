@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 //'http://localhost:8000/api/'
 //http://52.63.214.247/mas_autos_api_/public/api/
 export class EndPointService {
-    private apiUrl:string='http://localhost:8000/api/';
+    private apiUrl:string='http://52.63.214.247/mas_autos_api_/public/api/';
     constructor(public http:Http,public user:UserService) { }
 
     getApiUrl():string{
@@ -278,6 +278,18 @@ export class EndPointService {
     //guardar cliente
     saveCliente(request:Object){
         return this.http.post(this.getApiUrl()+'save_cliente?token='+this.user.getToken(),request).toPromise().then(
+            (response)=>{
+                return response.json();    
+        },
+            (err:Error)=>{
+                return err;
+            }
+        )
+    }
+
+    //editar cliente
+    editCliente(request:Object, id){
+        return this.http.post(`${this.getApiUrl()}edit_cliente/${id}?token=${this.user.getToken()}`,request).toPromise().then(
             (response)=>{
                 return response.json();    
         },

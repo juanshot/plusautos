@@ -64,5 +64,11 @@
     }
 
 }
-
-
+.total-wrapper{
+    margin: 20px;
+    font-weight: bolder;
+    font-size: 1.2em;
+    .amount {
+        color: $primary-color;
+    }
+}

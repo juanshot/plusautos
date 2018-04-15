@@ -29,52 +29,52 @@
                 <form [formGroup]="productoForm" class="row form-inline">
                         <div class="col-md-12">
                                 <div class="row">
-                                        <div class="form-group col-md-3 col-sm-6" [ngClass]="{}">
-                                                <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="form-group col-md-4 col-sm-4" [ngClass]="{}">
+                                                    <label for="">Nombre</label>
+                                                        <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre">
+                                                    </div>
+                                                    <div class="form-group col-md-4 col-sm-4" [ngClass]="{}">
+                                                            <label for="">Cantidad</label>
+                                                        <input type="number" formControlName="cantidad" class="form-control" placeholder="Cantidad Inicial">
+                                                    </div>
+                                                    <div class="form-group col-md-4 col-sm-4" [ngClass]="{}">
+                                                            <label for="">Precio</label>
+                                                            <input type="number" formControlName="precio_compra" class="form-control" placeholder="Precio Compra $">
+                                                    </div>
+                                                    <div style="margin-top: 10px; margin-bottom: 10px;" class="form-group col-md-4 col-sm-4" [ngClass]="{}">
+                                                                
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">Unidad</div>
+                                                                     <ng-select
+                                                                        formControlName="unidad_medida_id"
+                                                                        [(options)]="unidades"
+                                                                        [placeholder]="unidadLabel"
+                                                                        [multiple]="false"
+                                                                    >
+                                                                    </ng-select>
+                                                            </div>
+                                                  </div>
                                             </div>
-                                            <div class="form-group col-md-2 col-sm-6" [ngClass]="{}">
-                                                <input type="number" formControlName="cantidad" class="form-control" placeholder="Cantidad Inicial">
-                                            </div>
-                                            <div class="form-group col-md-3 col-sm-6" [ngClass]="{}">
-                                                    <input type="number" formControlName="precio_compra" class="form-control" placeholder="Precio Compra $">
-                                                </div>
-                                           
-                                            <div class="form-group col-md-3 col-sm-3" [ngClass]="{}">
+                                            <div class="row">
                                                     
-                                                      <div class="input-group">
-                                                          <div class="input-group-addon">Unidad</div>
-                                                               <ng-select
-                                                                  formControlName="unidad_medida_id"
-                                                                  [(options)]="unidades"
-                                                                  [placeholder]="unidadLabel"
-                                                                  [multiple]="false"
-                                                              >
-                                                              </ng-select>
-                                                      </div>
+
                                             </div>
-
-                                            <div class="col-md-1 col-sm-1">
-                                                    <div class="form-group" *ngIf="create">
-                                                            <button [disabled]="!productoForm.valid" (click)="saveproducto()" type="submit" class="btn btn-primary btn-sm">Guardar</button>
-                                                        </div>
-                                                        
-                                                        <div class="form-group" *ngIf="!create">
-                                                            <button [disabled]="!productoForm.valid" (click)="editProducto()" type="submit" class="btn btn-primary btn-sm">Editar</button>
-                                                        </div>
-                                                </div> 
-                                                
-                                            
+                                        </div>  
+                                        <div class="col-md-2">
+                                                <div>
+                                                        <div class="form-group" *ngIf="create">
+                                                                <button [disabled]="!productoForm.valid" (click)="saveproducto()" type="submit" class="btn btn-primary ">Guardar</button>
+                                                            </div>
+                                                            
+                                                            <div class="form-group" *ngIf="!create">
+                                                                <button [disabled]="!productoForm.valid" (click)="editProducto()" type="submit" class="btn btn-primary ">Editar</button>
+                                                            </div>
+                                                    </div> 
+                                        </div>  
                                 </div>
-
-                                <div class="row">
-                                      
-                                       
-                                        
-
-                                </div>
-                          
-                           
-
+        
                         </div>
               
                        
