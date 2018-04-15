@@ -120,12 +120,10 @@ export class GastosComponent {
         this.gastoForm.patchValue({nombre:'',cedula:'',direccion:'',celular:'',telefono:'',correo:'',ruc:'',tipoId:''});
     }
     setProveedor(proveedor){
-            this.holderDireccion = proveedor.direccion;
-            this.holderNombre = proveedor.nombre;
-            this.holderRuc = proveedor.cedula;
-            this.gastoForm.controls['proveedor_id'].setValue(proveedor.id);
-
-            console.log(proveedor);
+        this.holderDireccion = proveedor.direccion;
+        this.holderNombre = proveedor.nombre;
+        this.holderRuc = proveedor.ruc || proveedor.cedula;
+        this.gastoForm.controls['proveedor_id'].setValue(proveedor.id);
             
     }
     setProducto(producto){
@@ -221,13 +219,13 @@ export class GastosComponent {
     }
     get iva () {
         let result = this.gastoItems.map((item) => {
-            return  parseFloat(item.totalItem)
+            return  parseFloat(item.totalItem).toFixed(2)
         })
         .reduce((a,b) =>{
             return a + b
         }, 0)
 
-        return ((result * 12) / 100).toFixed(2)
+        return (result * 12) / 100
     }
     get subTotal () {
         let result = this.gastoItems.map((item) => {
@@ -237,10 +235,10 @@ export class GastosComponent {
             return a + b
         }, 0)
 
-        return (result).toFixed(2)
+        return result.toFixed(2)
     }
     get totalFactura () {
-        return  this.iva + this.subTotal
+        return  this.iva + parseFloat(this.subTotal)
     }
     
 }

@@ -124,14 +124,11 @@ export class ComprasComponent {
     setProveedor(proveedor){
             this.holderDireccion = proveedor.direccion;
             this.holderNombre = proveedor.nombre;
-            this.holderRuc = proveedor.cedula;
+            this.holderRuc = proveedor.ruc || proveedor.cedula;
             this.compraForm.controls['proveedor_id'].setValue(proveedor.id);
-
-            console.log(proveedor);
             
     }
     setProducto(producto){
-        console.log(producto);
         this.itemCompraForm.controls['producto_id'].setValue(producto.id);
         this.itemCompraForm.controls['producto_nombre'].setValue(producto.nombre);
         
@@ -139,7 +136,6 @@ export class ComprasComponent {
     setItem(){
         
         this.compraItems.push(this.itemCompraForm.value);
-        console.log(this.compraItems);
         this.itemCompraForm.patchValue({
             producto_id:'',
             iva:'',
@@ -156,7 +152,6 @@ export class ComprasComponent {
     }
 
     eliminarItem(index){
-        console.log(index);
         this.compraForm.controls['total'].setValue(this.compraForm.value.total - this.compraItems[index].precio );
         this.compraForm.controls['iva'].setValue(this.compraForm.value.iva - this.compraItems[index].iva );       
         this.compraItems.splice(index);   
@@ -172,16 +167,13 @@ export class ComprasComponent {
         this.compraItems.map((res)=>{
             return delete res['producto_nombre'];
         });
-        console.log('result demap',this.compraItems);
         
         this.compraForm.controls['compra_items'].setValue(this.compraItems);
-        console.log(this.compraForm.value);
         this.compraForm.controls['total'].setValue(this.totalFactura);
         this.compraForm.controls['iva'].setValue(this.iva);
        
         
         this._dynamicTablesService.savecompra(this.compraForm.value).then((res)=>{
-            console.log(res);
             this.saved = true;
             this.cuentaId =0;
             this.metodoPagoId = 1;
@@ -204,7 +196,6 @@ export class ComprasComponent {
         
     }
     selectCuenta(cuenta){
-        console.log(this.cuentaId);
         this.compraForm.controls['cuenta_id'].setValue(this.cuentaId);
     }
     setFecha(){
@@ -226,7 +217,7 @@ export class ComprasComponent {
     }
     get iva () {
         let result = this.compraItems.map((item) => {
-            return  parseFloat(item.totalItem)
+            return  parseFloat(item.totalItem).toFixed(2)
         })
         .reduce((a,b) =>{
             return a + b
@@ -236,16 +227,16 @@ export class ComprasComponent {
     }
     get subTotal () {
         let result = this.compraItems.map((item) => {
-            return  item.totalItem
+            return  parseFloat(item.totalItem)
         })
         .reduce((a,b) =>{
             return a + b
         }, 0)
 
-        return result
+        return result.toFixed(2)
     }
     get totalFactura () {
-        return  this.iva + this.subTotal
+        return  this.iva + parseFloat(this.subTotal)
     }
     
 }
