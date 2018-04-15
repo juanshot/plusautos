@@ -48,7 +48,7 @@ export class GastosComponent {
         this.gastoForm = this.fb.group({
             metodo_pago_id:[''],
             proveedor_id:[''],
-            num_factura:[''],
+            num_factura:[0],
             cuenta_id:[''],
             total:[0],
             iva:[0],
@@ -61,7 +61,7 @@ export class GastosComponent {
             nombre:[''],
             cantidad:['',Validators.compose([Validators.required])],
             precio:['',Validators.compose([Validators.required])],
-            iva:[''],
+            iva:[0],
             totalItem: [0,Validators.compose([Validators.required])]
 
         })
@@ -164,13 +164,13 @@ export class GastosComponent {
       
     }
     guardarGasto(){
-        this.gastoForm.controls['num_factura'].setValue(this.nFactura);
         console.log('result demap',this.gastoItems);
-        
+        this.gastoForm.controls['num_factura'].setValue(this.nFactura); 
         this.gastoForm.controls['gasto_items'].setValue(this.gastoItems);
         console.log('este es el req', this.gastoForm.value)
         this.gastoForm.controls['total'].setValue(this.totalFactura);
         this.gastoForm.controls['iva'].setValue(this.iva);
+        console.log('est es la maldita mierda que envio', this.gastoForm.value)
        
         
         this._dynamicTablesService.savegasto(this.gastoForm.value).then((res)=>{

@@ -48,7 +48,7 @@ export class ComprasComponent {
         this.compraForm = this.fb.group({
             metodo_pago_id:['',Validators.compose([Validators.required])],
             proveedor_id:['',Validators.compose([Validators.required])],
-            num_factura:['',Validators.compose([Validators.required])],
+            num_factura:[0,Validators.compose([Validators.required])],
             cuenta_id:[''],
             total:[0],
             iva:[0],
@@ -61,9 +61,9 @@ export class ComprasComponent {
         this.itemCompraForm = this.fb.group({
             producto_id:[''],
             descripcion: [''],
-            cantidad:['',Validators.compose([Validators.required])],
-            precio:['',Validators.compose([Validators.required])],
-            iva:[''],
+            cantidad:[0,Validators.compose([Validators.required])],
+            precio:[0,Validators.compose([Validators.required])],
+            iva:[0],
             producto_nombre:[''],
             totalItem: [0,Validators.compose([Validators.required])]
 
@@ -162,15 +162,16 @@ export class ComprasComponent {
        
       
     }
-    guardarCompra(){
-        this.compraForm.controls['num_factura'].setValue(this.nFactura);
+    guardarCompra(){  
         this.compraItems.map((res)=>{
             return delete res['producto_nombre'];
         });
-        
+
+        this.compraForm.controls['num_factura'].setValue(this.nFactura); 
         this.compraForm.controls['compra_items'].setValue(this.compraItems);
         this.compraForm.controls['total'].setValue(this.totalFactura);
         this.compraForm.controls['iva'].setValue(this.iva);
+        console.log('est es la maldita mierda que envio', this.compraForm.value)
        
         
         this._dynamicTablesService.savecompra(this.compraForm.value).then((res)=>{
