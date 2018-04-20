@@ -20,6 +20,8 @@ export class ListadoComprasComponent {
     public searchText:string;
     listadoIngresoForm:FormGroup;
     create:boolean = true;
+    compraId:any;
+    modelItems="compras"
  
     constructor(private _listadoComprasService:ListadoComprasService,public fb:FormBuilder,public ep:EndPointService){
         this.listadoIngresoForm = this.fb.group({

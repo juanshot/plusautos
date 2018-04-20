@@ -164,13 +164,11 @@ export class GastosComponent {
       
     }
     guardarGasto(){
-        console.log('result demap',this.gastoItems);
         this.gastoForm.controls['num_factura'].setValue(this.nFactura); 
         this.gastoForm.controls['gasto_items'].setValue(this.gastoItems);
-        console.log('este es el req', this.gastoForm.value)
         this.gastoForm.controls['total'].setValue(this.totalFactura);
         this.gastoForm.controls['iva'].setValue(this.iva);
-        console.log('est es la maldita mierda que envio', this.gastoForm.value)
+        console.log('este es el request', this.gastoForm.value)
        
         
         this._dynamicTablesService.savegasto(this.gastoForm.value).then((res)=>{
@@ -219,13 +217,13 @@ export class GastosComponent {
     }
     get iva () {
         let result = this.gastoItems.map((item) => {
-            return  parseFloat(item.totalItem).toFixed(2)
+            return  parseFloat(item.totalItem)
         })
         .reduce((a,b) =>{
             return a + b
         }, 0)
-
-        return (result * 12) / 100
+        let iva = (result * 0.12).toFixed(2)
+        return iva
     }
     get subTotal () {
         let result = this.gastoItems.map((item) => {
@@ -238,7 +236,17 @@ export class GastosComponent {
         return result.toFixed(2)
     }
     get totalFactura () {
-        return  this.iva + parseFloat(this.subTotal)
+        let result = this.gastoItems.map((item) => {
+            return  parseFloat(item.totalItem)
+        })
+        .reduce((a,b) =>{
+            return a + b
+        }, 0)
+
+        let sub: number = result
+        let iva: number = result * 0.12
+       
+        return  (sub + iva).toFixed(2)
     }
     
 }

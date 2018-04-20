@@ -46,8 +46,8 @@ export class ComprasComponent {
     autorizacion_sri:any;
     constructor(private _dynamicTablesService:CompraService,public fb:FormBuilder,public ep:EndPointService,public selectService:SelectService,public global:GlobalService){
         this.compraForm = this.fb.group({
-            metodo_pago_id:['',Validators.compose([Validators.required])],
-            proveedor_id:['',Validators.compose([Validators.required])],
+            metodo_pago_id:[0],
+            proveedor_id:[''],
             num_factura:[0,Validators.compose([Validators.required])],
             cuenta_id:[''],
             total:[0],
@@ -60,7 +60,6 @@ export class ComprasComponent {
         });
         this.itemCompraForm = this.fb.group({
             producto_id:[''],
-            descripcion: [''],
             cantidad:[0,Validators.compose([Validators.required])],
             precio:[0,Validators.compose([Validators.required])],
             iva:[0],
@@ -158,8 +157,6 @@ export class ComprasComponent {
     }
     getCuentasContado(){
         this.compraForm.controls['metodo_pago_id'].setValue(this.metodoPagoId);
-       
-       
       
     }
     guardarCompra(){  
@@ -171,7 +168,6 @@ export class ComprasComponent {
         this.compraForm.controls['compra_items'].setValue(this.compraItems);
         this.compraForm.controls['total'].setValue(this.totalFactura);
         this.compraForm.controls['iva'].setValue(this.iva);
-        console.log('est es la maldita mierda que envio', this.compraForm.value)
        
         
         this._dynamicTablesService.savecompra(this.compraForm.value).then((res)=>{
@@ -218,13 +214,13 @@ export class ComprasComponent {
     }
     get iva () {
         let result = this.compraItems.map((item) => {
-            return  parseFloat(item.totalItem).toFixed(2)
+            return  parseFloat(item.totalItem)
         })
         .reduce((a,b) =>{
             return a + b
         }, 0)
-
-        return (result * 12) / 100
+        let iva = (result * 0.12).toFixed(2)
+        return iva
     }
     get subTotal () {
         let result = this.compraItems.map((item) => {
@@ -237,7 +233,17 @@ export class ComprasComponent {
         return result.toFixed(2)
     }
     get totalFactura () {
-        return  this.iva + parseFloat(this.subTotal)
+        let result = this.compraItems.map((item) => {
+            return  parseFloat(item.totalItem)
+        })
+        .reduce((a,b) =>{
+            return a + b
+        }, 0)
+
+        let sub: number = result
+        let iva: number = result * 0.12
+       
+        return  (sub + iva).toFixed(2)
     }
     
 }

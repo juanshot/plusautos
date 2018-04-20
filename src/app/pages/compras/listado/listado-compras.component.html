@@ -69,7 +69,7 @@
                               
                             
     
-                                    <td><button class="btn btn-warning btn-sm">Ver Items de la Compra </button><button data-toggle="modal" data-target="#nuevo-compra" (click)="editProveedor(compra)" class="btn btn-success btn-sm"> <i class="fa fa-pencil"></i> Editar</button> <button data-toggle="modal" data-target="#nuevo-compra" (click)="editProveedor(compra)" class="btn btn-danger btn-sm"> <i class="fa fa-pencil"></i>Anular</button></td>
+                                    <td><button data-toggle="modal" data-target="#view-items" (click)="compraId = compra.id" class="btn btn-warning btn-sm">Ver Items de la Compra </button><button data-toggle="modal" data-target="#nuevo-compra" (click)="editProveedor(compra)" class="btn btn-success btn-sm"> <i class="fa fa-pencil"></i> Editar</button> <button data-toggle="modal" data-target="#nuevo-compra" (click)="editProveedor(compra)" class="btn btn-danger btn-sm"> <i class="fa fa-pencil"></i>Anular</button></td>
                                     </tr>
                                     <tr *ngIf="(mf.data | PresupuestoPipe : searchText).length === 0">
                                     <td colspan="100">
@@ -91,3 +91,4 @@
         </div>
 
     </div>
+    <view-items [model]="modelItems" [id]="compraId"></view-items>

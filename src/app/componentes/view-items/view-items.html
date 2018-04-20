@@ -1,0 +1,36 @@
+<div class="modal fade" id="view-items" tabindex="-1" role="dialog" aria-labelledby="modal-label" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header generic ">
+              
+                <h4  class="modal-title" id="modal-label"><i class="fa fa-user-plus"></i>Items</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                    <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of items">
+                                <th ><span *ngIf="item.producto">{{item.producto.nombre}}</span></th>
+                                <td>{{item.cantidad}}</td>
+                                <td>{{item.precio}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+          
+            </div>
+            <div class="modal-footer">
+               
+                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

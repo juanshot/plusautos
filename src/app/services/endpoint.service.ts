@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 //'http://localhost:8000/api/'
 //http://52.63.214.247/mas_autos_api_/public/api/
 export class EndPointService {
-    private apiUrl:string='http://52.63.214.247/mas_autos_api_/public/api/';
+    private apiUrl:string='http://localhost:8000/api/';
     constructor(public http:Http,public user:UserService) { }
 
     getApiUrl():string{
@@ -161,7 +161,17 @@ export class EndPointService {
                 return err;
             }
         )
-
+    }
+    // get compras items
+    getComprasItems(id){   
+        return this.http.get(`${this.getApiUrl()}ver_items_compra/${id}?token=${this.user.getToken()}`).toPromise().then(
+            (response)=>{
+                return response.json();
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
     }
 
     // actualizacion de compras
@@ -205,6 +215,19 @@ export class EndPointService {
             }
         )
 
+    }
+    // items de gasto
+
+    getGastoItems(id){
+            
+        return this.http.get(`${this.getApiUrl()}ver_items_gasto/${id}?token=${this.user.getToken()}`).toPromise().then(
+            (response)=>{
+                return response.json();
+            },
+            (err:Error)=>{
+                return err;
+            }
+        )
     }
 
     // actualizacion de gasto

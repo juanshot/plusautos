@@ -13,6 +13,7 @@ import { ProductoFormComponent } from './producto-form/producto-form.component';
 import { DetalleFormComponent } from './detalle-form/detalle-form';
 import { AutoFormComponent } from './auto-form/auto-form.component';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
+import { ViewItems } from './view-items/view-items';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -26,8 +27,8 @@ import { NgModule } from '@angular/core';
         HttpModule,
         SelectModule
     ],
-    exports: [ServicioFormComponent,SelectProveedorComponent,SelectProductoComponent,SeguimientoTimelineComponent,ProductoFormComponent,DetalleFormComponent,ClienteFormComponent,AutoFormComponent],
-    declarations:[ServicioFormComponent,SelectProveedorComponent,SelectProductoComponent,SeguimientoTimelineComponent,ProductoFormComponent,DetalleFormComponent,ClienteFormComponent,AutoFormComponent],
+    exports: [ServicioFormComponent,SelectProveedorComponent,SelectProductoComponent,SeguimientoTimelineComponent,ProductoFormComponent,DetalleFormComponent,ClienteFormComponent,AutoFormComponent, ViewItems],
+    declarations:[ServicioFormComponent,SelectProveedorComponent,SelectProductoComponent,SeguimientoTimelineComponent,ProductoFormComponent,DetalleFormComponent,ClienteFormComponent,AutoFormComponent, ViewItems],
     providers: [],
 })
 export class ComponentsModule { }

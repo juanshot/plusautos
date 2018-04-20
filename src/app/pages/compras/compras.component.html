@@ -17,7 +17,7 @@
                                         <div class="row form-inline" style="margin-bottom: 20px;">
                                                 <div class="form-group col-md-4 col-sm-6">
                                                         <label for="exampleSelect1">Fecha</label>
-                                                        <input (input)="setFecha()" [(ngModel)]="fecha_factura" placeholder="Fecha Recepcion" class="form-control" type="date">  
+                                                        <input (change)="setFecha()" (input)="setFecha()" [(ngModel)]="fecha_factura" placeholder="Fecha Recepcion" class="form-control" type="date">  
                                                 </div>
                                               
                                                 <div class="form-group col-md-4 col-sm-6">
@@ -29,12 +29,7 @@
                                                         <label for="exampleSelect1">Numero de Factura</label>
                                                        <input (input)="setNumFactura()" [(ngModel)]="nFactura" placeholder="No. Factura" class="form-control" type="text">
                                                 </div>
-                                         
-                                            
                                             </div>
-
-                                
-            
                             <div class="row form-inline" style="margin-bottom: 20px;">
                                 <div class="form-group col-md-3 col-sm-6">
                                         <button data-toggle="modal" data-target="#select-proveedor" class="btn btn-outline generic btn-sm">
